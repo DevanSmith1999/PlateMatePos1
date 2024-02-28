@@ -40,6 +40,8 @@ Thumbs.db
 *.exe
 *.war
 
+# Data Files Created with Migrations
+
 # Large media files
 *.mp4
 *.tiff
