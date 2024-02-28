@@ -41,6 +41,7 @@ Thumbs.db
 *.war
 
 # Data Files Created with Migrations
+*.sqlite3
 
 # Large media files
 *.mp4
