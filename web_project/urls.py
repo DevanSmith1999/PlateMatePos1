@@ -19,5 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("PlateMate.urls")),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path("", include('users.urls')),
+    
 ]
