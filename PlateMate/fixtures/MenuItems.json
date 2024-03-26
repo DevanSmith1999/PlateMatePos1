@@ -3,6 +3,616 @@
     "model": "PlateMate.MenuItem",
     "pk": 1,
     "fields": {
+      "Name": "Smoked Catfish Dip",
+      "Type": "APPETIZERS",
+      "Description": "Served with Toast and Crackers",
+      "Price": "8.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 2,
+    "fields": {
+      "Name": "Fried Catfish Tacos",
+      "Type": "APPETIZERS",
+      "Description": "With Shrimp, Remoulade Sauce, and Pico de Gallo",
+      "Price": "12.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 3,
+    "fields": {
+      "Name": "Crawfish Popper",
+      "Type": "APPETIZERS",
+      "Description": "Bite-sized parcels filled with creamy crawfish étouffée, lightly breaded and fried to a golden crisp. Served with a spicy remoulade for dipping.",
+      "Price": "10.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 4,
+    "fields": {
+      "Name": "Crawfish Cakes",
+      "Type": "APPETIZERS",
+      "Description": "With Remoulade Sauce",
+      "Price": "10.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 5,
+    "fields": {
+      "Name": "Shrimp Remoulade",
+      "Type": "APPETIZERS",
+      "Description": "Also available with Cocktail Sauce",
+      "Price": "9.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 6,
+    "fields": {
+      "Name": "Peel & Eat Boiled Shrimp",
+      "Type": "APPETIZERS",
+      "Description": "Served warm (1/2 lb)",
+      "Price": "11.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 7,
+    "fields": {
+      "Name": "Barbequed Oysters",
+      "Type": "APPETIZERS",
+      "Description": "Plump Gulf oysters bathed in a savory herb butter, broiled to perfection and bursting with flavor.",
+      "Price": "11.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 8,
+    "fields": {
+      "Name": "Italian Oysters",
+      "Type": "APPETIZERS",
+      "Description": "Broiled over spinach and Cream Cheese, topped with Garlic Parmesan Breadcrumbs",
+      "Price": "11.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 9,
+    "fields": {
+      "Name": "Fried Manchac Alligator Bites",
+      "Type": "APPETIZERS",
+      "Description": "Tender, bite-sized alligator meat seasoned to perfection and fried golden brown. Served with a zesty remoulade sauce.",
+      "Price": "11.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 10,
+    "fields": {
+      "Name": "Duck Quesadillas",
+      "Type": "APPETIZERS",
+      "Description": "With Cheese and Roasted Peppers",
+      "Price": "9.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 11,
+    "fields": {
+      "Name": "Stuffed Mushrooms",
+      "Type": "APPETIZERS",
+      "Description": "With Spinach and Cream Cheese",
+      "Price": "9.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 12,
+    "fields": {
+      "Name": "Crispy Fried Onion Rings",
+      "Type": "APPETIZERS",
+      "Description": "Thick slices of sweet Vidalia onions dipped in a buttermilk batter and fried to a delightful crunch.",
+      "Price": "8.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 13,
+    "fields": {
+      "Name": "Fried Green Tomatoes",
+      "Type": "APPETIZERS",
+      "Description": "Served with Remoulade Sauce and Balsamic Drizzle",
+      "Price": "8.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 14,
+    "fields": {
+      "Name": "Crab Gumbo",
+      "Type": "SOUPS",
+      "Description": "A rich, dark roux simmered with succulent blue crab meat, vegetables (okra, bell peppers, celery), and a hint of spice. A true Louisiana classic.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 15,
+    "fields": {
+      "Name": "Shrimp Gumbo",
+      "Type": "SOUPS",
+      "Description": "Tender shrimp nestled in a rich, flavorful roux with the holy trinity (onions, bell peppers, celery), and a touch of Cajun seasoning.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 16,
+    "fields": {
+      "Name": "Crab & Shrimp Gumbo",
+      "Type": "SOUPS",
+      "Description": "A luxurious combination of blue crab meat and succulent shrimp simmered in a robust roux with colorful vegetables. A seafood lover's dream.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 17,
+    "fields": {
+      "Name": "Turtle Soup",
+      "Type": "SOUPS",
+      "Description": "A New Orleans tradition! Rich, savory turtle soup simmered with slow-roasted vegetables and a hint of sherry.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 18,
+    "fields": {
+      "Name": "Caesar Shrimp Salad",
+      "Type": "SALADS",
+      "Description": "Mixed greens tossed with Boiled Cocktail Shrimp and Spicy New Potatoes in Caesar Dressing, topped with Catfish Croutons",
+      "Price": "16.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 19,
+    "fields": {
+      "Name": "Seared Tuna Salad",
+      "Type": "SALADS",
+      "Description": "Seared Tuna with Mixed Greens and Pickled Vegetables, tossed in Asian Sesame Dressing",
+      "Price": "17.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 20,
+    "fields": {
+      "Name": "Cobb Salad",
+      "Type": "SALADS",
+      "Description": "Mixed greens tossed in a roasted garlic balsamic vinaigrette and topped with grilled chicken, egg, avocado, tomatoes, bacon and blue cheese crumbles",
+      "Price": "16.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 21,
+    "fields": {
+      "Name": "Iceberg Wedge Salad",
+      "Type": "SALADS",
+      "Description": "with Balsamic Vinaigrette and Creamy Blue Cheese Dressing, topped with Bacon and Blue Cheese Crumbles",
+      "Price": "9.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 22,
+    "fields": {
+      "Name": "Middendorf's House Salad",
+      "Type": "SALADS",
+      "Description": "Mixed greens, tomatoes and cucumbers, served with your choice of dressing *Top with Cocktail Shrimp for an additional charge*",
+      "Price": "6.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 23,
+    "fields": {
+      "Name": "Catfish Sandwich",
+      "Type": "SANDWICHES",
+      "Description": "Dressed with lettuce, tomato and pickle",
+      "Price": "14.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 24,
+    "fields": {
+      "Name": "Shrimp",
+      "Type": "SANDWICHES",
+      "Description": "Dressed with lettuce, tomato and pickle",
+      "Price": "15.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 25,
+    "fields": {
+      "Name": "Broiled Chicken Breast",
+      "Type": "SANDWICHES",
+      "Description": "Dressed with lettuce, tomato and pickle",
+      "Price": "9.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 26,
+    "fields": {
+      "Name": "Hamburger",
+      "Type": "SANDWICHES",
+      "Description": "Dressed with lettuce, tomato, pickle, and onion",
+      "Price": "9.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 27,
+    "fields": {
+      "Name": "Cheeseburger",
+      "Type": "SANDWICHES",
+      "Description": "Dressed with lettuce, tomato, pickle, and onion",
+      "Price": "10.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 28,
+    "fields": {
+      "Name": "Middendorf's Special Thin Fried Catfish",
+      "Type": "ENTREES",
+      "Description": "Fresh catfish fillets dipped in a light batter and fried to a delicate crisp. Served with your choice of sides.",
+      "Price": "18.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 29,
+    "fields": {
+      "Name": "Thick Fried Catfish",
+      "Type": "ENTREES",
+      "Description": "Hearty catfish fillets coated in a crispy cornmeal batter for a satisfying crunch. A Southern favorite.",
+      "Price": "18.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 30,
+    "fields": {
+      "Name": "Bacon Wrapped Broiled Catfish",
+      "Type": "ENTREES",
+      "Description": "with Asparagus and Seasonal Vegetables",
+      "Price": "19.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 31,
+    "fields": {
+      "Name": "Broiled Catfish",
+      "Type": "ENTREES",
+      "Description": "with Lemon Butter, top with Lump Crab Meat for an additional charge",
+      "Price": "18.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 32,
+    "fields": {
+      "Name": "One Whole Fried Catfish",
+      "Type": "ENTREES",
+      "Description": "with bones",
+      "Price": "18.85"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 33,
+    "fields": {
+      "Name": "Broiled Whole Flounder",
+      "Type": "ENTREES",
+      "Description": "with bones, served with Lemon Butter, top with Lump Crab Meat for an additional charge",
+      "Price": "20.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 34,
+    "fields": {
+      "Name": "Stuffed Broiled Whole Flounder",
+      "Type": "ENTREES",
+      "Description": "with bones",
+      "Price": "24.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 35,
+    "fields": {
+      "Name": "Broiled Salmon Fillet",
+      "Type": "ENTREES",
+      "Description": "A perfectly seasoned salmon fillet broiled to a flaky perfection.",
+      "Price": "20.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 36,
+    "fields": {
+      "Name": "Fried Shrimp",
+      "Type": "ENTREES",
+      "Description": "Plump, juicy shrimp dipped in a light batter and fried golden brown.",
+      "Price": "19.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 37,
+    "fields": {
+      "Name": "Broiled Shrimp",
+      "Type": "ENTREES",
+      "Description": "with Lemon Butter",
+      "Price": "19.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 38,
+    "fields": {
+      "Name": "Broiled Stuffed Shrimp",
+      "Type": "ENTREES",
+      "Description": "Juicy shrimp stuffed with a savory seafood stuffing and broiled to tender perfection.",
+      "Price": "19.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 39,
+    "fields": {
+      "Name": "Barbequed Shrimp",
+      "Type": "ENTREES",
+      "Description": "in Homemade Red Barbeque Sauce",
+      "Price": "20.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 40,
+    "fields": {
+      "Name": "Fried Oysters",
+      "Type": "ENTREES",
+      "Description": "Fresh oysters lightly breaded and fried to a golden crisp. A taste of the Gulf Coast.",
+      "Price": "24.00"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 41,
+    "fields": {
+      "Name": "Stuffed Crabs (2)",
+      "Type": "ENTREES",
+      "Description": "Jumbo lump crabmeat seasoned and baked in its own shell. A decadent seafood experience.",
+      "Price": "18.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 42,
+    "fields": {
+      "Name": "Bayou Pasta",
+      "Type": "ENTREES",
+      "Description": "Andouille Sausage, Shrimp, Onions, Bell Pepper, Penne Pasta, Creole Cream Sauce",
+      "Price": "18.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 43,
+    "fields": {
+      "Name": "Seafood Platter",
+      "Type": "ENTREES",
+      "Description": "Thin Catfish, Shrimp, Oysters and Stuffed Crab",
+      "Price": "24.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 44,
+    "fields": {
+      "Name": "Fried Shrimp & Thin Catfish",
+      "Type": "ENTREES",
+      "Description": "A combination of our perfectly fried shrimp and our signature thin-fried catfish.",
+      "Price": "19.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 45,
+    "fields": {
+      "Name": "Fried Oysters & Thin Catfish",
+      "Type": "ENTREES",
+      "Description": "Fresh oysters and catfish fillets, lightly breaded and fried to golden perfection.",
+      "Price": "20.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 46,
+    "fields": {
+      "Name": "Fried Shrimp & Oysters",
+      "Type": "ENTREES",
+      "Description": "A delightful mix of plump shrimp and fresh oysters, fried golden brown.",
+      "Price": "21.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 47,
+    "fields": {
+      "Name": "Frog Legs (4 pair)/Fried or Broiled",
+      "Type": "ENTREES",
+      "Description": "Crispy fried or broiled frog legs.",
+      "Price": "18.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 48,
+    "fields": {
+      "Name": "U.S. Choice Rib Eye (12 oz)",
+      "Type": "ENTREES",
+      "Description": "Topped with Lemon Butter, Served with French Fries & House Salad",
+      "Price": "26.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 49,
+    "fields": {
+      "Name": "Grilled Chicken Breast",
+      "Type": "ENTREES",
+      "Description": "In Caramelized Onion Gravy, served with French Fries and Side Salad",
+      "Price": "15.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 50,
+    "fields": {
+      "Name": "Half of Fried Chicken",
+      "Type": "ENTREES",
+      "Description": "Served with French Fries and Cole Slaw",
+      "Price": "17.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 51,
+    "fields": {
+      "Name": "Hush Puppies (6)",
+      "Type": "SIDES",
+      "Description": "Golden brown cornmeal fritters, perfect for soaking up gumbo or enjoying on their own.",
+      "Price": "4.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 52,
+    "fields": {
+      "Name": "Fries",
+      "Type": "SIDES",
+      "Description": "Crispy golden french fries, a classic side.",
+      "Price": "4.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 53,
+    "fields": {
+      "Name": "Sweet Potato Fries",
+      "Type": "SIDES",
+      "Description": "Sweet and savory sweet potato fries.",
+      "Price": "5.00"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 54,
+    "fields": {
+      "Name": "Spicy New Potatoes",
+      "Type": "SIDES",
+      "Description": "Roasted new potatoes with a touch of Cajun spice for a flavorful kick.",
+      "Price": "3.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 55,
+    "fields": {
+      "Name": "Cole Slaw",
+      "Type": "SIDES",
+      "Description": "Refreshing coleslaw with a creamy dressing, a perfect complement to any entree.",
+      "Price": "3.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 56,
+    "fields": {
+      "Name": "Potato Salad",
+      "Type": "SIDES",
+      "Description": "Creamy and classic potato salad, a crowd-pleaser.",
+      "Price": "4.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 57,
+    "fields": {
+      "Name": "Seasonal Vegetables",
+      "Type": "SIDES",
+      "Description": "Fresh, seasonal vegetables steamed or roasted to perfection.",
+      "Price": "5.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 58,
+    "fields": {
+      "Name": "Thin Fried Catfish",
+      "Type": "CHILDREN'S MENU",
+      "Description": "Thin cut catfish fillets coated in a crispy cornmeal batter for a satisfying crunch.",
+      "Price": "8.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 59,
+    "fields": {
+      "Name": "Fried Shrimp",
+      "Type": "CHILDREN'S MENU",
+      "Description": "Plump, juicy shrimp dipped in a light batter and fried golden brown.",
+      "Price": "8.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 60,
+    "fields": {
+      "Name": "Chicken Tenderloins",
+      "Type": "CHILDREN'S MENU",
+      "Description": "Fried chicken tenders hand-dipped in our seasoned batter and fried to a golden crisp.",
+      "Price": "8.95"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 61,
+    "fields": {
+      "Name": "House Made Banana Bread Pudding with Rum Sauce",
+      "Type": "DESSERTS",
+      "Description": "Warm banana bread pudding soaked in a decadent rum sauce.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 62,
+    "fields": {
       "Name": "House Made German Chocolate Cake",
       "Type": "DESSERTS",
       "Description": "with Vanilla Ice Cream",
@@ -11,12 +621,102 @@
   },
   {
     "model": "PlateMate.MenuItem",
-    "pk": 2,
+    "pk": 63,
     "fields": {
       "Name": "House Made Chocolate Lava Cake",
       "Type": "DESSERTS",
       "Description": "Flourless Cake served with Vanilla Ice Cream",
       "Price": "7.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 64,
+    "fields": {
+      "Name": "Raising a Ruckus",
+      "Type": "DESSERTS",
+      "Description": "Chocolate Brownie topped with Vanilla Ice Cream, Elmer Chocolate Gold Brick Topping, Whipped Cream, Pecans, Chocolate Hazelnut Rolled Wafer",
+      "Price": "8.00"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 65,
+    "fields": {
+      "Name": "A Little Something Bad",
+      "Type": "DESSERTS",
+      "Description": "Assorted Fruit, Vanilla and Strawberry Ice Cream, Whipped Cream, Chocolate Hazelnut Rolled Wafer",
+      "Price": "7.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 66,
+    "fields": {
+      "Name": "Whatever Floats Your Boat",
+      "Type": "DESSERTS",
+      "Description": "barq's Root Beer Float",
+      "Price": "7.25"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 67,
+    "fields": {
+      "Name": "Red Velvet Cheesecake",
+      "Type": "DESSERTS",
+      "Description": "A rich and creamy red velvet cheesecake with a buttery graham cracker crust.",
+      "Price": "6.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 68,
+    "fields": {
+      "Name": "White Chocolate Bourbon Pecan Pie",
+      "Type": "DESSERTS",
+      "Description": "A decadent white chocolate pecan pie with a hint of bourbon for a unique and delicious flavor.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 69,
+    "fields": {
+      "Name": "Key Lime Pie",
+      "Type": "DESSERTS",
+      "Description": "A classic key lime pie with a refreshingly tart filling and a buttery graham cracker crust.",
+      "Price": "6.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 70,
+    "fields": {
+      "Name": "Good Old Fashioned Banana Split",
+      "Type": "DESSERTS",
+      "Description": "A classic banana split with vanilla ice cream, chocolate, strawberry, and pineapple sauce, topped with whipped cream, cherries, and a nut drizzle.",
+      "Price": "8.00"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 71,
+    "fields": {
+      "Name": "Pinocchio Eis",
+      "Type": "DESSERTS",
+      "Description": "Pinocchio look-alike sundae",
+      "Price": "5.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 72,
+    "fields": {
+      "Name": "Ice Cream - 2 Scoops",
+      "Type": "DESSERTS",
+      "Description": "Ask for available flavors",
+      "Price": "5.75"
     }
   }
 ]
