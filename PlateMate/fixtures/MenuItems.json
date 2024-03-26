@@ -1,0 +1,22 @@
+[
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 1,
+    "fields": {
+      "Name": "House Made German Chocolate Cake",
+      "Type": "DESSERTS",
+      "Description": "with Vanilla Ice Cream",
+      "Price": "7.50"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 2,
+    "fields": {
+      "Name": "House Made Chocolate Lava Cake",
+      "Type": "DESSERTS",
+      "Description": "Flourless Cake served with Vanilla Ice Cream",
+      "Price": "7.50"
+    }
+  }
+]
