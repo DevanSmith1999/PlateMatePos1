@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+
+@login_required
+def home(request):
+ return render(request, "PlateMate/home.html", {})
+
+
+def authView(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST or None)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to login page after successful registration
+        return redirect("login")
     else:
-        form = UserRegistrationForm()
-    return render(request, 'PlateMate/templates/register.html', {'form': form})
+        form = UserCreationForm()
+        return render(request, "registration/signup.html", {"form": form})
