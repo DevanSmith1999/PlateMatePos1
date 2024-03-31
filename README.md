@@ -17,51 +17,54 @@ Welcome to Plate Mates POS, the ultimate solution for managing your restaurant's
 3. Once installed, launch Plate Mates POS and follow the setup wizard to configure your system.
 
 ## Features
-
-- **Order Management**: Easily take and manage orders with a few clicks. Supports dine-in, takeaway, and delivery orders.
-- **Inventory Tracking**: Keep track of your inventory in real-time. Get notified when stocks are low.
-- **Payment Processing**: Supports multiple payment methods including credit/debit cards, cash, and mobile payments.
+- **Order Management**: Easily take and manage orders with a few clicks. 
+- **Ticket Tracking**: Keep track of your tickets in real-time.
 - **Reporting**: Generate detailed reports on sales, revenue, and customer preferences to make informed decisions.
-- **Customer Management**: Maintain a database of your customers for better service and personalized offers.
 - **Employee Management**: Manage employee roles, hours, and permissions within the system.
 
-## Getting Started
 
+## Getting Started
 - **Setting Up Your Menu**: Navigate to the 'Menu Management' section to add, edit, or remove menu items.
 - **Taking Orders**: Use the 'New Order' button to start taking orders. You can assign tables, add items, and choose the payment method.
-- **Managing Inventory**: Go to the 'Inventory' section to update stock levels or add new ingredients.
+
 
 ## User Guides
 
 ### Administrator
-- **System Setup and Configuration**: Learn how to configure global system settings, including payment options and tax rates.
+- **System Setup and Configuration**: Learn how to configure global system settings, including payment calculations with tax rates.
 - **User Management**: Instructions on how to create and manage user accounts for employees.
 - **Access Control**: How to set up different access levels for users based on their role.
 
-### Manager
-- **Sales Reporting and Analytics**: How to generate and interpret various reports.
-- **Inventory Management**: Detailed guide on managing inventory, including ordering and tracking stock levels.
-- ~~**Employee Performance Tracking**: Methods for tracking and evaluating employee performance using the system.~~
+### Manager / Owner
+- **Sales Reporting and Analytics**: You will be able to view, filter and compile order statistics in an easy-to-read format.
+- **Order Management**: Here you can review checks for open tickets and make overrides as needed.
+- **Employee Assignments**: You will be able to update server profiles, assign and track the server assignments giving them the privileges to view and modify tickets for their assigned tables. 
 
-### Wait Staff
-- **Order Taking**: Step-by-step guide on how to take orders efficiently using the POS system.
-- **Customer Interaction**: Tips on using the system to improve customer service and handle special requests.
-- **Payment Processing**: How to process different types of payments through the system.
+### Server
+- **Table Management**: Server will be able to check their daily assigned tables, set how many people are currently seated. You can check the tables’ status between open, occupied, and cleaning.
+- **Order Taking**: Here you can take a customer's order, view / modify current tickets and a easy to swap view that will allow you to easily swipe between tickets, and if a customer orders from the tablet ticket will be updated for the server view.
+
+
+
+### Kitchen 
+- **Real-time Menu Updates**: The kitchen will be able to view all current orders, When a order is added to the queue it comes with a time stamp along with the timer. You can also mark full tickets or individual items as complete.
+
 
 ### Customers
-- **Self-service Options**: Explanation of any self-service options available, such as kiosk ordering or online reservations.
-- **Feedback Submission**: How customers can submit feedback on their dining experience directly through the system.
+- **Self-service Options**: Customers will be greeted with a welcome page they will be able to click to view the home page will show the overall menu will tabs the will have different filters. They can either order from the table or wait for the server.
+- **Chat Bot**: At the bottom of the screen will be the icon for customers to interact with the chat bot that is powered by AI. It will be able to give customers recommendations such as popular items or the item of the day.
+
+
 
 ## Troubleshooting
-
 - If you encounter issues during installation, ensure that your system meets the minimum requirements and check your internet connection.
 - For problems with payment processing, verify your payment gateway settings and ensure that all hardware components are properly connected.
 - If the system runs slowly or crashes, try restarting the software and checking for updates. If the problem persists, contact support.
 
 ## Support
-
 For further assistance, please refer to the FAQ section on our website or contact our support team:
 - Email: support@platematespos.com
 - Phone: Insert Phone Number Here
 
-Thank you for choosing Plate Mates POS. We hope it enhances your restaurant's efficiency and customer satisfaction. Team 4 is committed to providing an exceptional POS solution for your restaurant.
+
+
