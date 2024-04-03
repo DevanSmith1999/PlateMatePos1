@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Set help_texts for password fields to empty dictionary
-        self.fields['password2'].help_text=Nonec
+        self.fields['password2'].help_text=None
        
 
     def clean_username(self):
