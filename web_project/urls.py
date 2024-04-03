@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("PlateMate.urls")),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
     path("",include("users.urls")),
     path("",include("Staff.urls")),
 ]

@@ -1,0 +1,12 @@
+<!-- position_list.html -->
+
+<h2>Position List</h2>
+<ul>
+    {% for position in positions %}
+        <li>{{ position.name }}
+            <a href="{% url 'position_delete' pk=position.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No positions found.</li>
+    {% endfor %}
+</ul>

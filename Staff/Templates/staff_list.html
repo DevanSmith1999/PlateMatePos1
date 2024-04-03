@@ -1,0 +1,12 @@
+<!-- staff_list.html -->
+
+<h2>Staff List</h2>
+<ul>
+    {% for staff_member in staff %}
+        <li>{{ staff_member.first_name }} {{ staff_member.last_name }} - {{ staff_member.id_number }}
+            <a href="{% url 'staff_delete' pk=staff_member.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No staff members found.</li>
+    {% endfor %}
+</ul>

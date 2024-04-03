@@ -1,0 +1,8 @@
+<!-- create_position.html -->
+
+<h2>Create Position</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
