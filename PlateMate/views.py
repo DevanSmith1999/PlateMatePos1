@@ -19,11 +19,52 @@ def Customer_Home(request):
         'PlateMate/Customer_Home.html'
     )
 
+def Customer_About_Us(request):
+    '''Access to information about the resturant'''
+    return render(
+        request,
+        'PlateMate/Customer_About_Us.html'
+    )
+
 def Customer_Menu_Ordering(request):
     '''Access menu with all restaurant orders and be able to add items to a check/order'''
     return render(
         request,
         'PlateMate/Customer_Menu_Ordering.html'
+    )
+
+def Customer_App_Ordering(request):
+    '''Access appetizer menu items and be able to add items to a check/order'''
+    return render(
+        request,
+        'PlateMate/Customer_App_Ordering.html'
+    )
+
+def Customer_Entree_Ordering(request):
+    '''Access entree menu items and be able to add items to a check/order'''
+    return render(
+        request,
+        'PlateMate/Customer_Entree_Ordering.html'
+    )
+def Customer_Kids_Sides_Ordering(request):
+    '''Access kids and side menu items and be able to add items to a check/order'''
+    return render(
+        request,
+        'PlateMate/Customer_Kids_Sides_Ordering.html'
+    )
+
+def Customer_Drinks_Ordering(request):
+    '''Access drink menu items and be able to add items to a check/order'''
+    return render(
+        request,
+        'PlateMate/Customer_Drinks_Ordering.html'
+    )
+
+def Customer_Dessert_Ordering(request):
+    '''Access dessert menu items and be able to add items to a check/order'''
+    return render(
+        request,
+        'PlateMate/Customer_Dessert_Ordering.html'
     )
 
 def Customer_Receipt_Check(request):
