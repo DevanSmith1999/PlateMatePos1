@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-
+from PlateMate.models import MenuItem #Use this to access Menuitem data
 # Stuff
 
 
