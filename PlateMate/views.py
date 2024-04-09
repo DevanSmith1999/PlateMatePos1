@@ -136,12 +136,13 @@ def create_order(request):
       menu_item = MenuItem.objects.get(pk=menu_item_id)
       table = Table.objects.get(pk=table_id)
 
-      new_order = ActiveOrder(MenuItemID=menu_item, TableID=table)
+      new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
       new_order.save()
       print("Testing print****************************************************************************************")
       return render(request, 'PlateMate/Customer_Menu_Ordering.html')
     except (ValueError, Exception) as e:
       print(e)
+      print("Testing print****************************************************************************************")
       # Handle various exceptions
       return render(request, 'PlateMate/Customer_Menu_Ordering.html')
   return render(request, 'PlateMate/Customer_Menu_Ordering.html')
