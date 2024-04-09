@@ -8,4 +8,17 @@ class MenuItem(models.Model):
   Description = models.TextField()
   Price = models.DecimalField(max_digits=5, decimal_places=2)
 
-  
+class Table(models.Model):
+  ServerID = models.IntegerField()
+
+class ActiveOrder(models.Model):
+  MenuItemID = models.ForeignKey(MenuItem,on_delete= models.CASCADE)
+  TableID = models.ForeignKey(Table,on_delete= models.CASCADE)
+  Quantity = models.IntegerField()
+  OrderTime = models.DateTimeField(auto_now_add = True)
+  completed = models.BooleanField(default = False)
+
+class OrderingHistory(models.Model):
+  MenuItemID = models.ForeignKey(MenuItem,on_delete= models.CASCADE)
+  OrderTime = models.DateTimeField()
+
