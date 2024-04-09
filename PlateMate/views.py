@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+# from django.http import HttpResponse 
+from .models import ActiveOrder, MenuItem, Table  #Use this to access Menuitem data
 
-from django.http import HttpResponse
-from PlateMate.models import MenuItem #Use this to access Menuitem data
+ # Import all relevant models
 # Stuff
 
 
@@ -122,3 +123,25 @@ def Server_Table_View(request):
         request,
         'PlateMate/Server_Table_View.html'
     )
+
+
+def create_order(request):
+  print("Testing print")
+  if request.method == 'POST':
+    try:
+      menu_item_id = int(request.POST.get('MenuItemID'))
+      table_id = int(request.POST.get('TableID'))
+
+      # Retrieve MenuItem object and Table object
+      menu_item = MenuItem.objects.get(pk=menu_item_id)
+      table = Table.objects.get(pk=table_id)
+
+      new_order = ActiveOrder(MenuItemID=menu_item, TableID=table)
+      new_order.save()
+      print("Testing print****************************************************************************************")
+      return render(request, 'PlateMate/Customer_Menu_Ordering.html')
+    except (ValueError, Exception) as e:
+      print(e)
+      # Handle various exceptions
+      return render(request, 'PlateMate/Customer_Menu_Ordering.html')
+  return render(request, 'PlateMate/Customer_Menu_Ordering.html')

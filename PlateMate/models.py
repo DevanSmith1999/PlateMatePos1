@@ -8,8 +8,14 @@ class MenuItem(models.Model):
   Description = models.TextField()
   Price = models.DecimalField(max_digits=5, decimal_places=2)
 
+  def __str__(self):
+    return str(self.pk)
+
 class Table(models.Model):
-  ServerID = models.IntegerField()
+  ServerID = models.IntegerField(default = 1)
+
+  def __str__(self):
+    return str(self.pk)
 
 class ActiveOrder(models.Model):
   MenuItemID = models.ForeignKey(MenuItem,on_delete= models.CASCADE)
@@ -18,7 +24,13 @@ class ActiveOrder(models.Model):
   OrderTime = models.DateTimeField(auto_now_add = True)
   completed = models.BooleanField(default = False)
 
+  def __str__(self):
+    return str(self.pk)
+
 class OrderingHistory(models.Model):
   MenuItemID = models.ForeignKey(MenuItem,on_delete= models.CASCADE)
   OrderTime = models.DateTimeField()
+
+  def __str__(self):
+    return str(self.pk)
 

@@ -719,7 +719,12 @@
               <div class="text-wrapper-4">$8.75</div>
               <div class="text-wrapper-5">Smoked Catfish Dip</div>
             </div>
-            <button class="add"><div class="text-wrapper-6">Add</div></button>
+            <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
+              {% csrf_token %}
+              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="TableID" value="1">
+              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+            </form>
           </div>
           <div class="ITEM-2">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
