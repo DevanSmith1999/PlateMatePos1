@@ -89,7 +89,7 @@ def confirm_delete_staff(request, pk):
         staff.delete()
         # Redirect the user to a success page or another appropriate page
         return redirect('staff_list')  # Redirect to the staff list page
-    return render(request, 'confirm_delete_staff.html', {'staff': staff})
+    return render(request, 'staff_delete_confirm.html', {'staff': staff})
 
 
 def create_staff(request):
