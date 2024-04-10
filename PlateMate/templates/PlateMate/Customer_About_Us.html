@@ -404,9 +404,9 @@
         <button class="STATUS-BUTTON"><div class="text-wrapper-2">Stat</div></button>
         <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-3">PAY</div></button>
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
-        <button class="MENU-LINK" onclick="window.location.href = 'Customer_Home.html';"><div class="text-wrapper-4">Home</div></button>
-        <button class="div-wrapper" onclick="window.location.href = 'Customer_About_Us.html';"><div class="text-wrapper-5">ABOUT US</div></button>
-        <button class="ORDER" onclick="window.location.href = 'Customer_Menu_Ordering.html';"><div class="text-wrapper-6">ORDER</div></button>
+        <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper-4">Home</div></button>
+        <button class="div-wrapper" onclick="goToAbout()"><div class="text-wrapper-5">ABOUT US</div></button>
+        <button class="ORDER" onclick="goToOrder()""><div class="text-wrapper-6">ORDER</div></button>
       </div>
       <div class="ABOUT-US-FRAME">
         <div class="INFO-SECTION"><div class="text-wrapper-7">INFO ABOUT THE PLACE</div></div>
@@ -420,3 +420,15 @@
     </div>
   </body>
 </html>
+<script>
+  function goToHome() {
+        window.location.href = "{% url 'Customer_Home' %}";
+    }
+  function goToAbout() {
+        window.location.href = "{% url 'About_Us' %}";
+    }
+    function goToOrder() {
+        window.location.href = "{% url 'Menu_Ordering' %}";
+    }
+
+</script>

@@ -816,7 +816,7 @@
           </div>
         </div>
         <div class="top-frame">
-            <button class="back-button" onclick="window.location.href = 'Customer_Home.html';">
+            <button class="back-button" onclick="goToHome()">
                 <div class="back-button-2">&lt;</div>
             </button>
             <button class="ai-chat">
@@ -835,4 +835,9 @@
     </div>
   </body>
 </html>
+<script>
+  function goToHome() {
+        window.location.href = "{% url 'Customer_Home' %}";
+    }
+</script>
     

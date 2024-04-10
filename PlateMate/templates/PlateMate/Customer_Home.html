@@ -499,12 +499,12 @@
                     <button class="MENU-LINK"><div class="text-wrapper">HOME</div></button>
 
 	                <!ABOUT_US SCREEN BUTTON LINK>
-                    <button class="ABOUT-US" onclick="window.location.href = 'Customer_About_Us.html';">
+                    <button class="ABOUT-US" onclick="goToAbout()">
 	  	                <div class="text-wrapper-2">ABOUT US</div>
 	                </button>
 
 	                <!ORDER SCREEN BUTTON LINK>
-                    <button class="ORDER" onclick="window.location.href='{% url 'Customer_About_Us' %}'">
+                    <button class="ORDER" onclick="goToOrder()">
 		                <div class="text-wrapper-3">ORDER</div>
 	                </button>
 
@@ -535,4 +535,15 @@
         </div>
     </body>
 </html>
+<script>
+  function goToHome() {
+        window.location.href = "{% url 'Customer_Home' %}";
+    }
+  function goToAbout() {
+        window.location.href = "{% url 'About_Us' %}";
+    }
+    function goToOrder() {
+        window.location.href = "{% url 'Menu_Ordering' %}";
+    }
+</script>
     
