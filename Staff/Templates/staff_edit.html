@@ -1,16 +1,17 @@
+<!-- edit_staff.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Position</title>
+    <title>Edit Staff</title>
 </head>
 <body>
-    <h1>Delete Position</h1>
-    <p>Are you sure you want to delete "{{ position.name }}"?</p>
+    <h1>Edit Staff</h1>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Delete</button>
+        {{ form.as_p }}
+        <button type="submit">Save</button>
     </form>
 </body>
 </html>
