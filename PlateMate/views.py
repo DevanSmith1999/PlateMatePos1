@@ -136,13 +136,18 @@ def create_order(request):
       menu_item = MenuItem.objects.get(pk=menu_item_id)
       table = Table.objects.get(pk=table_id)
 
-      new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
-      new_order.save()
-      print("Testing print****************************************************************************************")
-      return render(request, 'PlateMate/Customer_Menu_Ordering.html')
+      # Check for existing order with same MenuItemID and TableID
+      existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item, TableID=table).first()  # Get the first matching order
+      if existing_order:
+        # Increment quantity of existing order
+        existing_order.Quantity += 1
+        existing_order.save()
+        return render(request, 'PlateMate/Customer_Menu_Ordering.html')  # Display success message (optional)
+      else:
+        # Create new order if none exists
+        new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
+        new_order.save()
+        return render(request, 'PlateMate/Customer_Menu_Ordering.html')  
     except (ValueError, Exception) as e:
-      print(e)
-      print("Testing print****************************************************************************************")
       # Handle various exceptions
       return render(request, 'PlateMate/Customer_Menu_Ordering.html')
-  return render(request, 'PlateMate/Customer_Menu_Ordering.html')
