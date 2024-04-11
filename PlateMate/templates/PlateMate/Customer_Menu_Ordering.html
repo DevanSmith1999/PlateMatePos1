@@ -49,7 +49,7 @@
     position: relative;
     width: 298px;
     height: 120px;
-    margin-top: -0.5px;
+    margin-top: 75px;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -86,7 +86,7 @@
   
   .ORDER .recipt {
     position: absolute;
-    width: 375px;
+    width: 370px;
     height: 773px;
     top: 222px;
     left: 9px;
@@ -191,7 +191,7 @@
     border-radius: 2px;
     overflow: hidden;
     border: 1px solid;
-    border-color: #0000001a;
+    border-color: #000000;
   }
   
   .ORDER .item-frame {
@@ -449,7 +449,7 @@
     height: 278px;
     top: 0;
     left: 0;
-    border-bottom-width: 1px;
+    border-bottom-width: 2px;
     border-bottom-style: solid;
     border-color: #000000;
   }
@@ -530,7 +530,9 @@
   }
   
   .ORDER .order-banner {
-    display: inline-flex;
+    display: flex;
+    width: 977px;
+    height: 52px;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -541,12 +543,10 @@
   }
   
   .ORDER .text-wrapper-7 {
-    width: 977px;
-    height: 52px;
-    margin-top: -1px;
     color: #ffffff;
     font-size: 32px;
     position: relative;
+    width: fit-content;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     text-align: center;
@@ -557,6 +557,7 @@
   .ORDER .appetizers {
     display: flex;
     width: 186px;
+    height: 132px;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -567,62 +568,37 @@
     border-radius: 10px;
   }
   
-  .ORDER .text-wrapper-8 {
-    position: relative;
-    width: 172px;
-    height: 132px;
-    margin-top: -1px;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
   .ORDER .kids-sides {
-    position: absolute;
+    display: flex;
     width: 186px;
     height: 132px;
-    top: 132px;
-    left: 426px;
-    background-color: #c02c2c;
-    border-radius: 10px;
-  }
-  
-  .ORDER .KIDS-SIDES {
-    position: absolute;
-    width: 186px;
-    height: 132px;
-    top: -1px;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .ORDER .entrees {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     position: absolute;
     top: 132px;
-    left: 219px;
+    left: 429px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+  
+  .ORDER .entrees {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 220px;
     background-color: #c02c2c;
     border-radius: 10px;
   }
   
   .ORDER .text-wrapper-9 {
     position: relative;
-    width: 186px;
-    height: 132px;
-    margin-top: -1px;
+    width: fit-content;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -633,13 +609,15 @@
   }
   
   .ORDER .dessert {
-    display: inline-flex;
+    display: flex;
+    width: 186px;
+    height: 132px;
     align-items: center;
     justify-content: center;
     gap: 10px;
     position: absolute;
     top: 132px;
-    left: 633px;
+    left: 638px;
     background-color: #c02c2c;
     border-radius: 10px;
   }
@@ -683,19 +661,6 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
-  .ORDER .text-wrapper-11 {
-    position: relative;
-    width: fit-content;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
 
   </style>
   <body>
@@ -813,7 +778,7 @@
           </div>
         </div>
         <div class="top-frame">
-            <button class="back-button" onclick="window.location.href = 'Customer_Home.html';">
+            <button class="back-button" onclick="goToHome()">
                 <div class="back-button-2">&lt;</div>
             </button>
             <button class="ai-chat">
@@ -821,12 +786,12 @@
             </button>
             <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
       </div>
     </div>
@@ -1400,6 +1365,9 @@
         </div>
         `;
       }
+    }
+    function goToHome() {
+        window.location.href = "{% url 'Customer_Home' %}";
     }
     </script>
   </body>
