@@ -1,8 +1,9 @@
 from django.urls import path
 from PlateMate import views
+from users import views as userviews 
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", userviews.home, name="home"),
     path("Customer_Home/", views.Customer_Home, name = "Test Page"),
     path("Customer_Menu_Ordering/", views.Customer_Menu_Ordering, name = "Test Page"),
     path("Customer_Receipt_Check/", views.Customer_Receipt_Check, name = "Test Page"),
