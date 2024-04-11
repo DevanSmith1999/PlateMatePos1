@@ -21,13 +21,13 @@ class SubPositionForm(forms.ModelForm):
 
 
 class StaffForm(forms.ModelForm):
+    subposition = forms.ModelMultipleChoiceField(
+        queryset=SubPosition.objects.all(),#pylint:disable=no-member
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
     class Meta:
         model = Staff
         fields = ['first_name', 'last_name', 'Date_of_birth', 'id_number', 'subposition']
-        widgets = {
-            'Date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-        }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['subposition'].queryset = SubPosition.objects.all()#pylint:disable=no-member

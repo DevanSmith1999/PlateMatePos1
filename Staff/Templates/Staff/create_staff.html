@@ -55,13 +55,18 @@
         button[type="submit"]:hover {
             background-color: #45a049;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    {% include 'navbar.html' %}
     <div class="container">
         <h2>Create Staff</h2>
-        <form method="post">
+        <form method="post" id="create-staff-form">
             {% csrf_token %}
             <div class="form-group">
                 <label for="parent_position">Parent Position:</label>
@@ -90,8 +95,12 @@
             <div class="form-group">
                 <label for="id_number">ID Number:</label>
                 <input type="text" id="id_number" name="id_number" required>
+                <div class="error" id="id-number-error">
+                    {% if form.errors.id_number %}
+                        {{ form.errors.id_number }}
+                    {% endif %}
+                </div>
             </div>
-            <!-- Add more form fields as needed -->
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -123,7 +132,39 @@
                     subpositionsDiv.empty();
                 }
             });
+    
+            $(document).ready(function() {
+            $('#create-staff-form').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                
+                var idNumber = $('#id_number').val();
+                var errorDiv = $('#id-number-error');
+                
+                // AJAX request to check if ID number already exists
+                $.ajax({
+                    url: '/check-id-number/',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() // Get the CSRF token from the form
+                    },
+                    data: { 'id_number': idNumber },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.exists) {
+                            errorDiv.text('ID number already exists. Please choose a different one.');
+                        } else {
+                            // If ID number is unique, submit the form
+                            $('#create-staff-form').unbind('submit').submit();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error checking ID number:', error);
+                    }
+                });
+            });
         });
+     });
     </script>
+    
 </body>
 </html>

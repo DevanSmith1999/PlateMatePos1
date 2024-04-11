@@ -42,6 +42,7 @@
     </style>
 </head>
 <body>
+    {% include 'navbar.html' %}
     <div class="container">
         <h1>Staff Detail</h1>
         <p><strong>First Name:</strong> {{ staff.first_name }}</p>
@@ -56,6 +57,7 @@
         </ul>
         <a href="{% url 'staff_list' %}">Back to Staff List</a>
         <a href="{% url 'staff_delete' pk=staff.id %}">Delete</a>
+        <a href="{% url 'staff_edit' staff_id=staff.id %}">Edit Staff</a>
 
     </div>
 </body>

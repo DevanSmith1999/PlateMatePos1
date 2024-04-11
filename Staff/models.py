@@ -24,7 +24,7 @@ class Staff(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     Date_of_birth = models.DateField(null=True)
-    id_number = models.CharField(max_length=20)
+    id_number = models.CharField(max_length=20,unique=True)
     subposition = models.ManyToManyField(SubPosition,null=True)
 
     def __str__(self):

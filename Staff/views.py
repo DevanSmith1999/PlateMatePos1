@@ -19,11 +19,11 @@ def create_position(request):
         'form': form,
         'parent_positions': parent_positions
     }
-    return render(request, 'create_positions.html', context)
+    return render(request, 'Positions/create_positions.html', context)
 
 def position_list(request):
     positions = Position.objects.all() # pylint: disable=no-member
-    return render(request, 'position_list.html', {'positions': positions})
+    return render(request, 'Positions/position_list.html', {'positions': positions})
 
 def edit_position(request, pk):
     position = get_object_or_404(Position, pk=pk)
@@ -34,7 +34,7 @@ def edit_position(request, pk):
             return redirect('position_list')
     else:
         form = PositionForm(instance=position)
-    return render(request, 'edit_position.html', {'form': form})
+    return render(request, 'Positions/edit_position.html', {'form': form})
 
 def confirm_delete_subposition(request, pk):
     subposition = get_object_or_404(SubPosition, pk=pk)
@@ -43,19 +43,19 @@ def confirm_delete_subposition(request, pk):
         subposition.delete()
         # Redirect the user to a success page or another appropriate page
         return redirect('subposition_list')  # Redirect to the positions list page
-    return render(request, 'confirm_delete_subposition.html', {'subposition': subposition})
+    return render(request, 'Positions/confirm_delete_subposition.html', {'subposition': subposition})
 
 def delete_subposition(request, pk):
     subposition = get_object_or_404(SubPosition, pk=pk)
     if request.method == 'POST':
         subposition.delete()
         return redirect('subposition_list')  # Redirect to the subpositions list page
-    return redirect('confirm_delete_subposition', pk=pk)  # Redirect to the confirmation page if GET request
+    return redirect('Positions/confirm_delete_subposition', pk=pk)  # Redirect to the confirmation page if GET request
 
 # Views for Staff
 def staff_list(request):
     subposition = SubPosition.objects.all()#pylint:disable=no-member
-    return render(request, 'staff_list.html', {'subposition': subposition})
+    return render(request, 'Staff/staff_list.html', {'subposition': subposition})
 
 def get_staff(request):
     subposition_id = request.GET.get('subposition_id')
@@ -65,22 +65,42 @@ def get_staff(request):
 
 def staff_detail(request, staff_id):
     staff = get_object_or_404(Staff, id=staff_id)
-    return render(request, 'staff_detail.html', {'staff': staff})
+    return render(request, 'Staff/staff_detail.html', {'staff': staff})
 
 def subpositions_list(request):
     subpositions=SubPosition.objects.all()# pylint: disable=no-member
-    return render(request, 'subposition_list.html',{'subpositions': subpositions})
+    return render(request, 'Staff/subposition_list.html',{'subpositions': subpositions})
 
-def edit_staff(request, pk):
-    staff = get_object_or_404(Staff, pk=pk)
+def edit_staff(request, staff_id):
+    staff = get_object_or_404(Staff, id=staff_id)
     if request.method == 'POST':
         form = StaffForm(request.POST, instance=staff)
         if form.is_valid():
             form.save()
-            return redirect('staff_list')
+            return redirect('Staff/staff_detail', staff_id=staff.id)
     else:
         form = StaffForm(instance=staff)
-    return render(request, 'edit_staff.html', {'form': form})
+    
+    # Pre-fill the Date_of_birth field with the existing value
+    form.fields['Date_of_birth'].initial = staff.Date_of_birth
+    
+    subposition = SubPosition.objects.all()  #pylint:disable=no-member
+    context = {
+        'form': form,
+        'staff': staff,
+        'subposition': subposition,
+    }
+    return render(request, 'Staff/staff_edit.html', context)
+
+def check_id_number(request):
+    if request.method == 'POST':
+        id_number = request.POST.get('id_number')
+        if Staff.objects.filter(id_number=id_number).exists():#pylint:disable=no-member
+            return JsonResponse({'exists': True})
+        else:
+            return JsonResponse({'exists': False})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
 
 def confirm_delete_staff(request, pk):
     staff = get_object_or_404(Staff, pk=pk)
@@ -89,15 +109,20 @@ def confirm_delete_staff(request, pk):
         staff.delete()
         # Redirect the user to a success page or another appropriate page
         return redirect('staff_list')  # Redirect to the staff list page
-    return render(request, 'staff_delete_confirm.html', {'staff': staff})
+    return render(request, 'Staff/staff_delete_confirm.html', {'staff': staff})
 
 
 def create_staff(request):
     if request.method == 'POST':
         form = StaffForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('staff_list')  # Assuming you have a URL named 'staff_list' for the staff list page
+            id_number = form.cleaned_data['id_number']
+            if Staff.objects.filter(id_number=id_number).exists():#pylint:disable=no-member
+                form.add_error('id_number', 'ID number already exists.')
+            else:
+                form.save()
+                return redirect('staff_list')
+            
     else:
         form = StaffForm()
     
@@ -106,7 +131,7 @@ def create_staff(request):
         'form': form,
         'positions': positions
     }
-    return render(request, 'create_staff.html', context)
+    return render(request, 'Staff/create_staff.html', context)
 
 
 def get_subpositions(request):

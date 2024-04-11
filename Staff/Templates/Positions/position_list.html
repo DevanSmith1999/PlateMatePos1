@@ -90,35 +90,34 @@
         <a href="{% url 'create_position' %}">Create New Positions</a>
         <a href="{% url 'subposition_list' %}">Delete Positions</a>
     </div>
-<script>
-    document.getElementById('filter_button').addEventListener('click', function(event) {
-        event.preventDefault();
-        var subpositionId = document.getElementById('subposition').value;
-        if (subpositionId) {
-            fetch(`/get-staff/?subposition_id=${subpositionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    var staffListDiv = document.getElementById('staff_list');
-                    staffListDiv.innerHTML = ''; // Clear existing staff list
-                    if (data.length > 0) {
-                        var staffList = document.createElement('ul');
-                        data.forEach(staff => {
-                            var listItem = document.createElement('li');
-                            listItem.textContent = staff.first_name + ' ' + staff.last_name;
-                            staffList.appendChild(listItem);
-                        });
-                        staffListDiv.appendChild(staffList);
-                    } else {
-                        staffListDiv.textContent = 'No staff members found for this subposition.';
-                    }
-                })
-                .catch(error => console.error('Error fetching staff members:', error));
-        } else {
-            alert('Please select a subposition.');
-        }
-    });
-</script>
-
+    <script>
+        document.getElementById('filter_button').addEventListener('click', function(event) {
+            event.preventDefault();
+            var parentPositionId = document.getElementById('parent_position').value;
+            if (parentPositionId) {
+                fetch(`/get-subpositions/?parent_position=${parentPositionId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var subpositionsDiv = document.getElementById('subpositions');
+                        subpositionsDiv.innerHTML = ''; // Clear existing options
+                        if (data.length > 0) {
+                            var subpositionsList = document.createElement('ul');
+                            data.forEach(subposition => {
+                                var listItem = document.createElement('li');
+                                listItem.textContent = subposition.name;
+                                subpositionsList.appendChild(listItem);
+                            });
+                            subpositionsDiv.appendChild(subpositionsList);
+                        } else {
+                            subpositionsDiv.textContent = 'No subpositions found.';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching subpositions:', error));
+            } else {
+                alert('Please select a parent position.');
+            }
+        });
+    </script>
 </body>
 </html>
 
