@@ -142,7 +142,7 @@ def create_order(request):
         # Increment quantity of existing order
         existing_order.Quantity += 1
         existing_order.save()
-        return render(request, 'PlateMate/Customer_Menu_Ordering.html')  # Display success message (optional)
+        return render(request, 'PlateMate/Customer_Menu_Ordering.html') 
       else:
         # Create new order if none exists
         new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
