@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .forms import PositionForm, SubPositionForm, StaffForm
 from .models import Position, SubPosition, Staff
 from django.contrib.auth import logout
+from django.urls import reverse
 
 def create_position(request):
     if request.method == 'POST':
@@ -78,7 +79,7 @@ def edit_staff(request, staff_id):
         form = StaffForm(request.POST, instance=staff)
         if form.is_valid():
             form.save()
-            return redirect('Staff/staff_detail', staff_id=staff.id)
+            return redirect(reverse('staff_detail', kwargs={'staff_id': staff.id})) 
     else:
         form = StaffForm(instance=staff)
     
