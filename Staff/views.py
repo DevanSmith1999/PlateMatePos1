@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import PositionForm, SubPositionForm, StaffForm
 from .models import Position, SubPosition, Staff
+from django.contrib.auth import logout
 
 def create_position(request):
     if request.method == 'POST':
@@ -142,3 +143,9 @@ def get_subpositions(request):
     else:
         return JsonResponse({'error': 'No parent position provided'}, status=400)
 
+def logout_confirmation(request):
+    return render(request, 'logout_confirmation.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('login') 
