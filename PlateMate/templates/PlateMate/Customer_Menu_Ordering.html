@@ -672,6 +672,15 @@
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
               QT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE
+              <table>
+                <tbody>
+                    {% for order in active_orders %}
+                    <tr>
+                        <td>{{ order.Quantity }}</td>
+                        <td>{{ order.menu_item.Name }}</td>  <td>{{ order.menu_item.Price }}</td>  </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             </div>
           </div>
           <div class="total-price"><div class="div">Total: Amount</div></div>

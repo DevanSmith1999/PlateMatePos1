@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse 
 from .models import ActiveOrder, MenuItem, Table  #Use this to access Menuitem data
 
+
  # Import all relevant models
 # Stuff
 
@@ -124,30 +125,66 @@ def Server_Table_View(request):
         'PlateMate/Server_Table_View.html'
     )
 
-
+        
 def create_order(request):
-  print("Testing print")
-  if request.method == 'POST':
-    try:
-      menu_item_id = int(request.POST.get('MenuItemID'))
-      table_id = int(request.POST.get('TableID'))
+    context = {}
 
-      # Retrieve MenuItem object and Table object
-      menu_item = MenuItem.objects.get(pk=menu_item_id)
-      table = Table.objects.get(pk=table_id)
+    if request.method == 'POST':
+        try:
+            menu_item_id = int(request.POST.get('MenuItemID'))
+            table_id = int(request.POST.get('TableID'))
 
-      # Check for existing order with same MenuItemID and TableID
-      existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item, TableID=table).first()  # Get the first matching order
-      if existing_order:
-        # Increment quantity of existing order
-        existing_order.Quantity += 1
-        existing_order.save()
-        return render(request, 'PlateMate/Customer_Menu_Ordering.html') 
-      else:
-        # Create new order if none exists
-        new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
-        new_order.save()
-        return render(request, 'PlateMate/Customer_Menu_Ordering.html')  
-    except (ValueError, Exception) as e:
-      # Handle various exceptions
-      return render(request, 'PlateMate/Customer_Menu_Ordering.html')
+            # Retrieve MenuItem object and Table object
+            menu_item = MenuItem.objects.get(pk=menu_item_id)
+            table = Table.objects.get(pk=table_id)
+
+            # Check for existing order with same MenuItemID and TableID
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item, TableID=table).first()  # Get the first matching order
+
+            if existing_order:
+                # Increment quantity of existing order
+                existing_order.Quantity += 1
+                existing_order.save()
+            else:
+                # Create new order if none exists
+                new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
+                new_order.save()
+
+            # After processing the form, retrieve active orders with data integrity check
+            active_orders = []
+            for order in ActiveOrder.objects.filter(TableID=table_id):
+                try:
+                    # Check if MenuItem object exists
+                    order.menu_item = MenuItem.objects.get(pk=order.pk)
+                    active_orders.append(order)  # Only add order if MenuItem exists
+                except MenuItem.DoesNotExist:
+                    # Handle cases where MenuItem doesn't exist (e.g., log the error)
+                    pass
+
+            context['active_orders'] = active_orders
+
+            return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+
+        except (ValueError, Exception) as e:
+            # Handle various exceptions
+            context['active_orders'] = []  # Set empty list for active orders
+            return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+
+    else:  # GET request (initial page load)
+        table_id = 1
+        active_orders = []
+        for order in ActiveOrder.objects.filter(TableID=table_id):
+            try:
+                # Check if MenuItem object exists
+                order.menu_item = MenuItem.objects.get(pk=order.pk)
+                active_orders.append(order)  # Only add order if MenuItem exists
+            except MenuItem.DoesNotExist:
+                # Handle cases where MenuItem doesn't exist (e.g., log the error)
+                pass
+
+        context['active_orders'] = active_orders
+
+    return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+
+
+
