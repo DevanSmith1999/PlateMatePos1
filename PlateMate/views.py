@@ -128,18 +128,24 @@ def Server_Table_View(request):
         
 def create_order(request):
     context = {}
-
-    if request.method == 'POST':
+    table_id = 1 #Set table id here (1 for testing will need to be retrived from table user eventually)
+    active_orders = []
+    
+    #handle the order button (Pushes order to Kitchen)
+    if request.method == 'POST' and 'mark_ordered' in request.POST:
+        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
+        return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+    
+    elif request.method == 'POST' and 'Add': #handle the add button
         try:
             menu_item_id = int(request.POST.get('MenuItemID'))
             table_id = int(request.POST.get('TableID'))
 
-            # Retrieve MenuItem object and Table object
-            menu_item = MenuItem.objects.get(pk=menu_item_id)
+            # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
             table = Table.objects.get(pk=table_id)
-
-            # Check for existing order with same MenuItemID and TableID
-            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item, TableID=table).first()  # Get the first matching order
+        
+            # Check for existing order with same menu_item_id and TableID
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
 
             if existing_order:
                 # Increment quantity of existing order
@@ -147,43 +153,39 @@ def create_order(request):
                 existing_order.save()
             else:
                 # Create new order if none exists
-                new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
+                new_order = ActiveOrder(MenuItemID=menu_item_id, TableID=table, Quantity=1)
                 new_order.save()
 
             # After processing the form, retrieve active orders with data integrity check
             active_orders = []
-            for order in ActiveOrder.objects.filter(TableID=table_id):
-                try:
-                    # Check if MenuItem object exists
-                    order.menu_item = MenuItem.objects.get(pk=order.pk)
-                    active_orders.append(order)  # Only add order if MenuItem exists
-                except MenuItem.DoesNotExist:
-                    # Handle cases where MenuItem doesn't exist (e.g., log the error)
-                    pass
-
+            
+            # Retrive all the data for displaying 
+            total_price = 0
+            for order in ActiveOrder.objects.filter(TableID=table_id, Ordered = 0):
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                active_orders.append(order)
+                total_price += order.menu_item.Price * order.Quantity #calc sum of all currently ordered items
+            
             context['active_orders'] = active_orders
+            context['total_price'] = total_price #sum of all ordered items
+            
 
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
-
         except (ValueError, Exception) as e:
+            print("ERRORRRRRRRRRR")
             # Handle various exceptions
             context['active_orders'] = []  # Set empty list for active orders
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
-
     else:  # GET request (initial page load)
         table_id = 1
         active_orders = []
         for order in ActiveOrder.objects.filter(TableID=table_id):
-            try:
-                # Check if MenuItem object exists
-                order.menu_item = MenuItem.objects.get(pk=order.pk)
-                active_orders.append(order)  # Only add order if MenuItem exists
-            except MenuItem.DoesNotExist:
-                # Handle cases where MenuItem doesn't exist (e.g., log the error)
-                pass
-
+            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+            active_orders.append(order)
         context['active_orders'] = active_orders
 
+    
+    
     return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
 
 

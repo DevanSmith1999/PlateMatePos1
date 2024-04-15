@@ -18,10 +18,11 @@ class Table(models.Model):
     return str(self.pk)
 
 class ActiveOrder(models.Model):
-  MenuItemID = models.ForeignKey(MenuItem,on_delete= models.CASCADE)
+  MenuItemID = models.IntegerField()
   TableID = models.ForeignKey(Table,on_delete= models.CASCADE)
   Quantity = models.IntegerField()
   OrderTime = models.DateTimeField(auto_now_add = True)
+  Ordered = models.BooleanField(default = False)
   completed = models.BooleanField(default = False)
 
   def __str__(self):
