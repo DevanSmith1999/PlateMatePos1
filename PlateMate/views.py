@@ -76,6 +76,13 @@ def Customer_Receipt_Check(request):
         'PlateMate/Customer_Receipt_Check.html'
     )
 
+def Server_Order_Screen(request):
+    '''Server order screen'''
+    return render(
+        request,
+        'PlateMate/Server_Order_Screen.html'
+    )
+
 def Kitchen_Current_Orders(request):
     '''View current orders from all tables'''
     return render(
