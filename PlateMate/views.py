@@ -35,38 +35,38 @@ def Customer_Menu_Ordering(request):
         'PlateMate/Customer_Menu_Ordering.html'
     )
 
-def Customer_App_Ordering(request):
-    '''Access appetizer menu items and be able to add items to a check/order'''
+def App_Menu(request):
+    '''Access appetizer menu items'''
     return render(
         request,
-        'PlateMate/Customer_App_Ordering.html'
+        'PlateMate/App_Menu.html'
     )
 
-def Customer_Entree_Ordering(request):
-    '''Access entree menu items and be able to add items to a check/order'''
+def Entree_Menu(request):
+    '''Access entree menu items'''
     return render(
         request,
-        'PlateMate/Customer_Entree_Ordering.html'
+        'PlateMate/Entree_Menu.html'
     )
-def Customer_Kids_Sides_Ordering(request):
-    '''Access kids and side menu items and be able to add items to a check/order'''
+def Kids_Sides_Menu(request):
+    '''Access kids and side menu items'''
     return render(
         request,
-        'PlateMate/Customer_Kids_Sides_Ordering.html'
-    )
-
-def Customer_Drinks_Ordering(request):
-    '''Access drink menu items and be able to add items to a check/order'''
-    return render(
-        request,
-        'PlateMate/Customer_Drinks_Ordering.html'
+        'PlateMate/Kids_Sides_Menu.html'
     )
 
-def Customer_Dessert_Ordering(request):
-    '''Access dessert menu items and be able to add items to a check/order'''
+def Drink_Menu(request):
+    '''Access drink menu items'''
     return render(
         request,
-        'PlateMate/Customer_Dessert_Ordering.html'
+        'PlateMate/Drinks_Menu.html'
+    )
+
+def Dessert_Menu(request):
+    '''Access dessert menu items '''
+    return render(
+        request,
+        'PlateMate/Dessert_Menu.html'
     )
 
 def Customer_Receipt_Check(request):

@@ -145,7 +145,7 @@
         width: 100px;
       }
       
-      .MAIN .text-wrapper-4 {
+      .MAIN .text-wrapper-24 {
         height: 72px;
         top: 17px;
         left: 0;
@@ -170,7 +170,7 @@
         height: 39px;
       }
       
-      .MAIN .text-wrapper-5 {
+      .MAIN .text-wrapper-23 {
         top: -1px;
         left: 0;
         font-family: "Inter", Helvetica;
@@ -297,7 +297,7 @@
         line-height: normal;
       }
       
-      .MAIN .APPETIZEERS {
+      .MAIN .APPETIZEERS1 {
         position: absolute;
         width: 292px;
         height: 229px;
@@ -489,6 +489,8 @@
         top: 11px;
         left: 2px;
       }
+      
+
     </style>
     <body>
         <div class="MAIN">
@@ -509,9 +511,9 @@
 		                <div class="text-wrapper-3">ORDER</div>
 	                </button>
 
-                    <div class="LOGO"><div class="text-wrapper-4">Logo</div></div>
+                    <div class="LOGO"><div class="text-wrapper-24">Logo</div></div>
 
-                    <div class="TIME"><div class="text-wrapper-5">TIME</div></div>
+                    <div class="TIME"><div class="text-wrapper-23">TIME</div></div>
 
                     <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-6">PAY</div></button>
                     <button class="STATUS-BUTTON"><div class="text-wrapper-7">Stat</div></button>
@@ -521,12 +523,12 @@
                 <div class="MAIN-MENU">
                     <div class="TABLE-NUM"><div class="text-wrapper-8">#</div></div>
                     <div class="MENU-ITEM-BANNER"><div class="text-wrapper-9">Welcome</div></div>
-                    <button class="APPETIZEERS" onclick="window.location.href= 'Customer_App_Order.html';"><div class="text-wrapper-10">Appetizers</div></button>
-                    <button class="ENTREE" onclick="window.location.href= 'Customer_Entree_Order.html';"><div class="text-wrapper-11">Entrees</div></button>
-                    <button class="DRINKS" onclick="window.location.href= 'Customer_Drinks_Order.html';"><div class="text-wrapper-12">DRINKS</div></button>
-                    <button class="KIDS" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';"><div class="text-wrapper-13">KIDS</div></button>
-                    <button class="SIDES" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';"><div class="text-wrapper-14">Sides</div></button>
-                    <button class="DESSERT" onclick="window.location.href= 'Customer_Dessert_Order.html';"><div class="text-wrapper-15">DESSERT</div></button>
+                    <button class="APPETIZEERS1" onclick="goToApps();"><div class="text-wrapper-10">Appetizers</div></button>
+                    <button class="ENTREE" onclick="goToEntree()";"><div class="text-wrapper-11">Entrees</div></button>
+                    <button class="DRINKS" onclick="goToDrink()";"><div class="text-wrapper-12">DRINKS</div></button>
+                    <button class="KIDS" onclick="goToKids()";"><div class="text-wrapper-13">KIDS</div></button>
+                    <button class="SIDES" onclick="goToSides()";"><div class="text-wrapper-14">Sides</div></button>
+                    <button class="DESSERT" onclick="goToDessert()";"><div class="text-wrapper-15">DESSERT</div></button>
                     <button class="AI-CHAT">
                         <div class="AI-chat">AI <br />Chat</div>
                     </button>
@@ -534,8 +536,6 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
 <script>
   function goToHome() {
         window.location.href = "{% url 'Customer_Home' %}";
@@ -546,5 +546,22 @@
     function goToOrder() {
         window.location.href = "{% url 'Menu_Ordering' %}";
     }
+    function goToApps() {
+        window.location.href = "{% url 'App_Menu' %}";
+    }
+    function goToEntree() {
+        window.location.href = "{% url 'Entree_Menu' %}";
+    }
+    function goToKids_Sides() {
+        window.location.href = "{% url 'Kids_Sides_Menu' %}";
+    }
+    function goToDessert() {
+        window.location.href = "{% url 'Dessert_Menu' %}";
+    }
+    function goToDrink() {
+        window.location.href = "{% url 'Drink_Menu' %}";
+    }
 </script>
+</body>
+</html>
     
