@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan Viewer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(248, 245, 245);
+            margin: 0;
+            padding: 20px;
+        }
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative; /* Make it a positioning context for absolute positioning of mainDiningText */
+            z-index: 1; /* Ensure it's above the canvas */
+        }
+
+        #navbar {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+            justify-content: center;
+            
+
+        }
+        #canvas {
+            width: 75vw;
+            height: 85vh;
+            background-color: darkgray;
+            border: 1px solid darkgrey;
+            position: relative;
+            margin-top: 20px;
+            z-index: 0;
+            margin-left: auto; /* Pushes the canvas to the right */
+            margin-right: 0;
+        }
+        .table, .table-text {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black; /* Black border for tables */
+        }
+        .table-text {
+            border: 2px solid black; /* No border for text boxes */
+            background-color: transparent;
+        }
+        .table-input {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+            background-color: transparent;
+            text-align: center;
+            pointer-events: none; /* To prevent input from blocking drag and drop */
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(247, 243, 243);
+        }
+        .rectangle {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(247, 243, 243);
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(247, 243, 243);
+        }
+        #mainDiningText {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(11, 220, 247);
+            margin-bottom: 20px;
+            position: absolute; /* Position it absolutely within the canvas */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust to truly center */
+            z-index: 2;
+        }
+        .occupied {
+            background-color: yellow;
+        }
+        
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div id="content">
+        <div id="mainDiningText">Main Dining</div>
+        <div id="canvas">
+            <!-- Tables and text boxes will be appended here -->
+        </div>
+    </div>
+
+    <script>
+        let tables = [];
+        let textboxes = [];
+    
+        $(document).ready(function() {
+            const floor_plan_name = "Main";
+            const originalCanvasWidth =683;  // Original canvas width
+            const originalCanvasHeight = 600; // Original canvas height
+            const newCanvasWidth = $('#canvas').width();  // New canvas width
+            const newCanvasHeight = $('#canvas').height();
+
+            const scaleX = newCanvasWidth / originalCanvasWidth;
+            const scaleY = newCanvasHeight / originalCanvasHeight;
+    
+            // Fetch floor plan data
+            $.ajax({
+                url: `/get-floor-plan/${floor_plan_name}/`,
+                method: 'GET',
+                success: function(response) {
+                    console.log("Floor plan data:", response);
+                    tables = response.tables || [];
+                    textboxes = response.textboxes || [];
+    
+                    console.log("Received tables data:", tables);
+                    console.log("Received text boxes data:", textboxes);
+    
+                    renderElements();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Error:", textStatus, errorThrown);
+                }
+            });
+    
+            function renderElements() {
+                console.log("Rendering tables:", tables);
+                console.log("Rendering text boxes:", textboxes);
+
+                if (!Array.isArray(tables) || !Array.isArray(textboxes)) {
+                    console.log("Tables or text boxes data is not an array.");
+                    return;
+                }
+
+                tables.forEach(table => {
+                    const { table_number, shape, x_position, y_position, width, height } = table;
+                    const scaledX = x_position * scaleX;
+                    const scaledY = y_position * scaleY;
+                    const scaledWidth = width * scaleX;
+                    const scaledHeight = height * scaleY;
+
+                    console.log(`Rendering table ${table_number} at ${scaledX}, ${scaledY}`);
+                    let shapeClass = shape;
+                    if (shape === 'square') {
+                        shapeClass = 'square';
+                    }
+
+                    const tableElement = `
+                        <a href="/" class="table-link" id="table-link-${table_number}" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
+                            <div id="table-${table_number}" class="table ${shapeClass}" style="width: 100%; height: 100%;">
+                                <input type="text" class="table-input" value="${table_number}" readonly />
+                            </div>
+                        </a>`;
+
+                    $("#canvas").append(tableElement);
+                });
+
+                textboxes.forEach(textbox => {
+                    const { id, x_position, y_position, width, height, content } = textbox;
+                    const scaledX = x_position * scaleX;
+                    const scaledY = y_position * scaleY;
+                    const scaledWidth = width * scaleX;
+                    const scaledHeight = height * scaleY;
+
+                    console.log(`Rendering text box ${id} at ${scaledX}, ${scaledY}`);
+                    
+                    const element = `
+                        <div id="text-box-${id}" class="table-text" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
+                            <input type="text" class="table-input" value="${content}" readonly />
+                        </div>`;
+                    
+                    $("#canvas").append(element);
+                });
+            }
+    
+            $("#canvas").on('click', '.table', function() {
+                const id = $(this).attr("table_number"); // Extracting table number from the ID
+                // Implement logic to handle table click, e.g., placing an order
+                const staffNumber = sessionStorage.getItem('staffNumber');
+
+                // Update the isOccupiedBy field of the clicked table in tables array
+                const clickedTable = tables.find(table => table.table_number == id);
+                error.log("Clicked table:",clickedTable);
+                if (clickedTable) {
+                    clickedTable.isOccupiedBy = staffNumber;
+
+                    // Update table's data on server-side
+                    $.ajax({
+                        url: `/update-table/${id}/`,  // Assuming you have an endpoint to update table data
+                        method: 'PUT',
+                        data: JSON.stringify(clickedTable),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            console.log("Table data updated successfully:", response);
+                            // Optionally update the UI to reflect the change, e.g., change table color to indicate occupancy
+                            $(`#table-${id}`).addClass('occupied');  // Add a CSS class to indicate occupied table
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error updating table data:", textStatus, errorThrown);
+                        }
+                    });
+                } else {
+                    console.log("Table not found.");
+                }
+    
+            });
+    
+            $("#canvas").on('click', '.table-text', function(event) {
+                event.stopPropagation(); // Stop the click event from bubbling up
+            });
+        });
+    </script>
+    
+</body>
+</html>

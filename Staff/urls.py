@@ -17,6 +17,7 @@ urlpatterns = [
     path('staff/<int:staff_id>/edit/', views.edit_staff, name='staff_edit'),
     path('get-staff/', views.get_staff, name='get_staff'),
     path('check-id-number/', views.check_id_number, name='check_id_number'),#pylint:disable=no-member
+    path('server_login/',views.server_login,name='server_login'),
 
     path('logout-confirmation/', views.logout_confirmation, name='logout_confirmation'),
     path('logout/', views.logout_user, name='logout'),

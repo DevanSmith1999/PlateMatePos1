@@ -1,7 +1,7 @@
 <!-- navbar.html -->
 <style>
     .navbar {
-        background-color: #007bff;
+        background-color: #808080;
         color: #fff;
         padding: 10px;
         display: flex;
@@ -30,6 +30,8 @@
     <div class="navbar-links">
         <a href="{% url 'position_list' %}">Positions</a>
         <a href="{% url 'staff_list' %}">Staff</a>
+        <a href="{% url 'list_floorplans' %}">Floorplans</a>
+        <a href="{% url 'server_login' %}">Server Login</a>
         <a href="{% url 'logout_confirmation' %}">Logout</a>
         <!-- Add more links here as needed -->
     </div>

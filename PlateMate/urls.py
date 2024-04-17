@@ -13,5 +13,12 @@ urlpatterns = [
     path("Manager_Table_Assignment/", views.Manager_Table_Assignment, name = "Test Page"),
     path("Server_Check_View/", views.Server_Check_View, name = "Test Page"),
     path("Server_Pin_Log_in/", views.Server_Pin_Log_in, name = "Test Page"),
-    path("Server_Table_View/", views.Server_Table_View, name = "Test Page")
+    path("Server_Table_View/", views.Server_Table_View, name = "Test Page"),
+    path('floorplans/', views.list_floorplans, name='list_floorplans'),
+    path('edit_floor_plan/<str:floor_plan_name>/', views.edit_floor_plan, name='edit_floor_plan'),
+    path('save_floor_plan/<str:floor_plan_name>/', views.save_floor_plan, name='save_floor_plan'),
+    path('get-floor-plan/<str:floor_plan_name>/', views.get_floor_plan, name='get_floor_plan_by_name'),
+    path('floor-plan/<str:floor_plan_name>/', views.floor_plan_view, name='floor_plan_view'),
+    path('remove-shape/<str:shape_id>/', views.remove_shape, name='remove_shape'),
+    path('update-table/<int:table_id>/', views.update_table, name='update_table'),
 ]
