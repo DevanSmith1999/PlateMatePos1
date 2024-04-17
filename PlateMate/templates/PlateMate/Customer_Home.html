@@ -522,7 +522,7 @@
 
                     <div class="TIME"><div class="text-wrapper-23">TIME</div></div>
 
-                    <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-6">PAY</div></button>
+                    <button class="PAY-BUTTON" onclick="goToPay()"><div class="text-wrapper-6">PAY</div></button>
                     <button class="STATUS-BUTTON"><div class="text-wrapper-7">STAT</div></button>
 
                 </div>
@@ -530,12 +530,12 @@
                 <div class="MAIN-MENU">
                     <div class="TABLE-NUM"><div class="text-wrapper-8">#</div></div>
                     <div class="MENU-ITEM-BANNER"><div class="text-wrapper-9">Welcome</div></div>
-                    <button class="APPETIZEERS1" onclick="goToApps();"><div class="text-wrapper-10">Appetizers</div></button>
-                    <button class="ENTREE" onclick="goToEntree()";"><div class="text-wrapper-11">Entrees</div></button>
-                    <button class="DRINKS" onclick="goToDrink()";"><div class="text-wrapper-12">Drinks</div></button>
-                    <button class="KIDS" onclick="goToKids()";"><div class="text-wrapper-13">Kids</div></button>
-                    <button class="SIDES" onclick="goToSides()";"><div class="text-wrapper-14">Sides</div></button>
-                    <button class="DESSERT" onclick="goToDessert()";"><div class="text-wrapper-15">Desserts</div></button>
+                    <button class="APPETIZEERS1" onclick="goToApps()"><div class="text-wrapper-10">Appetizers</div></button>
+                    <button class="ENTREE" onclick="goToEntree()"><div class="text-wrapper-11">Entrees</div></button>
+                    <button class="DRINKS" onclick="goToDrink()"><div class="text-wrapper-12">Drinks</div></button>
+                    <button class="KIDS" onclick="goToKids()"><div class="text-wrapper-13">Kids</div></button>
+                    <button class="SIDES" onclick="goToSides()"><div class="text-wrapper-14">Sides</div></button>
+                    <button class="DESSERT" onclick="goToDessert()"><div class="text-wrapper-15">Desserts</div></button>
                     <button class="AI-CHAT">
                         <div class="AI-chat">AI <br />Chat</div>
                     </button>
@@ -555,6 +555,9 @@
     function goToOrder() {
         window.location.href = "{% url 'Menu_Ordering' %}";
     }
+    function goToPay() {
+                window.location.href = "{% url 'Pay_Screen' %}"
+            }
     function goToApps() {
         window.location.href = "{% url 'App_Menu' %}";
     }

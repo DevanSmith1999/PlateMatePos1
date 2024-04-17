@@ -392,7 +392,7 @@
         <div class="LOGO"><div class="text-wrapper">Logo</div></div>
         <div class="TIME"><div class="text-wrapper-10">TIME</div></div>
         <button class="STATUS-BUTTON"><div class="text-wrapper-2">STAT</div></button>
-        <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-3">PAY</div></button>
+        <button class="PAY-BUTTON" onclick="goToPay()"><div class="text-wrapper-3">PAY</div></button>
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
         <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper-4">HOME</div></button>
         <button class="div-wrapper" onclick="goToAbout()"><div class="text-wrapper-5">ABOUT US</div></button>
@@ -423,5 +423,7 @@
     function goToOrder() {
         window.location.href = "{% url 'Menu_Ordering' %}";
     }
-
+    function goToPay() {
+        window.location.href = "{% url 'Pay_Screen' %}"
+    }
 </script>
