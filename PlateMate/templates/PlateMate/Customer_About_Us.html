@@ -333,7 +333,8 @@
   
   .ABOUT-US .CALL-SERVER {
     display: flex;
-    width: 100px;
+    flex-direction: column;
+    width: 87px;
     height: 86px;
     align-items: center;
     justify-content: center;
@@ -347,8 +348,16 @@
   
   .ABOUT-US .call-server {
     position: relative;
-    width: 96.64px;
-    height: 63px;
+    width: 80px;
+    height: 82px;
+    top: 20px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
   }
   
   .ABOUT-US .ABOUT-US-BANNER {
@@ -382,20 +391,22 @@
       <div class="SIDE-PANNEL">
         <div class="LOGO"><div class="text-wrapper">Logo</div></div>
         <div class="TIME"><div class="text-wrapper-10">TIME</div></div>
-        <button class="STATUS-BUTTON"><div class="text-wrapper-2">Stat</div></button>
+        <button class="STATUS-BUTTON"><div class="text-wrapper-2">STAT</div></button>
         <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-3">PAY</div></button>
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
-        <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper-4">Home</div></button>
+        <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper-4">HOME</div></button>
         <button class="div-wrapper" onclick="goToAbout()"><div class="text-wrapper-5">ABOUT US</div></button>
         <button class="ORDER" onclick="goToOrder()""><div class="text-wrapper-6">ORDER</div></button>
       </div>
       <div class="ABOUT-US-FRAME">
         <div class="INFO-SECTION"><div class="text-wrapper-7">INFO ABOUT THE PLACE</div></div>
         <div class="TABLE-NUM"><div class="text-wrapper-8">#</div></div>
-        <div class="AI-CHAT">
+        <button class="AI-CHAT">
           <div class="AI-chat">AI <br />Chat</div>
-        </div>
-        <div class="CALL-SERVER"><img class="call-server" src="img/call-server.png" /></div>
+        </button>
+        <button class="CALL-SERVER">
+          <div class="call-server">CALL</div>
+        </button>
         <div class="ABOUT-US-BANNER"><div class="text-wrapper-9">ABOUT US</div></div>
       </div>
     </div>

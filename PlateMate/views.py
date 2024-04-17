@@ -59,7 +59,7 @@ def Drink_Menu(request):
     '''Access drink menu items'''
     return render(
         request,
-        'PlateMate/Drinks_Menu.html'
+        'PlateMate/Drink_Menu.html'
     )
 
 def Dessert_Menu(request):
