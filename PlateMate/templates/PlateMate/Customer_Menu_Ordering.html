@@ -682,7 +682,7 @@
                         <form method="post" action="{% url 'delete_order_item' %}">
                           {% csrf_token %}
                           <input type="hidden" name="order_id" value="{{ order.id }}">
-                          <button type="submit" class="add" name="delete">
+                          <button type="submit"  name="delete">
                             {% if order.Quantity > 1 %}
                               x
                             {% else %}
