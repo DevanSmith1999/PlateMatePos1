@@ -191,9 +191,32 @@ def create_order(request):
             active_orders.append(order)
         context['active_orders'] = active_orders
 
-    
-    
     return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
 
+def delete_order_item(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        try:
+            order = ActiveOrder.objects.get(pk=order_id)
+            if order.Quantity > 1:
+                order.Quantity -= 1
+                order.save()
+            else:
+                order.delete()
 
+            # Recalculate total price for all active orders after deletion/modification
+            active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+            total_price = 0
+            for order in active_orders:
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                total_price += order.menu_item.Price * order.Quantity
+
+            # Update context with the new total price
+            context = {'active_orders': active_orders, 'total_price': total_price}
+            return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+
+        except (ActiveOrder.DoesNotExist, ValueError):
+            # Handle errors
+            pass
+    return redirect('create_order')  # Redirect back even on GET requests (optional)
 

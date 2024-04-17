@@ -670,14 +670,27 @@
         <div class="recipt">
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
-              QT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE
-              <table style="margin-top: 20px;">
+              QT&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE&nbsp;&nbsp;&nbsp;&nbsp;
+              <table cellspacing="10" style="margin-top: 20px; font-size: 20px;">
                 <tbody>
                     {% for order in active_orders %}
                     <tr>
-                        <td>{{ order.Quantity }}</td>
-                        <td>{{ order.menu_item.Name }}</td>
-                        <td>{{ order.menu_item.Price }}</td>  
+                      <td>{{ order.Quantity }}</td>
+                      <td style="text-align: left;">{{ order.menu_item.Name }}</td>
+                      <td>{{ order.menu_item.Price }}</td>
+                      <td>
+                        <form method="post" action="{% url 'delete_order_item' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="order_id" value="{{ order.id }}">
+                          <button type="submit" class="add" name="delete">
+                            {% if order.Quantity > 1 %}
+                              x
+                            {% else %}
+                              x
+                            {% endif %}
+                          </button>
+                        </form>
+                      </td>
                     </tr>
                     {% endfor %}
                 </tbody>

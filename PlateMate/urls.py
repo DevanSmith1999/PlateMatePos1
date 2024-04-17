@@ -15,5 +15,6 @@ urlpatterns = [
     path("Server_Check_View/", views.Server_Check_View, name = "Test Page"),
     path("Server_Pin_Log_in/", views.Server_Pin_Log_in, name = "Test Page"),
     path("Server_Table_View/", views.Server_Table_View, name = "Test Page"),
-    path('create_order/', views.create_order, name='create_order')
+    path('create_order/', views.create_order, name='create_order'),
+    path('delete_order_item/', views.delete_order_item, name='delete_order_item')
 ]
