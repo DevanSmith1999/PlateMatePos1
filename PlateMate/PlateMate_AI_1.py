@@ -10,33 +10,32 @@ import os
 import pandas as pd
 
 
-
+#api-key
 os.environ["OPENAI_API_KEY"] = "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"
 api_key = "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"
 
 
-
+#Path to csv file  #needs to be changed later
 file_path = "C:\\Users\\ambro\\.vscode\\plate-mate-pos\\PlateMate\Final_Menu_Items_with_Ingredients_v2.csv"
-
-
 df = pd.read_csv(file_path)
 
-
+#List of comma-separated strings representing each row of the CSV.
 texts = [', '.join(map(str, row)) for row in df.values]
 
 
 
-def chat():
-    embeddings = OpenAIEmbeddings(deployment= "text-embedding-ada-002", chunk_size=1, api_key= "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")
+#Creates embeddings using OpenAI's Text Embedding API.
+embeddings = OpenAIEmbeddings(deployment= "text-embedding-ada-002", chunk_size=1, api_key= "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")
+docsearch = FAISS.from_texts(texts, embeddings)
 
-
-    docsearch = FAISS.from_texts(texts, embeddings)
-    
+# main function interacting with the Chatbot
+def chat():    
     retriever = docsearch.as_retriever(search_type ="similarity", search_kwargs={"k":15})
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="answer")
     llm = ChatOpenAI(model='gpt-3.5-turbo', temperature = 0.2)
 
 
+    #Chatbot template used to manipulate its parameters
     system_template = """
     You are a simple chatbot aimed at answering questions about the menu for customers.
     The menu is given to you through your vector database reference.
@@ -63,7 +62,7 @@ def chat():
         retriever = retriever,
         combine_docs_chain_kwargs={'prompt': prompt_doc},
     )
-
+    #accepts user and returns the Chatbot's response
     query = input("Input text here: ")
     
     result = qa_chain({"question": query})
