@@ -2,7 +2,7 @@
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
-from langchain.vectorstores import FAISS # vector storage
+from langchain.vectorstores import FAISS 
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts.prompt import PromptTemplate
 
@@ -64,7 +64,6 @@ def chat():
         combine_docs_chain_kwargs={'prompt': prompt_doc},
     )
 
- #def chat():
     query = input("Input text here: ")
     
     result = qa_chain({"question": query})
