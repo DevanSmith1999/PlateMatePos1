@@ -8,19 +8,25 @@
   </head>
   <style>
     .ORDER {
+      background-color: #ffffff;
     display: flex;
-    height: 1006px;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    position: relative;
-    background-color: #ffffff;
     width: 100%;
+  }
+  .ORDER .div2 {
+    background-color: #ffffff;
+    width: 1438px;
+    height: 1006px;
+    position: relative;
   }
   
   .ORDER .SIDE-PANNEL {
-    position: relative;
-    width: 393px;
+    position: absolute;
+    width: 394px;
     height: 1006px;
+    top:0;
+    left: 0;
     background-color: #ffffff;
     border-radius: 2px;
     overflow: hidden;
@@ -181,9 +187,11 @@
   }
   
   .ORDER .ORDER-HERE {
-    position: relative;
-    width: 1045px;
-    height: 1002px;
+    position: absolute;
+    width: 1044px;
+    height: 1006px;
+    top: 0;
+    left: 394px;
     background-color: #ffffff;
     border-radius: 2px;
     overflow: hidden;
@@ -198,7 +206,6 @@
     top: 278px;
     left: 0;
     background-color: #ffffff;
-    overflow: hidden;
     overflow-y: scroll;
   }
   
@@ -446,7 +453,7 @@
     height: 278px;
     top: 0;
     left: 0;
-    border-bottom-width: 2px;
+    border-bottom-width: 1px;
     border-bottom-style: solid;
     border-color: #000000;
   }
@@ -672,6 +679,7 @@
   </style>
   <body>
     <div class="ORDER">
+      <div class="div2">
       <div class="SIDE-PANNEL">
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
         <div class="TIME"><div class="text-wrapper">TIME</div></div>
@@ -890,6 +898,7 @@
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
             <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
+      </div>
       </div>
     </div>
     <script>
