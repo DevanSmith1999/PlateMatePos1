@@ -1,570 +1,629 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="globals.css" type="text/css"/>
-        <link rel="stylesheet" href="styleguide.css" type="text/css"/>
-        <link rel="stylesheet" href="customer_style.css" type="text/css"/>
-    </head>
-    <style>
-        .MAIN {
-        background-color: #f5f5f5;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-      }
-      
-      .MAIN .div {
-        background-color: #f5f5f5;
-        width: 1438px;
-        height: 1006px;
-        position: relative;
-      }
-      
-      .MAIN .SIDE-PANNEL {
-        position: absolute;
-        width: 393px;
-        height: 1006px;
-        top: 0;
-        left: 1px;
-        background-color: #ffffff;
-        border-radius: 2px;
-        overflow: hidden;
-        border: 1px solid;
-        border-color: #000000;
-      }
-      
-      .MAIN .COMPANY-NAME {
-        position: absolute;
-        width: 299px;
-        height: 121px;
-        top: 130px;
-        left: 47px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .middendorf-s {
-        position: absolute;
-        width: 298px;
-        height: 120px;
-        top: 40px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .MENU-LINK {
-        position: absolute;
-        width: 212px;
-        height: 98px;
-        top: 345px;
-        left: 90px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper {
-        width: 214px;
-        height: 98px;
-        top: 30px;
-        left: -1px;
-        position: absolute;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .ABOUT-US {
-        position: absolute;
-        width: 212px;
-        height: 98px;
-        top: 486px;
-        left: 90px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-2 {
-        position: absolute;
-        width: 209px;
-        height: 94px;
-        top: 30px;
-        left: 2px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .ORDER {
-        position: absolute;
-        width: 212px;
-        height: 103px;
-        top: 627px;
-        left: 91px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-3 {
-        position: absolute;
-        width: 210px;
-        height: 102px;
-        top: 30px;
-        left: 1px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .LOGO {
-        height: 73px;
-        top: 23px;
-        left: 21px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-        position: absolute;
-        width: 100px;
-      }
-      
-      .MAIN .text-wrapper-4 {
-        height: 72px;
-        top: 17px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-        position: absolute;
-        width: 100px;
-      }
-      
-      .MAIN .TIME {
-        top: 28px;
-        left: 293px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-        position: absolute;
-        width: 77px;
-        height: 39px;
-      }
-      
-      .MAIN .text-wrapper-5 {
-        top: -1px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-        position: absolute;
-        width: 77px;
-        height: 39px;
-      }
-      
-      .MAIN .PAY-BUTTON {
-        position: absolute;
-        width: 89px;
-        height: 77px;
-        top: 773px;
-        left: 89px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-6 {
-        position: absolute;
-        width: 87px;
-        height: 75px;
-        top: 20px;
-        left: 1px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .STATUS-BUTTON {
-        position: absolute;
-        width: 89px;
-        height: 77px;
-        top: 773px;
-        left: 211px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-7 {
-        position: absolute;
-        width: 86px;
-        height: 76px;
-        top: 20px;
-        left: 2px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .MAIN-MENU {
-        position: absolute;
-        width: 1044px;
-        height: 1006px;
-        top: 0;
-        left: 394px;
-        background-color: #ffffff;
-        border-radius: 2px;
-        border: 1px solid;
-        border-color: #000000;
-      }
-      
-      .MAIN .TABLE-NUM {
-        position: absolute;
-        width: 52px;
-        height: 46px;
-        top: 21px;
-        left: 966px;
-        background-color: #c02c2c;
-        border-radius: 50px;
-      }
-      
-      .MAIN .text-wrapper-8 {
-        position: absolute;
-        width: 46px;
-        height: 42px;
-        top: 1px;
-        left: 3px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .MENU-ITEM-BANNER {
-        position: absolute;
-        width: 996px;
-        height: 124px;
-        top: 126px;
-        left: 22px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-9 {
-        width: 995px;
-        height: 120px;
-        top: 32px;
-        left: 0;
-        position: absolute;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 50px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .APPETIZEERS {
-        position: absolute;
-        width: 292px;
-        height: 229px;
-        top: 309px;
-        left: 24px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-10 {
-        position: absolute;
-        width: 292px;
-        height: 230px;
-        top: 93px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .ENTREE {
-        position: absolute;
-        width: 292px;
-        height: 229px;
-        top: 309px;
-        left: 375px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-11 {
-        position: absolute;
-        width: 291px;
-        height: 223px;
-        top: 93px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .DRINKS {
-        top: 309px;
-        left: 726px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-        position: absolute;
-        width: 292px;
-        height: 229px;
-      }
-      
-      .MAIN .text-wrapper-12 {
-        top: 93px;
-        left: 0;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-        position: absolute;
-        width: 292px;
-        height: 229px;
-      }
-      
-      .MAIN .KIDS {
-        position: absolute;
-        width: 292px;
-        height: 229px;
-        top: 597px;
-        left: 24px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-13 {
-        position: absolute;
-        width: 288px;
-        height: 230px;
-        top: 93px;
-        left: 2px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .SIDES {
-        width: 292px;
-        top: 597px;
-        left: 375px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-        position: absolute;
-        height: 229px;
-      }
-      
-      .MAIN .text-wrapper-14 {
-        width: 290px;
-        top: 93px;
-        left: 1px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-        position: absolute;
-        height: 229px;
-      }
-      
-      .MAIN .DESSERT {
-        position: absolute;
-        width: 292px;
-        height: 229px;
-        top: 597px;
-        left: 726px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .text-wrapper-15 {
-        position: absolute;
-        width: 287px;
-        height: 223px;
-        top: 93px;
-        left: 2px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .AI-CHAT {
-        position: absolute;
-        width: 87px;
-        height: 86px;
-        top: 885px;
-        left: 772px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .AI-chat {
-        position: absolute;
-        width: 80px;
-        height: 82px;
-        top: 1px;
-        left: 4px;
-        font-family: "Inter", Helvetica;
-        font-weight: 400;
-        color: #ffffff;
-        font-size: 32px;
-        text-align: center;
-        letter-spacing: 0;
-        line-height: normal;
-      }
-      
-      .MAIN .CALL-SERVER {
-        position: absolute;
-        width: 100px;
-        height: 86px;
-        top: 885px;
-        left: 918px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-      }
-      
-      .MAIN .call-server {
-        position: absolute;
-        width: 97px;
-        height: 63px;
-        top: 11px;
-        left: 2px;
-      }
-    </style>
-    <body>
-        <div class="MAIN">
-            <div class="div">
-                <div class="SIDE-PANNEL">
 
-                    <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
+<head>
+  <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="globals.css" type="text/css" />
+  <link rel="stylesheet" href="styleguide.css" type="text/css" />
+  <link rel="stylesheet" href="customer_style.css" type="text/css" />
+</head>
+<style>
+  .MAIN {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
 
-                    <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper">HOME</div></button>
+  .MAIN .div {
+    background-color: #f5f5f5;
+    width: 1438px;
+    height: 1006px;
+    position: relative;
+  }
 
-	                <!ABOUT_US SCREEN BUTTON LINK>
-                    <button class="ABOUT-US" onclick="goToAbout()">
-	  	                <div class="text-wrapper-2">ABOUT US</div>
-	                </button>
+  .MAIN .SIDE-PANNEL {
+    position: absolute;
+    width: 393px;
+    height: 1006px;
+    top: 0;
+    left: 1px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+  }
 
-	                <!ORDER SCREEN BUTTON LINK>
-                    <button class="ORDER" onclick="goToOrder()">
-		                <div class="text-wrapper-3">ORDER</div>
-	                </button>
+  .MAIN .COMPANY-NAME {
+    position: absolute;
+    width: 299px;
+    height: 121px;
+    top: 130px;
+    left: 47px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
 
-                    <div class="LOGO"><div class="text-wrapper-4">Logo</div></div>
+  .MAIN .middendorf-s {
+    position: absolute;
+    width: 298px;
+    height: 120px;
+    top: 40px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
 
-                    <div class="TIME"><div class="text-wrapper-5">TIME</div></div>
+  .MAIN .MENU-LINK {
+    position: absolute;
+    width: 212px;
+    height: 98px;
+    top: 345px;
+    left: 90px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
 
-                    <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';"><div class="text-wrapper-6">PAY</div></button>
-                    <button class="STATUS-BUTTON"><div class="text-wrapper-7">Stat</div></button>
+  .MAIN .text-wrapper {
+    width: 214px;
+    height: 98px;
+    top: 30px;
+    left: -1px;
+    position: absolute;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
 
-                </div>
+  .MAIN .ABOUT-US {
+    position: absolute;
+    width: 212px;
+    height: 98px;
+    top: 486px;
+    left: 90px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
 
-                <div class="MAIN-MENU">
-                    <div class="TABLE-NUM"><div class="text-wrapper-8">#</div></div>
-                    <div class="MENU-ITEM-BANNER"><div class="text-wrapper-9">Welcome</div></div>
-                    <button class="APPETIZEERS" onclick="window.location.href= 'Customer_App_Order.html';"><div class="text-wrapper-10">Appetizers</div></button>
-                    <button class="ENTREE" onclick="window.location.href= 'Customer_Entree_Order.html';"><div class="text-wrapper-11">Entrees</div></button>
-                    <button class="DRINKS" onclick="window.location.href= 'Customer_Drinks_Order.html';"><div class="text-wrapper-12">DRINKS</div></button>
-                    <button class="KIDS" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';"><div class="text-wrapper-13">KIDS</div></button>
-                    <button class="SIDES" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';"><div class="text-wrapper-14">Sides</div></button>
-                    <button class="DESSERT" onclick="window.location.href= 'Customer_Dessert_Order.html';"><div class="text-wrapper-15">DESSERT</div></button>
-                    <script>
-                      function callChatFunction() {
-                          var query = document.getElementById('userQuery').value;
-                          $.ajax({
-                              url: "{% url 'chat' %}",
-                              type: "GET",
-                              data: { query: query },
-                              success: function(data) {
-                                  document.getElementById('response').innerText = data.response;
-                              },
-                              error: function(xhr, status, error) {
-                                  console.error('Error: ' + error);
-                              }
-                          });
-                      }
-                  </script>
-                  <input type="text" id="userQuery" placeholder="Ask AI">
-                  <button onclick="callChatFunction()">Ask</button>
-                  <div id="response"></div>
-                    <button class="AI-CHAT">
-                        <div class="AI-chat">AI <br />Chat</div>
-                    </button>
-	                <button class="CALL-SERVER"><img class="call-server" src="img/call-server.png" /></button>
-                </div>
-            </div>
+  .MAIN .text-wrapper-2 {
+    position: absolute;
+    width: 209px;
+    height: 94px;
+    top: 30px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .ORDER {
+    position: absolute;
+    width: 212px;
+    height: 103px;
+    top: 627px;
+    left: 91px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-3 {
+    position: absolute;
+    width: 210px;
+    height: 102px;
+    top: 30px;
+    left: 1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .LOGO {
+    height: 73px;
+    top: 23px;
+    left: 21px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 100px;
+  }
+
+  .MAIN .text-wrapper-4 {
+    height: 72px;
+    top: 17px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 100px;
+  }
+
+  .MAIN .TIME {
+    top: 28px;
+    left: 293px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 77px;
+    height: 39px;
+  }
+
+  .MAIN .text-wrapper-5 {
+    top: -1px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 77px;
+    height: 39px;
+  }
+
+  .MAIN .PAY-BUTTON {
+    position: absolute;
+    width: 89px;
+    height: 77px;
+    top: 773px;
+    left: 89px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-6 {
+    position: absolute;
+    width: 87px;
+    height: 75px;
+    top: 20px;
+    left: 1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .STATUS-BUTTON {
+    position: absolute;
+    width: 89px;
+    height: 77px;
+    top: 773px;
+    left: 211px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-7 {
+    position: absolute;
+    width: 86px;
+    height: 76px;
+    top: 20px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .MAIN-MENU {
+    position: absolute;
+    width: 1044px;
+    height: 1006px;
+    top: 0;
+    left: 394px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MAIN .TABLE-NUM {
+    position: absolute;
+    width: 52px;
+    height: 46px;
+    top: 21px;
+    left: 966px;
+    background-color: #c02c2c;
+    border-radius: 50px;
+  }
+
+  .MAIN .text-wrapper-8 {
+    position: absolute;
+    width: 46px;
+    height: 42px;
+    top: 1px;
+    left: 3px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .MENU-ITEM-BANNER {
+    position: absolute;
+    width: 996px;
+    height: 124px;
+    top: 126px;
+    left: 22px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-9 {
+    width: 995px;
+    height: 120px;
+    top: 32px;
+    left: 0;
+    position: absolute;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .APPETIZEERS {
+    position: absolute;
+    width: 292px;
+    height: 229px;
+    top: 309px;
+    left: 24px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-10 {
+    position: absolute;
+    width: 292px;
+    height: 230px;
+    top: 93px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .ENTREE {
+    position: absolute;
+    width: 292px;
+    height: 229px;
+    top: 309px;
+    left: 375px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-11 {
+    position: absolute;
+    width: 291px;
+    height: 223px;
+    top: 93px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .DRINKS {
+    top: 309px;
+    left: 726px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 292px;
+    height: 229px;
+  }
+
+  .MAIN .text-wrapper-12 {
+    top: 93px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 292px;
+    height: 229px;
+  }
+
+  .MAIN .KIDS {
+    position: absolute;
+    width: 292px;
+    height: 229px;
+    top: 597px;
+    left: 24px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-13 {
+    position: absolute;
+    width: 288px;
+    height: 230px;
+    top: 93px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .SIDES {
+    width: 292px;
+    top: 597px;
+    left: 375px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    height: 229px;
+  }
+
+  .MAIN .text-wrapper-14 {
+    width: 290px;
+    top: 93px;
+    left: 1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    height: 229px;
+  }
+
+  .MAIN .DESSERT {
+    position: absolute;
+    width: 292px;
+    height: 229px;
+    top: 597px;
+    left: 726px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-15 {
+    position: absolute;
+    width: 287px;
+    height: 223px;
+    top: 93px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MAIN .AI-CHAT {
+    position: absolute;
+    width: 87px;
+    height: 86px;
+    top: 885px;
+    left: 772px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .AI-chat {
+    position: absolute;
+    width: 80px;
+    height: 82px;
+    top: 1px;
+    left: 4px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  .MAIN .message {
+    margin: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 70%;
+  }
+
+  .MAIN .received {
+    background-color: #f1f0f0;
+    /* Light gray for received messages */
+    float: left;
+  }
+
+  .MAIN .sent {
+    background-color: #007bff;
+    /* Blue for sent messages */
+    color: #fff;
+    float: right;
+  }
+
+  /* Clear floating after each message */
+  .MAIN .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .MAIN .CALL-SERVER {
+    position: absolute;
+    width: 100px;
+    height: 86px;
+    top: 885px;
+    left: 918px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .call-server {
+    position: absolute;
+    width: 97px;
+    height: 63px;
+    top: 11px;
+    left: 2px;
+  }
+</style>
+
+<body>
+  <div class="MAIN">
+    <div class="div">
+      <div class="SIDE-PANNEL">
+
+        <div class="COMPANY-NAME">
+          <div class="middendorf-s">Middendorf’s</div>
         </div>
-    </body>
+
+        <button class="MENU-LINK" onclick="goToHome()">
+          <div class="text-wrapper">HOME</div>
+        </button>
+
+        <!ABOUT_US SCREEN BUTTON LINK>
+          <button class="ABOUT-US" onclick="goToAbout()">
+            <div class="text-wrapper-2">ABOUT US</div>
+          </button>
+
+          <!ORDER SCREEN BUTTON LINK>
+            <button class="ORDER" onclick="goToOrder()">
+              <div class="text-wrapper-3">ORDER</div>
+            </button>
+
+            <div class="LOGO">
+              <div class="text-wrapper-4">Logo</div>
+            </div>
+
+            <div class="TIME">
+              <div class="text-wrapper-5">TIME</div>
+            </div>
+
+            <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';">
+              <div class="text-wrapper-6">PAY</div>
+            </button>
+            <button class="STATUS-BUTTON">
+              <div class="text-wrapper-7">Stat</div>
+            </button>
+
+      </div>
+
+      <div class="MAIN-MENU">
+        <div class="TABLE-NUM">
+          <div class="text-wrapper-8">#</div>
+        </div>
+        <div class="MENU-ITEM-BANNER">
+          <div class="text-wrapper-9">Welcome</div>
+        </div>
+        <button class="APPETIZEERS" onclick="window.location.href= 'Customer_App_Order.html';">
+          <div class="text-wrapper-10">Appetizers</div>
+        </button>
+        <button class="ENTREE" onclick="window.location.href= 'Customer_Entree_Order.html';">
+          <div class="text-wrapper-11">Entrees</div>
+        </button>
+        <button class="DRINKS" onclick="window.location.href= 'Customer_Drinks_Order.html';">
+          <div class="text-wrapper-12">DRINKS</div>
+        </button>
+        <button class="KIDS" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';">
+          <div class="text-wrapper-13">KIDS</div>
+        </button>
+        <button class="SIDES" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';">
+          <div class="text-wrapper-14">Sides</div>
+        </button>
+        <button class="DESSERT" onclick="window.location.href= 'Customer_Dessert_Order.html';">
+          <div class="text-wrapper-15">DESSERT</div>
+        </button>
+        <script>
+          function callChatFunction() {
+            var query = document.getElementById('userQuery').value;
+            $.ajax({
+              url: "{% url 'chat' %}",
+              type: "GET",
+              data: { query: query },
+              success: function (data) {
+                document.getElementById('response').innerText = data.response;
+              },
+              error: function (xhr, status, error) {
+                console.error('Error: ' + error);
+              }
+            });
+          }
+        </script>
+        <div class="message">
+          <input type="text" class="received" id="userQuery" placeholder="Ask AI">
+          <button onclick="callChatFunction()">Ask</button>
+          <div class="sent" id="response"></div>
+        </div>
+        <button class="AI-CHAT" onclick="callChatFunction()">
+          <div class="AI-chat">AI <br />Chat</div>
+          <div id="response"></div>
+        </button>
+        <button class="CALL-SERVER"><img class="call-server" src="img/call-server.png" /></button>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
 <script>
   function goToHome() {
-        window.location.href = "{% url 'Customer_Home' %}";
-    }
+    window.location.href = "{% url 'Customer_Home' %}";
+  }
   function goToAbout() {
-        window.location.href = "{% url 'About_Us' %}";
-    }
-    function goToOrder() {
-        window.location.href = "{% url 'Menu_Ordering' %}";
-    }
+    window.location.href = "{% url 'About_Us' %}";
+  }
+  function goToOrder() {
+    window.location.href = "{% url 'Menu_Ordering' %}";
+  }
 </script>
-    
