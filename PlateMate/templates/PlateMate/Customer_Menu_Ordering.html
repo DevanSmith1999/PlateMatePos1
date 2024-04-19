@@ -9,22 +9,25 @@
   </head>
   <style>
     .ORDER {
+      background-color: #ffffff;
     display: flex;
-    height: 1006px;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    position: relative;
-    background-color: #ffffff;
-    border: 1px solid;
-    border-color: #000000;
     width: 100%;
-    min-width: 1438px;
+  }
+  .ORDER .div2 {
+    background-color: #ffffff;
+    width: 1438px;
+    height: 1006px;
+    position: relative;
   }
   
   .ORDER .SIDE-PANNEL {
-    position: relative;
-    width: 393px;
+    position: absolute;
+    width: 394px;
     height: 1006px;
+    top:0;
+    left: 0;
     background-color: #ffffff;
     border-radius: 2px;
     overflow: hidden;
@@ -185,9 +188,11 @@
   }
   
   .ORDER .ORDER-HERE {
-    position: relative;
-    width: 1045px;
-    height: 1002px;
+    position: absolute;
+    width: 1044px;
+    height: 1006px;
+    top: 0;
+    left: 394px;
     background-color: #ffffff;
     border-radius: 2px;
     overflow: hidden;
@@ -202,7 +207,6 @@
     top: 278px;
     left: 0;
     background-color: #ffffff;
-    overflow: hidden;
     overflow-y: scroll;
   }
   
@@ -450,7 +454,7 @@
     height: 278px;
     top: 0;
     left: 0;
-    border-bottom-width: 2px;
+    border-bottom-width: 1px;
     border-bottom-style: solid;
     border-color: #000000;
   }
@@ -487,7 +491,9 @@
   }
   
   .ORDER .ai-chat {
-    display: inline-flex;
+    display: flex;
+    width: 71px;
+    height: 49px;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -499,10 +505,9 @@
   }
   
   .ORDER .AI-CHAT {
-    position: relative;
-    width: 71px;
-    height: 49px;
-    margin-top: -1px;
+    position: absolute;
+    width: fit-content;
+    margin-top: -0.5px;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -513,7 +518,9 @@
   }
   
   .ORDER .call-server {
-    display: inline-flex;
+    display: flex;
+    width: 71px;
+    height: 49px;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -525,9 +532,16 @@
   }
   
   .ORDER .CALL-SERVER {
-    position: relative;
-    width: 58.95px;
-    height: 31px;
+    position: absolute;
+    width: fit-content;
+    margin-top: -0.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
   }
   
   .ORDER .order-banner {
@@ -666,26 +680,48 @@
   </style>
   <body>
     <div class="ORDER">
+      <div class="div2">
       <div class="SIDE-PANNEL">
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
         <div class="TIME"><div class="text-wrapper">TIME</div></div>
         <div class="recipt">
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
-              QT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE
-              <table>
+              QT&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE&nbsp;&nbsp;&nbsp;&nbsp;
+              <table cellspacing="10" style="margin-top: 20px; font-size: 20px;">
                 <tbody>
                     {% for order in active_orders %}
                     <tr>
-                        <td>{{ order.Quantity }}</td>
-                        <td>{{ order.menu_item.Name }}</td>  <td>{{ order.menu_item.Price }}</td>  </tr>
+                      <td>{{ order.Quantity }}</td>
+                      <td style="text-align: left;">{{ order.menu_item.Name }}</td>
+                      <td>{{ order.menu_item.Price }}</td>
+                      <td>
+                        <form method="post" action="{% url 'delete_order_item' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="order_id" value="{{ order.id }}">
+                          <button type="submit"  name="delete">
+                            {% if order.Quantity > 1 %}
+                              x
+                            {% else %}
+                              x
+                            {% endif %}
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
             </div>
           </div>
-          <div class="total-price"><div class="div">Total: Amount</div></div>
-          <div class="pay"><div class="text-wrapper-2">Order</div></div>
+          <div class="total-price"><div class="div">Total: {{ total_price }}</div></div>
+          <div class="pay">
+            <div class="text-wrapper-2">
+              <form method="post" action="{% url 'create_order' %}">
+                {% csrf_token %} <button type="submit" name="mark_ordered">Order</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
       <div class="ORDER-HERE" id="orderHere">
@@ -700,7 +736,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
@@ -713,7 +749,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="2">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
@@ -726,7 +762,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="3">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
@@ -739,7 +775,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="4">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
@@ -752,7 +788,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="5">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
@@ -765,7 +801,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="6">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
@@ -778,7 +814,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="7">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
@@ -791,7 +827,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="8">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
@@ -804,7 +840,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="9">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-10">
@@ -817,7 +853,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="10">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-11">
@@ -830,7 +866,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="11">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-12">
@@ -843,7 +879,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="12">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -854,7 +890,7 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
             <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
@@ -885,6 +921,7 @@
           -->
         </div>
       </div>
+      </div>
     </div>
     <script>
       function showCategory(category) {
@@ -907,7 +944,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
@@ -920,7 +957,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
@@ -933,7 +970,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
@@ -944,9 +981,9 @@
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="4">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
@@ -959,7 +996,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
@@ -972,7 +1009,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
@@ -985,7 +1022,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
@@ -998,7 +1035,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
@@ -1009,9 +1046,9 @@
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="9">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-10">
@@ -1024,7 +1061,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-11">
@@ -1037,7 +1074,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-12">
@@ -1050,7 +1087,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -1061,14 +1098,14 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
         `;
       } else if (category === 'entree') {
@@ -1084,7 +1121,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="28">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
@@ -1097,7 +1134,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="29">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
@@ -1110,7 +1147,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="30">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
@@ -1123,7 +1160,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="31">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
@@ -1136,7 +1173,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="32">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
@@ -1149,7 +1186,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="33">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
@@ -1162,7 +1199,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="34">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
@@ -1175,7 +1212,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="35">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
@@ -1188,7 +1225,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="36">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-10">
@@ -1201,7 +1238,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="37">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-11">
@@ -1214,7 +1251,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="38">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-12">
@@ -1227,7 +1264,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="39">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -1238,14 +1275,14 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
         `;
       } else if (category === 'side') {
@@ -1261,7 +1298,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="58">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
@@ -1274,7 +1311,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="59">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
@@ -1287,7 +1324,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="60">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
@@ -1300,7 +1337,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="52">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
@@ -1313,7 +1350,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="53">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
@@ -1326,7 +1363,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="54">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
@@ -1339,7 +1376,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="55">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
@@ -1352,7 +1389,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="56">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
@@ -1365,7 +1402,7 @@
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="57">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -1376,14 +1413,14 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
         `;
       } else if (category === 'dessert') {
@@ -1392,157 +1429,157 @@
           <div class="ITEM">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$6.50</div>
+              <div class="text-wrapper-5">Banana Bread Pudding with Rum Sauce</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$7.50</div>
+              <div class="text-wrapper-5">German Chocolate Cake</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$7.50</div>
+              <div class="text-wrapper-5">Choclate Lava Cake</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$8.00</div>
+              <div class="text-wrapper-5">Raising a Ruckus</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$7.25</div>
+              <div class="text-wrapper-5">A Little Something Bad</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$7.25e</div>
+              <div class="text-wrapper-5">Whatever Floats Your Boat</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$6.75</div>
+              <div class="text-wrapper-5">Red Velvet Cheesecake</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$6.50</div>
+              <div class="text-wrapper-5">White Chocolate Bourbon Pecan Pie</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$6.50</div>
+              <div class="text-wrapper-5">Key Lime Pie</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-10">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$8.00</div>
+              <div class="text-wrapper-5">Good Old Fashioned Banana Split</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-11">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$5.75</div>
+              <div class="text-wrapper-5">Pinocchio Eis</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-12">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$5.75</div>
+              <div class="text-wrapper-5">Ice Cream - 2 Scoops</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -1553,14 +1590,14 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
         `;
       } else if (category === 'drink') {
@@ -1569,157 +1606,157 @@
           <div class="ITEM">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Coca-Cola</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-2">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Sprite</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-3">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Dr. Pepper</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-4">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Barq's Rootbeer</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-5">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Coke Zero</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-6">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Diet Coke </div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-7">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Unsweet Tea</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-8">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Sweet Tea</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-9">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$1.50</div>
+              <div class="text-wrapper-5">Coffee</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-10">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Lemonade</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-11">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$2.75</div>
+              <div class="text-wrapper-5">Half & Half Tea</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
           <div class="ITEM-12">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
-              <div class="text-wrapper-4">$Price</div>
-              <div class="text-wrapper-5">Item Name</div>
+              <div class="text-wrapper-4">$1.50</div>
+              <div class="text-wrapper-5">Milk</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
         </div>
@@ -1730,14 +1767,14 @@
             <button class="ai-chat">
                 <div class="AI-CHAT">AI<br />CHAT</div>
             </button>
-            <button class="call-server"><img class="CALL-SERVER" src="img/call-server.png" /></button>
+            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-8">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="KIDS-SIDES">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-11">Drinks</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
         </div>
         `;
       }

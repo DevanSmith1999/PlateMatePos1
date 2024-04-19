@@ -1,0 +1,36 @@
+<!-- navbar.html -->
+<style>
+    .navbar {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .navbar-links a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 20px;
+        transition: color 0.3s;
+    }
+
+    .navbar-links a:hover {
+        color: #f8f9fa; /* lighter shade of white */
+    }
+</style>
+
+<div class="navbar">
+    <div class="navbar-brand">PlateMate</div>
+    <div class="navbar-links">
+        <a href="{% url 'position_list' %}">Positions</a>
+        <a href="{% url 'staff_list' %}">Staff</a>
+        <a href="{% url 'logout_confirmation' %}">Logout</a>
+        <!-- Add more links here as needed -->
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #dc3545;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Staff Detail</h1>
+        <p><strong>First Name:</strong> {{ staff.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ staff.last_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ staff.Date_of_birth }}</p>
+        <p><strong>ID Number:</strong> {{ staff.id_number }}</p>
+        <p><strong>Subpositions:</strong></p>
+        <ul>
+            {% for subposition in staff.subposition.all %}
+                <li>{{ subposition.name }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'staff_list' %}">Back to Staff List</a>
+        <a href="{% url 'staff_delete' pk=staff.id %}">Delete</a>
+        <a href="{% url 'staff_edit' staff_id=staff.id %}">Edit Staff</a>
+
+    </div>
+</body>
+</html>

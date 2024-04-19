@@ -42,38 +42,38 @@ def Customer_Menu_Ordering(request):
         'PlateMate/Customer_Menu_Ordering.html'
     )
 
-def Customer_App_Ordering(request):
-    '''Access appetizer menu items and be able to add items to a check/order'''
+def App_Menu(request):
+    '''Access appetizer menu items'''
     return render(
         request,
-        'PlateMate/Customer_App_Ordering.html'
+        'PlateMate/App_Menu.html'
     )
 
-def Customer_Entree_Ordering(request):
-    '''Access entree menu items and be able to add items to a check/order'''
+def Entree_Menu(request):
+    '''Access entree menu items'''
     return render(
         request,
-        'PlateMate/Customer_Entree_Ordering.html'
+        'PlateMate/Entree_Menu.html'
     )
-def Customer_Kids_Sides_Ordering(request):
-    '''Access kids and side menu items and be able to add items to a check/order'''
+def Kids_Sides_Menu(request):
+    '''Access kids and side menu items'''
     return render(
         request,
-        'PlateMate/Customer_Kids_Sides_Ordering.html'
-    )
-
-def Customer_Drinks_Ordering(request):
-    '''Access drink menu items and be able to add items to a check/order'''
-    return render(
-        request,
-        'PlateMate/Customer_Drinks_Ordering.html'
+        'PlateMate/Kids_Sides_Menu.html'
     )
 
-def Customer_Dessert_Ordering(request):
-    '''Access dessert menu items and be able to add items to a check/order'''
+def Drink_Menu(request):
+    '''Access drink menu items'''
     return render(
         request,
-        'PlateMate/Customer_Dessert_Ordering.html'
+        'PlateMate/Drink_Menu.html'
+    )
+
+def Dessert_Menu(request):
+    '''Access dessert menu items '''
+    return render(
+        request,
+        'PlateMate/Dessert_Menu.html'
     )
 
 def Customer_Receipt_Check(request):
@@ -81,6 +81,13 @@ def Customer_Receipt_Check(request):
     return render(
         request,
         'PlateMate/Customer_Receipt_Check.html'
+    )
+
+def Server_Order_Screen(request):
+    '''Server order screen'''
+    return render(
+        request,
+        'PlateMate/Server_Order_Screen.html'
     )
 
 def Kitchen_Current_Orders(request):
@@ -135,18 +142,24 @@ def Server_Table_View(request):
         
 def create_order(request):
     context = {}
-
-    if request.method == 'POST':
+    table_id = 1 #Set table id here (1 for testing will need to be retrived from table user eventually)
+    active_orders = []
+    
+    #handle the order button (Pushes order to Kitchen)
+    if request.method == 'POST' and 'mark_ordered' in request.POST:
+        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
+        return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+    
+    elif request.method == 'POST' and 'Add': #handle the add button
         try:
             menu_item_id = int(request.POST.get('MenuItemID'))
             table_id = int(request.POST.get('TableID'))
 
-            # Retrieve MenuItem object and Table object
-            menu_item = MenuItem.objects.get(pk=menu_item_id)
+            # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
             table = Table.objects.get(pk=table_id)
-
-            # Check for existing order with same MenuItemID and TableID
-            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item, TableID=table).first()  # Get the first matching order
+        
+            # Check for existing order with same menu_item_id and TableID
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
 
             if existing_order:
                 # Increment quantity of existing order
@@ -154,44 +167,63 @@ def create_order(request):
                 existing_order.save()
             else:
                 # Create new order if none exists
-                new_order = ActiveOrder(MenuItemID=menu_item, TableID=table, Quantity=1)
+                new_order = ActiveOrder(MenuItemID=menu_item_id, TableID=table, Quantity=1)
                 new_order.save()
 
             # After processing the form, retrieve active orders with data integrity check
             active_orders = []
-            for order in ActiveOrder.objects.filter(TableID=table_id):
-                try:
-                    # Check if MenuItem object exists
-                    order.menu_item = MenuItem.objects.get(pk=order.pk)
-                    active_orders.append(order)  # Only add order if MenuItem exists
-                except MenuItem.DoesNotExist:
-                    # Handle cases where MenuItem doesn't exist (e.g., log the error)
-                    pass
-
+            
+            # Retrive all the data for displaying 
+            total_price = 0
+            for order in ActiveOrder.objects.filter(TableID=table_id, Ordered = 0):
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                active_orders.append(order)
+                total_price += order.menu_item.Price * order.Quantity #calc sum of all currently ordered items
+            
             context['active_orders'] = active_orders
+            context['total_price'] = total_price #sum of all ordered items
+            
 
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
-
         except (ValueError, Exception) as e:
+            print("ERRORRRRRRRRRR")
             # Handle various exceptions
             context['active_orders'] = []  # Set empty list for active orders
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
-
     else:  # GET request (initial page load)
         table_id = 1
         active_orders = []
         for order in ActiveOrder.objects.filter(TableID=table_id):
-            try:
-                # Check if MenuItem object exists
-                order.menu_item = MenuItem.objects.get(pk=order.pk)
-                active_orders.append(order)  # Only add order if MenuItem exists
-            except MenuItem.DoesNotExist:
-                # Handle cases where MenuItem doesn't exist (e.g., log the error)
-                pass
-
+            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+            active_orders.append(order)
         context['active_orders'] = active_orders
 
     return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
 
+def delete_order_item(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        try:
+            order = ActiveOrder.objects.get(pk=order_id)
+            if order.Quantity > 1:
+                order.Quantity -= 1
+                order.save()
+            else:
+                order.delete()
 
+            # Recalculate total price for all active orders after deletion/modification
+            active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+            total_price = 0
+            for order in active_orders:
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                total_price += order.menu_item.Price * order.Quantity
+
+            # Update context with the new total price
+            context = {'active_orders': active_orders, 'total_price': total_price}
+            return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+
+        except (ActiveOrder.DoesNotExist, ValueError):
+            # Handle errors
+            pass
+    return redirect('create_order')  # Redirect back even on GET requests (optional)
 

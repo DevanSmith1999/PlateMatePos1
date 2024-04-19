@@ -603,7 +603,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 61,
     "fields": {
-      "Name": "House Made Banana Bread Pudding with Rum Sauce",
+      "Name": "Banana Bread Pudding with Rum Sauce",
       "Type": "DESSERTS",
       "Description": "Warm banana bread pudding soaked in a decadent rum sauce.",
       "Price": "6.50"
@@ -613,7 +613,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 62,
     "fields": {
-      "Name": "House Made German Chocolate Cake",
+      "Name": "German Chocolate Cake",
       "Type": "DESSERTS",
       "Description": "with Vanilla Ice Cream",
       "Price": "7.50"
@@ -623,7 +623,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 63,
     "fields": {
-      "Name": "House Made Chocolate Lava Cake",
+      "Name": "Chocolate Lava Cake",
       "Type": "DESSERTS",
       "Description": "Flourless Cake served with Vanilla Ice Cream",
       "Price": "7.50"
