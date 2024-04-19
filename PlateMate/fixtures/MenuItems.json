@@ -83,7 +83,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 9,
     "fields": {
-      "Name": "Fried Manchac Alligator Bites",
+      "Name": "Fried Alligator Bites",
       "Type": "APPETIZERS",
       "Description": "Tender, bite-sized alligator meat seasoned to perfection and fried golden brown. Served with a zesty remoulade sauce.",
       "Price": "11.75"
@@ -273,7 +273,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 28,
     "fields": {
-      "Name": "Middendorf's Special Thin Fried Catfish",
+      "Name": "Thin Fried Catfish",
       "Type": "ENTREES",
       "Description": "Fresh catfish fillets dipped in a light batter and fried to a delicate crisp. Served with your choice of sides.",
       "Price": "18.25"
@@ -573,7 +573,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 58,
     "fields": {
-      "Name": "Thin Fried Catfish",
+      "Name": "Kids Thin Fried Catfish",
       "Type": "CHILDREN'S MENU",
       "Description": "Thin cut catfish fillets coated in a crispy cornmeal batter for a satisfying crunch.",
       "Price": "8.95"
@@ -583,7 +583,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 59,
     "fields": {
-      "Name": "Fried Shrimp",
+      "Name": "Kids Fried Shrimp",
       "Type": "CHILDREN'S MENU",
       "Description": "Plump, juicy shrimp dipped in a light batter and fried golden brown.",
       "Price": "8.95"
@@ -593,7 +593,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 60,
     "fields": {
-      "Name": "Chicken Tenderloins",
+      "Name": "Kids Chicken Tenderloins",
       "Type": "CHILDREN'S MENU",
       "Description": "Fried chicken tenders hand-dipped in our seasoned batter and fried to a golden crisp.",
       "Price": "8.95"
@@ -603,7 +603,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 61,
     "fields": {
-      "Name": "House Made Banana Bread Pudding with Rum Sauce",
+      "Name": "Banana Bread Pudding with Rum Sauce",
       "Type": "DESSERTS",
       "Description": "Warm banana bread pudding soaked in a decadent rum sauce.",
       "Price": "6.50"
@@ -613,7 +613,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 62,
     "fields": {
-      "Name": "House Made German Chocolate Cake",
+      "Name": "German Chocolate Cake",
       "Type": "DESSERTS",
       "Description": "with Vanilla Ice Cream",
       "Price": "7.50"
@@ -623,7 +623,7 @@
     "model": "PlateMate.MenuItem",
     "pk": 63,
     "fields": {
-      "Name": "House Made Chocolate Lava Cake",
+      "Name": "Chocolate Lava Cake",
       "Type": "DESSERTS",
       "Description": "Flourless Cake served with Vanilla Ice Cream",
       "Price": "7.50"
