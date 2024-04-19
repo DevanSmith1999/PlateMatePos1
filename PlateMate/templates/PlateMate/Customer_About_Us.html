@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="globals.css" type="text/css"/>
     <link rel="stylesheet" href="styleguide.css" type="text/css"/>
     <link rel="stylesheet" href="customer_style.css" type="text/css"/>
@@ -387,7 +388,28 @@
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
         <button class="MENU-LINK" onclick="goToHome()"><div class="text-wrapper-4">Home</div></button>
         <button class="div-wrapper" onclick="goToAbout()"><div class="text-wrapper-5">ABOUT US</div></button>
-        <button class="ORDER" onclick="goToOrder()""><div class="text-wrapper-6">ORDER</div></button>
+        <button class="ORDER" onclick="goToOrder()"><div class="text-wrapper-6">ORDER</div></button>
+        <script>
+          function callChatFunction() {
+              var query = document.getElementById('userQuery').value;
+              $.ajax({
+                  url: "{% url 'chat' %}",
+                  type: "GET",
+                  data: { query: query },
+                  success: function(data) {
+                      document.getElementById('response').innerText = data.response;
+                  },
+                  error: function(xhr, status, error) {
+                      console.error('Error: ' + error);
+                  }
+              });
+          }
+      </script>
+      <!---
+      <input type="text" id="userQuery" placeholder="Ask AI">
+      <button onclick="callChatFunction()">Ask</button>
+      <div id="response"></div>
+     -->
       </div>
       <div class="ABOUT-US-FRAME">
         <div class="INFO-SECTION"><div class="text-wrapper-7">INFO ABOUT THE PLACE</div></div>

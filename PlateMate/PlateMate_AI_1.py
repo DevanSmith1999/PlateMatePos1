@@ -71,5 +71,5 @@ def chat(query):
     print(result["answer"])
     return(result["answer"])
 
-#chat(query)    
+
 
