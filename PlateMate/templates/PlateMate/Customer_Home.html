@@ -473,6 +473,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
+
   /* Popup container */
   .popup-container {
     display: none;
@@ -502,6 +503,7 @@
     overflow-y: auto;
     margin-bottom: 10px;
   }
+
   /* AI message */
   .ai-message {
     background-color: #b2dff5;
@@ -609,7 +611,7 @@
         <button class="DESSERT" onclick="window.location.href= 'Customer_Dessert_Order.html';">
           <div class="text-wrapper-15">DESSERT</div>
         </button>
-        
+
 
         <button class="AI-CHAT" onclick="togglePopup()">
           <div class="AI-chat">AI <br />Chat</div>
@@ -620,20 +622,19 @@
           <div class="chat-area" id="chatArea">
             <div class="message ai-message">Welcome! How can I assist you today?</div>
           </div>
-          <input type="text" class="input-field" id="userInput" placeholder="Type your message..." onkeyup="sendMessage(event)">
+          <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
         </div>
-        
+
         <script>
           function togglePopup() {
             var popup = document.getElementById('popupContainer');
             if (popup.style.display === 'none') {
               popup.style.display = 'block';
-              callChatFunction(); // Call the AI function when the popup is opened
             } else {
               popup.style.display = 'none';
             }
           }
-        
+
           function addMessage(sender, content) {
             var chatArea = document.getElementById('chatArea');
             var messageElement = document.createElement('div');
@@ -642,30 +643,32 @@
             chatArea.appendChild(messageElement);
             chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
           }
-        
+
           function sendMessage(event) {
             if (event.keyCode === 13) { // Enter key
-              var userInput = document.getElementById('userInput');
+              var userInput = document.getElementById('userQuery');
               var message = userInput.value.trim();
               if (message !== '') {
                 addMessage('user', message);
-                // Here you can add code to send the user's message to your AI and get the response
-                // For now, let's just simulate an AI response
-                setTimeout(function() {
-                  addMessage('ai', 'This is an AI response.');
-                }, 500);
                 userInput.value = ''; // Clear the input field
+                callChatFunction(message); // Call the chat function with the user's message
               }
             }
           }
-        
+
           // Sample AI function (replace with your actual AI function)
-          function callChatFunction() {
-            // Here you can call your AI function to initialize the chat
-            // For now, let's just simulate an AI message
-            setTimeout(function() {
-              addMessage('ai', 'Welcome! How can I assist you today?');
-            }, 500);
+          function callChatFunction(query) {
+            $.ajax({
+              url: "{% url 'chat' %}",
+              type: "GET",
+              data: { query: query },
+              success: function (data) {
+                addMessage('ai', data.response);
+              },
+              error: function (xhr, status, error) {
+                console.error('Error: ' + error);
+              }
+            });
           }
         </script>
 
