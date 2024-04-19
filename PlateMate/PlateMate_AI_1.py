@@ -16,7 +16,7 @@ api_key = "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"
 
 
 #Path to csv file  #needs to be changed later
-file_path = "C:\\Users\\ambro\\.vscode\\plate-mate-pos\\PlateMate\Final_Menu_Items_with_Ingredients_v2.csv"
+file_path = "PlateMate/Final_Menu_Items_with_Ingredients_v2.csv"
 df = pd.read_csv(file_path)
 
 #List of comma-separated strings representing each row of the CSV.
