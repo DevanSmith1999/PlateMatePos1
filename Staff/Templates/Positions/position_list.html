@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positions List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        select {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #subpositions {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Positions List</h1>
+        <form>
+            <label for="parent_position">Select Parent Position:</label>
+            <select id="parent_position">
+                <option value="">-- Select Position --</option>
+                {% for position in positions %}
+                    <option value="{{ position.id }}">{{ position.name }}</option>
+                {% endfor %}
+            </select>
+            <button id="filter_button">Filter</button>
+        </form>
+        <div id="subpositions">
+            
+        </div>
+        <a href="{% url 'create_position' %}">Create New Positions</a>
+        <a href="{% url 'subposition_list' %}">Delete Positions</a>
+    </div>
+    <script>
+        document.getElementById('filter_button').addEventListener('click', function(event) {
+            event.preventDefault();
+            var parentPositionId = document.getElementById('parent_position').value;
+            if (parentPositionId) {
+                fetch(`/get-subpositions/?parent_position=${parentPositionId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var subpositionsDiv = document.getElementById('subpositions');
+                        subpositionsDiv.innerHTML = ''; // Clear existing options
+                        if (data.length > 0) {
+                            var subpositionsList = document.createElement('ul');
+                            data.forEach(subposition => {
+                                var listItem = document.createElement('li');
+                                listItem.textContent = subposition.name;
+                                subpositionsList.appendChild(listItem);
+                            });
+                            subpositionsDiv.appendChild(subpositionsList);
+                        } else {
+                            subpositionsDiv.textContent = 'No subpositions found.';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching subpositions:', error));
+            } else {
+                alert('Please select a parent position.');
+            }
+        });
+    </script>
+</body>
+</html>
+

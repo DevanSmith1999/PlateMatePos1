@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        select {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            cursor: pointer;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #subpositions {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #007bff;
+        }
+        li:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Staff List</h1>
+        <form>
+            <label for="subposition">Select Subposition:</label>
+            <select id="subposition" name="subposition">
+                <option value="">-- Select Subposition --</option>
+                {% for subposition in subposition %}
+                    <option value="{{ subposition.id }}">{{ subposition.name }}</option>
+                {% endfor %}
+            </select>
+            <button id="filter_button">Filter</button>
+        </form>
+        <div id="staff_list"></div>
+        <a href="{% url 'create_staff' %}">Create New Staff</a>
+    </div>
+
+    <script>
+        document.getElementById('filter_button').addEventListener('click', function(event) {
+            event.preventDefault();
+            var subpositionId = document.getElementById('subposition').value;
+            if (subpositionId) {
+                fetch(`/get-staff/?subposition_id=${subpositionId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var staffListDiv = document.getElementById('staff_list');
+                        staffListDiv.innerHTML = ''; // Clear existing staff list
+                        if (data.length > 0) {
+                            var staffList = document.createElement('ul');
+                            data.forEach(staff => {
+                                var listItem = document.createElement('li');
+                                var staffLink = document.createElement('a');
+                                staffLink.textContent = staff.first_name + ' ' + staff.last_name;
+                                staffLink.href = `/staff/${staff.id}/`;
+                                listItem.appendChild(staffLink);
+                                staffList.appendChild(listItem);
+                            });
+                            staffListDiv.appendChild(staffList);
+                        } else {
+                            staffListDiv.textContent = 'No staff members found for this subposition.';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching staff members:', error));
+            } else {
+                alert('Please select a subposition.');
+            }
+        });
+    </script>
+</body>
+</html>
