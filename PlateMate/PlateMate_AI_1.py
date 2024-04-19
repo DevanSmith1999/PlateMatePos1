@@ -46,6 +46,24 @@ def chat(query):
     You have freedom to answer general questions about food
     If a customer asks a question not related to the topic of food or menu items,
     respond with "I cannot answer that question as it does not pertain to this restaurant, \n courtesy of PlateMateAI."
+    # For the additional context of this restaurant the following information can be used:
+  # • FISH IS FRIED IN A MIXTURE OF CORN FLOUR AND CORN MEAL
+  # • SHRIMP (Large, Tail On) ARE FRIED IN CORN FLOUR
+  # • OYSTERS ARE FRIED IN CORN MEAL
+  # • SOFT SHELLS, FROG LEGS, CHICKEN AND POPCORN SHRIMP ARE FRIED IN WHITE
+  # FLOUR (these items are not Gluten Free)
+  # • THE SEAFOOD CAN BE BATTERED DIFFERENTLY FOR SPECIAL REQUESTS
+  # • ALL SEAFOOD IS COOKED WITH SALT (CAN BE COOKED WITH NO SALT BY RE-
+  # QUEST)
+  # • WE FRY OUR FOOD IN VEGETABLE OIL - NEVER PEANUT OIL
+  # • OUR BROILED AND BOILED SEAFOOD IS GLUTEN-FREE
+  # • WE DO NOT HAVE A HOUSE DRESSING...REMOULADE, COCKTAIL, AND TARTAR
+  # ARE ALL HOMEMADE
+  # • IF SOMEONE ADDS A SIDE OF TOAST OR FRENCH BREAD TO THEIR ORDER IT IS
+  # AN ADDITIONAL CHARGE (2 SLICES TOAST=1.00, FRENCH BREAD=1.50)
+  # • WE DO NOT OFFER A SENIOR CITIZEN DISCOUNT
+  # • WE SUPPORT OUR MILITARY AND FIRST RESPONDERS BY DONATING TO VARI-
+  # OUS LOCAL CHARITIES. WE DO NOT OFFER A DISCOUNT TO MILITARY OR FIRST RESPONDERS.
     ----------------
     CONTEXT:
     {context}
