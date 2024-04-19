@@ -28,8 +28,11 @@ texts = [', '.join(map(str, row)) for row in df.values]
 embeddings = OpenAIEmbeddings(deployment= "text-embedding-ada-002", chunk_size=1, api_key= "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")
 docsearch = FAISS.from_texts(texts, embeddings)
 
+# Later change to take input from front-end
+#query = input("Input text here: ")
+
 # main function interacting with the Chatbot
-def chat():    
+def chat(query):    
     retriever = docsearch.as_retriever(search_type ="similarity", search_kwargs={"k":15})
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="answer")
     llm = ChatOpenAI(model='gpt-3.5-turbo', temperature = 0.2)
@@ -63,11 +66,10 @@ def chat():
         combine_docs_chain_kwargs={'prompt': prompt_doc},
     )
     #accepts user and returns the Chatbot's response
-    query = input("Input text here: ")
     
     result = qa_chain({"question": query})
     print(result["answer"])
     return(result["answer"])
 
-chat()    
+#chat(query)    
 

@@ -2,10 +2,17 @@ from django.shortcuts import render, redirect
 # from django.http import HttpResponse 
 from .models import ActiveOrder, MenuItem, Table  #Use this to access Menuitem data
 
+from django.http import JsonResponse
+from .PlateMate_AI_1 import chat
 
  # Import all relevant models
 # Stuff
 
+
+def chat_view(request):
+    user_query = request.GET.get('query', 'Default Query')  # Get the query parameter from URL
+    response = chat(user_query)  # Call function
+    return JsonResponse({'response': response})  # Return the response as JSON
 
 def home(request):
     '''This is Plate Mate's home landing page'''

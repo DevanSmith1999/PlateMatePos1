@@ -1,5 +1,6 @@
 from django.urls import path
 from PlateMate import views
+from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -19,5 +20,6 @@ urlpatterns = [
     path("Server_Check_View/", views.Server_Check_View, name = "Test Page"),
     path("Server_Pin_Log_in/", views.Server_Pin_Log_in, name = "Test Page"),
     path("Server_Table_View/", views.Server_Table_View, name = "Test Page"),
-    path('create_order/', views.create_order, name='create_order')
+    path('create_order/', views.create_order, name='create_order'),
+    path('chat/', views.chat_view, name='chat'),
 ]
