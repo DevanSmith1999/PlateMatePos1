@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="globals.css" type="text/css" />
   <link rel="stylesheet" href="styleguide.css" type="text/css" />
   <link rel="stylesheet" href="customer_style.css" type="text/css" />
@@ -614,7 +613,7 @@
 
 
         <button class="AI-CHAT" onclick="togglePopup()">
-          <div class="AI-chat">AI <br />Chat</div>
+          <div class="AI-chat">AI <br />CHAT</div>
         </button>
         <div class="popup-container" id="popupContainer">
           <span class="close-btn" onclick="togglePopup()">X</span>
@@ -625,52 +624,6 @@
           <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
         </div>
 
-        <script>
-          function togglePopup() {
-            var popup = document.getElementById('popupContainer');
-            if (popup.style.display === 'none') {
-              popup.style.display = 'block';
-            } else {
-              popup.style.display = 'none';
-            }
-          }
-
-          function addMessage(sender, content) {
-            var chatArea = document.getElementById('chatArea');
-            var messageElement = document.createElement('div');
-            messageElement.textContent = content;
-            messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
-            chatArea.appendChild(messageElement);
-            chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
-          }
-
-          function sendMessage(event) {
-            if (event.keyCode === 13) { // Enter key
-              var userInput = document.getElementById('userQuery');
-              var message = userInput.value.trim();
-              if (message !== '') {
-                addMessage('user', message);
-                userInput.value = ''; // Clear the input field
-                callChatFunction(message); // Call the chat function with the user's message
-              }
-            }
-          }
-
-          // Sample AI function (replace with your actual AI function)
-          function callChatFunction(query) {
-            $.ajax({
-              url: "{% url 'chat' %}",
-              type: "GET",
-              data: { query: query },
-              success: function (data) {
-                addMessage('ai', data.response);
-              },
-              error: function (xhr, status, error) {
-                console.error('Error: ' + error);
-              }
-            });
-          }
-        </script>
 
 
         <button class="CALL-SERVER"><img class="call-server" src="img/call-server.png" /></button>
@@ -680,6 +633,54 @@
 </body>
 
 </html>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById('popupContainer');
+    if (popup.style.display === 'none') {
+      popup.style.display = 'block';
+    } else {
+      popup.style.display = 'none';
+    }
+  }
+
+  function addMessage(sender, content) {
+    var chatArea = document.getElementById('chatArea');
+    var messageElement = document.createElement('div');
+    messageElement.textContent = content;
+    messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+    chatArea.appendChild(messageElement);
+    chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+  }
+
+  function sendMessage(event) {
+    if (event.keyCode === 13) { // Enter key
+      var userInput = document.getElementById('userQuery');
+      var message = userInput.value.trim();
+      if (message !== '') {
+        addMessage('user', message);
+        userInput.value = ''; // Clear the input field
+        callChatFunction(message); // Call the chat function with the user's message
+      }
+    }
+  }
+
+  // Sample AI function (replace with your actual AI function)
+  function callChatFunction(query) {
+    $.ajax({
+      url: "{% url 'chat' %}",
+      type: "GET",
+      data: { query: query },
+      success: function (data) {
+        addMessage('ai', data.response);
+      },
+      error: function (xhr, status, error) {
+        console.error('Error: ' + error);
+      }
+    });
+  }
+</script>
+
 <script>
   function goToHome() {
     window.location.href = "{% url 'Customer_Home' %}";
