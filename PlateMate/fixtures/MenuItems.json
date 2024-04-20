@@ -718,5 +718,125 @@
       "Description": "Ask for available flavors",
       "Price": "5.75"
     }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 73,
+    "fields": {
+      "Name": "Coca-Cola",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 74,
+    "fields": {
+      "Name": "Sprite",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75"
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 75,
+    "fields": {
+      "Name": "Dr. Pepper",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75"  
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 76,
+    "fields": {
+      "Name": "Barq's Rootbeer",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 77,
+    "fields": {
+      "Name": "Coke Zero",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 78,
+    "fields": {
+      "Name": "Diet Coke",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75"  
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 79,
+    "fields": {
+      "Name": "Unsweet Tea",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75"  
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 80,
+    "fields": {
+      "Name": "Sweet Tea",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75"  
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 81,
+    "fields": {
+      "Name": "Lemonade",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 82,
+    "fields": {
+      "Name": "Half & Half Tea",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "2.75" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 83,
+    "fields": {
+      "Name": "Milk",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "1.50" 
+    }
+  },
+  {
+    "model": "PlateMate.MenuItem",
+    "pk": 84,
+    "fields": {
+      "Name": "Coffee",
+      "Type": "DRINK",
+      "Description": "",
+      "Price": "1.50"  
+    }
   }
 ]
