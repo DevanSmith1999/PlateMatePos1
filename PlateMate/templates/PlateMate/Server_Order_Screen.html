@@ -590,21 +590,34 @@
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
               QT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE
-              <table style="margin-top: 20px;">
+              <table style="width: 100%; margin-top: 30px; font-size: 20px; table-layout: fixed;">
                 <tbody>
-                  {% for order in active_orders %}
-                  <tr>
-                    <td>{{ order.Quantity }}</td>
-                    <td>{{ order.menu_item.Name }}</td>
-                    <td>{{ order.menu_item.Price }}</td>
-                  </tr>
-                  {% endfor %}
+                    {% for order in active_orders %}
+                    <tr>
+                      <td style="width: 10%;">{{ order.Quantity }}</td>
+                      <td style="text-align: left; width: 45%;">{{ order.menu_item.Name }}</td>
+                      <td style="width: 25%;">{{ order.menu_item.Price }}</td>
+                      <td>
+                        <form method="post" action="{% url 'server_delete_order_item' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="order_id" value="{{ order.id }}">
+                          <button type="submit"  name="delete">
+                            {% if order.Quantity > 1 %}
+                              x
+                            {% else %}
+                              x
+                            {% endif %}
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
+            </table>
             </div>
           </div>
           <div class="total-price">
-            <div class="subtotal-amount-tax">Subtotal: <br />Tax: <br />Total: {{ total_price }}</div>
+            <div class="subtotal-amount-tax">Subtotal: {{ total_price }}<br />Tax: {{ tax }} <br />Total: {{ totalandtax }} </div>
           </div>
           <div class="order">
             <div class="text-wrapper">
