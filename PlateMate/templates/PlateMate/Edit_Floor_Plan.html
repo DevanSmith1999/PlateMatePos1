@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan Builder - Edit {{ floorplan.name }}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #canvas {
+            width: 1250px;
+            height: 600px;
+            border: 1px solid black;
+            position: relative;
+            background-image: 
+                linear-gradient(0deg, transparent 24.99%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.2) 50.01%, transparent 50.01%),
+                linear-gradient(90deg, transparent 24.99%, rgba(0, 0, 0, 0.2) 25%, rgba(0, 0, 0, 0.2) 50.01%, transparent 50.01%);
+            background-size: 15px 15px;
+            margin-top: 20px;
+        }
+        .table, .table-text {
+            position: absolute;
+            cursor: pointer;
+            background-color: darkgrey;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .table-input {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+            background: transparent;
+            color: inherit;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .table-handle, .textbox-handle {
+            width: 100%;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .rectangle {
+            width: 100px;
+            height: 50px;
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+        }
+        .addShape, #save, #addText {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .addShape:hover, #save:hover, #addText:hover {
+            background-color: #0056b3;
+        }
+        #trash {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed red;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            text-align: center;
+            line-height: 100px;
+            z-index: 10;
+        }
+        #backToList {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #007BFF; /* You can change the color as per your design */
+            text-decoration: none; /* Removes the underline */
+            width: 100%; /* Makes the link take the full width */
+            position: relative;
+            top: 600px; /* Moves it down from the canvas */
+        }
+
+        #backToList:hover {
+            text-decoration: underline; /* Underlines the text on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Floor Plan - {{ floorplan.name }}</h1>
+    <div id="canvas">
+        <div id="trash">Trash</div>
+        <a href="{% url 'list_floorplans' %}" id="backToList">Back to List</a>
+    </div>
+    
+    
+    <button class="addShape" data-shape="circle">Add Circle</button>
+    <button class="addShape" data-shape="rectangle">Add Rectangle</button>
+    <button class="addShape" data-shape="square">Add Square</button>
+    <button id="addText">Add Text</button>
+    <button id="save">Save</button>
+    
+
+
+    <script>
+        let tables = [];
+        let textboxes = [];
+    
+        // Get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Extract floor plan name from the URL
+        const floorPlanName = "{{ floorplan.name }}"
+
+        $(document).ready(function() {
+            if (!floorPlanName) {
+                console.error('Floor plan name not found in URL');
+                return;
+            }
+
+            // Existing tables and textboxes will be fetched when the page loads
+            $.ajax({
+                url: `/get-floor-plan/${floorPlanName}/`,
+                method: 'GET',
+                success: function(response) {
+                    tables = response.tables || [];
+                    textboxes = response.textboxes || [];
+                    renderElements();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX Error:", textStatus, errorThrown);
+                }
+            });
+
+            function renderElements() {
+                tables.forEach(table => {
+                    const { table_number, shape, x_position, y_position, width, height } = table;
+                    const tableElement = `
+                        <div id="table-${table_number}" class="table ${shape}" style="position: absolute; top: ${y_position}px; left: ${x_position}px; width: ${width}px; height: ${height}px;">
+                            <input type="text" class="table-input" value="${table_number}" />
+                            <div class="table-handle"></div>
+                        </div>`;
+                    const $tableElement = $(tableElement);
+                    $("#canvas").append($tableElement);
+
+                    $tableElement.draggable({
+                        handle: ".table-handle",
+                        stop: function(event, ui) {
+                            const index = tables.findIndex(tbl => tbl.table_number == table_number);
+                            if (index > -1) {
+                                tables[index].x_position = ui.position.left;
+                                tables[index].y_position = ui.position.top;
+                            }
+                        }
+                        
+                    }).resizable({
+                        handles: 'all',
+                        stop: function(event, ui) {
+                            const index = tables.findIndex(tbl => tbl.table_number == table_number);
+                            if (index > -1) {
+                                tables[index].width = ui.size.width;
+                                tables[index].height = ui.size.height;
+                            }
+                        }
+                    });
+                    $tableElement.find('.table-input').keydown(function(event) {
+                        if (event.which === 13) {
+                            $(this).blur();
+                        }
+                    }).change(function() {
+                        const index = tables.findIndex(tbl => tbl.table_number == table_number);
+                        tables[index].table_number = $(this).val();
+                    });
+                });
+                
+
+                textboxes.forEach(textbox => {
+                    const { id, x_position, y_position, width, height, content } = textbox;
+                    const element = `
+                        <div id="textbox-${id}" class="table-text" style="position: absolute; top: ${y_position}px; left: ${x_position}px; width: ${width}px; height: ${height}px;">
+                            <input type="text" class="table-input" value="${content}" />
+                            <div class="textbox-handle"></div> <!-- Handle div for textbox -->
+                        </div>`;
+                    const $element = $(element);
+                    $("#canvas").append($element);
+
+                    $element.draggable({
+                        handle: ".textbox-handle",  // Handle for textbox
+                        stop: function(event, ui) {
+                            const index = textboxes.findIndex(txt => txt.id == id);
+                            if (index > -1) {
+                                textboxes[index].x_position = ui.position.left;
+                                textboxes[index].y_position = ui.position.top;
+                            }
+                        }
+                    }).resizable({
+                        handles: 'all',
+                        stop: function(event, ui) {
+                            const index = textboxes.findIndex(txt => txt.id == id);
+                            if (index > -1) {
+                                textboxes[index].width = ui.size.width;
+                                textboxes[index].height = ui.size.height;
+                            }
+                        }
+                    });
+                    $element.find('.table-input').keydown(function(event) {
+                        if (event.which === 13) {
+                            $(this).blur();
+                        }
+                    }).change(function() {
+                        const index = textboxes.findIndex(txt => txt.id == id);
+                        textboxes[index].content = $(this).val();
+                    });
+                });
+            }   
+    
+            $(".addShape").click(function() {
+                const shape = $(this).data('shape');
+                addTable(shape);
+            });
+
+            $("#addText").click(function() {
+                addTextBox();
+            });
+
+            function addTable(shape) {
+                const id = Date.now();
+                const tableNumberInput = $(`<input type="number" class="table-input" placeholder="Table ${id}" />`);
+                const table = `
+                    <div id="${id}" class="table ${shape}">
+                        ${tableNumberInput.prop('outerHTML')}
+                        <div class="table-handle"></div>
+                    </div>`;
+                $("#canvas").append(table);
+
+                $(`#${id}`).draggable({
+                    handle: ".table-handle",
+                    stop: function(event, ui) {
+                        const index = tables.findIndex(table => table.id === id);
+                        tables[index].x_position = ui.position.left;
+                        tables[index].y_position = ui.position.top;
+                    }
+                }).resizable({
+                    aspectRatio: shape === 'circle' ? 1 : false,
+                    minHeight: shape === 'circle' ? 50 : 0,
+                    minWidth: shape === 'circle' ? 50 : 0,
+                    handles: 'all'
+                });
+
+                tables.push({
+                    id: id,
+                    shape: shape,
+                    x_position: 0,
+                    y_position: 0,
+                    width: shape === 'circle' ? 50 : 100,
+                    height: shape === 'circle' ? 50 : 50,
+                    table_number: 1
+                });
+
+                $(`#${id} .table-input`).keydown(function(event) {
+                    if (event.which === 13) {
+                        $(this).blur();
+                    }
+                }).change(function() {
+                    const index = tables.findIndex(table => table.id === id);
+                    tables[index].table_number = $(this).val();
+                });
+            }
+
+            function addTextBox() {
+                const id = Date.now();
+                const text = `
+                    <div id="${id}" class="table-text">
+                        <input type="text" class="table-input" placeholder="Text ${id}" />
+                        <div class="textbox-handle"></div> <!-- Added the handle div here -->
+                    </div>`;
+                $("#canvas").append(text);
+
+                $(`#${id}`).draggable({
+                    handle: ".textbox-handle",  // Changed handle selector to .textbox-handle
+                    stop: function(event, ui) {
+                        const index = textboxes.findIndex(textbox => textbox.id === id);
+                        textboxes[index].x_position = ui.position.left;
+                        textboxes[index].y_position = ui.position.top;
+                    }
+                }).resizable({
+                    minHeight: 20,
+                    minWidth: 50,
+                    handles: 'all'
+                });
+
+                textboxes.push({
+                    id: id,
+                    x_position: 0,
+                    y_position: 0,
+                    width: 100,
+                    height: 20,
+                    content: ""
+                });
+            }
+            $("#canvas").on("keydown", ".table-input", function(event) {
+                if (event.which === 13) {
+                    $(this).blur();
+                }
+            }).on("change", ".table-input", function() {
+                const id = $(this).closest(".table, .table-text").attr("id").replace("table-", "").replace("text-box-", "");
+                const isTable = $(this).closest(".table").length > 0;
+
+                if (isTable) {
+                    const index = tables.findIndex(tbl => tbl.table_number == id);
+                    tables[index].table_number = $(this).val();
+                } else {
+                    const index = textboxes.findIndex(txt => txt.id == id);
+                    textboxes[index].content = $(this).val();
+                }
+            });
+            
+            function removeShapeFromCanvas(shapeId) { 
+                // Check if the shape is in the database
+                if (shapeId.startsWith('table')) {
+                    // Call the server to remove the shape from the database
+                    $.ajax({
+                        url: `/remove-shape/${shapeId}/`,
+                        type: 'POST',
+                        headers: {'X-CSRFToken': getCookie('csrftoken')},
+                        success: function(response) {
+                            console.log(response.message);
+                        },
+                        error: function(error) {
+                            console.error("Error removing shape from database:", error);
+                        }
+                    });
+                } else if (shapeId.startsWith('textbox')) {
+                    // Call the server to remove the shape from the database
+                    $.ajax({
+                        url: `/remove-shape/${shapeId}/`,
+                        type: 'POST',
+                        headers: {'X-CSRFToken': getCookie('csrftoken')},
+                        success: function(response) {
+                            console.log(response.message);
+                        },
+                        error: function(error) {
+                            console.error("Error removing shape from database:", error);
+                        }
+                    });
+                }
+            }
+
+            $("#trash").droppable({
+                accept: "#canvas > .table, #canvas > .table-text",
+                drop: function(event, ui) {
+                    const id = ui.draggable.attr("id");
+                    ui.draggable.remove();
+                    const index = tables.findIndex(table => table.id == id);
+                    if (index > -1) {
+                        tables.splice(index, 1);
+                    } else {
+                        const index = textboxes.findIndex(textbox => textbox.id == id);
+                        if (index > -1) {
+                            textboxes.splice(index, 1);
+                        }
+                    }
+                    removeShapeFromCanvas(id)
+                    location.reload();
+                }
+            });
+
+            $("#save").click(function() {
+                const csrftoken = getCookie('csrftoken');
+
+
+                const formattedTables = tables.map(table => {
+
+                    if (table.shape === 'square') {
+                        table.width = 50;  // or whatever default width you want for a square
+                        table.height = 50; // same as width for a square
+                    } else if (table.shape === 'rectangle') {
+                        table.width = 100;  // or whatever default width you want for a rectangle
+                        table.height = 50; // or whatever height you want for a rectangle
+                    }
+                    return {
+                        shape: table.shape,
+                        x_position: table.x_position,
+                        y_position: table.y_position,
+                        width: table.width,
+                        height: table.height,
+                        table_number: table.table_number
+                    };
+                });
+
+                const formattedTextboxes = textboxes.map(textbox => {
+                    return {
+                        textbox_id: textbox.id,
+                        x_position: textbox.x_position,
+                        y_position: textbox.y_position,
+                        width: textbox.width,
+                        height: textbox.height,
+                        content: textbox.content
+                    };
+                });
+
+                $.ajax({
+                    url: `/save_floor_plan/${floorPlanName}/`,
+                    method: 'POST',
+                    headers: {'X-CSRFToken': csrftoken},
+                    data: {
+                        table: JSON.stringify(formattedTables),
+                        textbox: JSON.stringify(formattedTextboxes)
+                    },
+                    success: function(response) {
+                        alert("Floor plan saved successfully!");
+                    },
+                    error: function(error) {
+                        console.error("Error saving floor plan:", error);
+                        alert("Error saving floor plan.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

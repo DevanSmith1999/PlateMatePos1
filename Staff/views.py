@@ -6,6 +6,7 @@ from .forms import PositionForm, SubPositionForm, StaffForm
 from .models import Position, SubPosition, Staff
 from django.contrib.auth import logout
 from django.urls import reverse
+import users
 
 def create_position(request):
     if request.method == 'POST':
@@ -150,3 +151,25 @@ def logout_confirmation(request):
 def logout_user(request):
     logout(request)
     return redirect('login') 
+
+def server_login(request):
+    if request.method == 'POST':
+        id_number = request.POST.get('id_number')
+        
+        # Perform database query to check if the entered ID number exists in the Staff model
+        try:
+            staff = Staff.objects.get(id_number=id_number)#pylint:disable=no-member
+        except Staff.DoesNotExist:#pylint:disable=no-member
+            staff = None
+
+        if staff:
+            # Redirect to home page if the staff member exists
+            
+             return redirect(reverse('floor_plan_view', args=['Main']))
+        
+        else:
+            # If staff member doesn't exist, render the login page with an error message
+            return render(request, 'Staff/server_login.html', {'error': 'Invalid ID number'})
+
+    # Render the login page for GET requests
+    return render(request, 'Staff/server_login.html', {'error': ''})

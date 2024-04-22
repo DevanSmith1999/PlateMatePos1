@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Floor Plans</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        li a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        li a:hover {
+            color: #0056b3;
+        }
+
+        li:empty::before {
+            content: "No floor plans available.";
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <h1>List of Floor Plans</h1>
+
+        {% if floorplan%}
+            <ul>
+                {% for floorplan in floorplan %}
+                <li>
+                    <a href="{% url 'edit_floor_plan' floorplan.name %}">{{ floorplan.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No floor plans available.</p>
+        {% endif %}
+
+</body>
+</html>

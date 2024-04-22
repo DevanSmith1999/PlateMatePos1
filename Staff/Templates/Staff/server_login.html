@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Login</title>
+    <style>
+        body {
+            /* Radial gradient background */
+            background: radial-gradient(circle, #808080, #000000);
+            /* Center the content vertically and horizontally */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ensure full viewport height */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+        }
+
+        .display {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-display {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .keypad button {
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: #f0f0f0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .keypad button:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-3px);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .control-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .control-button:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="display">
+            <div class="input-display" id="input-display"></div>
+        </div>
+        <form method="post" onsubmit="setStaffNumber();">
+            {% if error %}
+                 <p style="color: red;">{{ error }}</p>
+           {% endif %}
+            {% csrf_token %}
+            <div class="keypad">
+                <button type="button" onclick="appendToInput('1')">1</button>
+                <button type="button" onclick="appendToInput('2')">2</button>
+                <button type="button" onclick="appendToInput('3')">3</button>
+                <button type="button" onclick="appendToInput('4')">4</button>
+                <button type="button" onclick="appendToInput('5')">5</button>
+                <button type="button" onclick="appendToInput('6')">6</button>
+                <button type="button" onclick="appendToInput('7')">7</button>
+                <button type="button" onclick="appendToInput('8')">8</button>
+                <button type="button" onclick="appendToInput('9')">9</button>
+                <button type="button" onclick="clearInput()">Clear</button>
+                <button type="button" onclick="appendToInput('0')">0</button>
+                <button type="button" onclick="backspace()">Back</button>
+            </div>
+            <div class="controls">
+                <button type="submit" class="control-button">Login</button>
+            </div>
+            <input type="hidden" id="id_number" name="id_number">
+        </form>
+    </div>
+
+    <script>
+        function appendToInput(digit) {
+            var input = document.getElementById('id_number');
+            var display = document.getElementById('input-display');
+            input.value += digit;
+            display.textContent = input.value;
+        }
+
+        function clearInput() {
+            var input = document.getElementById('id_number');
+            var display = document.getElementById('input-display');
+            input.value = '';
+            display.textContent = '';
+        }
+
+        function backspace() {
+            var input = document.getElementById('id_number');
+            var display = document.getElementById('input-display');
+            input.value = input.value.slice(0, -1);
+            display.textContent = input.value;
+        }
+        function setStaffNumber() {
+            var input = document.getElementById('id_number').value;
+            
+            // Set staffNumber in sessionStorage
+            sessionStorage.setItem('staffNumber', input);
+
+            console.log("Stored staffNumber:", sessionStorage.getItem('staffNumber'));
+        }
+    </script>
+</body>
+</html>
