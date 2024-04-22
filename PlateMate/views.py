@@ -8,6 +8,7 @@ from PlateMate import models #Use this to access Menuitem data# Stuff
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_POST
+from Staff import models as sm
 
 
 
@@ -126,6 +127,7 @@ def save_floor_plan(request, floor_plan_name):
                     width=table_data['width'],
                     height=table_data['height'],
                     table_number=table_data.get('table_number', 1)
+
                 )
                 table.save()
 
@@ -167,6 +169,7 @@ def get_floor_plan(request, floor_plan_name):
                 'y_position': table.y_position,
                 'width': table.width,
                 'height': table.height,
+                'isOccupiedBy': table.isOccupiedBy
             }
             for table in tables
         ]
@@ -205,6 +208,7 @@ def floor_plan_view(request, floor_plan_name):
                 'y_position': table.y_position,
                 'width': table.width,
                 'height': table.height,
+                'isOccupiedBy': table.isOccupiedBy
             }
             for table in tables
         ]
@@ -331,16 +335,34 @@ def list_floorplans(request):
 
     return render(request, 'PlateMate/floorplan_list.html', context)
 @require_http_methods(["PUT"])
-def update_table(request, table_id):
-    print("Received table ID:", table_id)
+def update_table(request, table_number):
+    print("Received table ID:", table_number)
     data = request.body.decode('utf-8')
     print("Received data:", data)
     table_data = json.loads(data)
     
-    table = get_object_or_404(models.Table, id=table_id)
+    table = get_object_or_404(models.Table, table_number=table_number)
     
     # Update the table's isOccupiedBy field
     table.isOccupiedBy = table_data.get('isOccupiedBy', None)
     table.save()
     
     return JsonResponse({'status': 'success', 'message': 'Table updated successfully'}, status=200)
+def get_staff_subpositions(request, staff_number):
+    try:
+        print(staff_number)
+        staff = sm.Staff.objects.get(id_number=staff_number)
+        subposition_ids = [subposition.id for subposition in staff.subposition.all()]
+        print(subposition_ids)
+        return JsonResponse(subposition_ids, safe=False)
+
+    except sm.Staff.DoesNotExist:
+        return JsonResponse({"error": "Staff not found"}, status=404)
+def get_staff_name(request, staff_number):
+    try:
+        staff = sm.Staff.objects.get(id_number=staff_number)
+        first_name = staff.first_name
+        print(first_name)
+        return JsonResponse({'first_name': first_name})
+    except sm.Staff.DoesNotExist:
+        return JsonResponse({'error': 'Staff member not found'}, status=404)

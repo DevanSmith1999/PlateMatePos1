@@ -14,10 +14,9 @@
         }
         #content {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative; /* Make it a positioning context for absolute positioning of mainDiningText */
-            z-index: 1; /* Ensure it's above the canvas */
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
         }
 
         #navbar {
@@ -25,19 +24,14 @@
             display: block;
             margin-bottom: 20px;
             justify-content: center;
-            
-
         }
         #canvas {
-            width: 75vw;
-            height: 85vh;
+            flex-grow:1; /* Take up remaining space */
+            height: 90vh;
             background-color: darkgray;
             border: 1px solid darkgrey;
             position: relative;
-            margin-top: 20px;
             z-index: 0;
-            margin-left: auto; /* Pushes the canvas to the right */
-            margin-right: 0;
         }
         .table, .table-text {
             position: absolute;
@@ -82,21 +76,73 @@
             font-weight: bold;
             color: rgb(11, 220, 247);
             margin-bottom: 20px;
-            position: absolute; /* Position it absolutely within the canvas */
-            top: 50%; /* Center vertically */
-            left: 50%; /* Center horizontally */
-            transform: translate(-50%, -50%); /* Adjust to truly center */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 2;
         }
         .occupied {
             background-color: yellow;
         }
-        
+        .sidebar {
+            width: 25vw;
+            height: 85vh;
+            background-color: #f5f5f5;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        li.table-item {
+            list-style-type: none;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        li.table-item:hover {
+            background-color: #e9f5f5;
+        }
+
+        li.table-item a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        li.table-item a:hover {
+            color: #0056b3;
+        }
+
+        li.table-item:empty::before {
+            content: "No occupied tables.";
+            color: #aaa;
+        }
+
     </style>
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% include 'Server_navbar.html' %}
     <div id="content">
+        <div class="sidebar">
+            <div class="sidebar-title">Occupied Tables</div>
+            <ul id="occupied-tables-list">
+                <!-- Occupied tables will be appended here -->
+            </ul>
+        </div>        
         <div id="mainDiningText">Main Dining</div>
         <div id="canvas">
             <!-- Tables and text boxes will be appended here -->
@@ -106,18 +152,62 @@
     <script>
         let tables = [];
         let textboxes = [];
-    
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        function getStaffSubposition(staffNumber) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `/get-staff-subpositions/${staffNumber}/`,
+                    method: 'GET',
+                    success: function(response) {
+                        resolve(response); // Return the list of subposition_ids
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        reject(errorThrown);
+                    }
+                });
+            });
+        }
+        function isManager(subpositionIds) {
+            return subpositionIds.includes("24") || subpositionIds.includes(24);
+        }
+        function getStaffName(staffNumber) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `/get-staff-name/${staffNumber}/`,
+                    method: 'GET',
+                    success: function(response) {
+                        resolve(response.first_name);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        reject(errorThrown);
+                    }
+                });
+            });
+        }
+
         $(document).ready(function() {
             const floor_plan_name = "Main";
-            const originalCanvasWidth =683;  // Original canvas width
-            const originalCanvasHeight = 600; // Original canvas height
-            const newCanvasWidth = $('#canvas').width();  // New canvas width
+            const originalCanvasWidth = 683;
+            const originalCanvasHeight = 600;
+            const newCanvasWidth = $('#canvas').width();
             const newCanvasHeight = $('#canvas').height();
 
             const scaleX = newCanvasWidth / originalCanvasWidth;
             const scaleY = newCanvasHeight / originalCanvasHeight;
-    
-            // Fetch floor plan data
+
             $.ajax({
                 url: `/get-floor-plan/${floor_plan_name}/`,
                 method: 'GET',
@@ -125,46 +215,43 @@
                     console.log("Floor plan data:", response);
                     tables = response.tables || [];
                     textboxes = response.textboxes || [];
-    
+
                     console.log("Received tables data:", tables);
                     console.log("Received text boxes data:", textboxes);
-    
+
+                    populateOccupiedTables();
+
                     renderElements();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log("AJAX Error:", textStatus, errorThrown);
                 }
             });
-    
-            function renderElements() {
-                console.log("Rendering tables:", tables);
-                console.log("Rendering text boxes:", textboxes);
 
+            function renderElements() {
                 if (!Array.isArray(tables) || !Array.isArray(textboxes)) {
                     console.log("Tables or text boxes data is not an array.");
                     return;
                 }
 
                 tables.forEach(table => {
-                    const { table_number, shape, x_position, y_position, width, height } = table;
+                    const { table_number, isOccupiedBy, shape, x_position, y_position, width, height } = table;
                     const scaledX = x_position * scaleX;
                     const scaledY = y_position * scaleY;
                     const scaledWidth = width * scaleX;
                     const scaledHeight = height * scaleY;
 
-                    console.log(`Rendering table ${table_number} at ${scaledX}, ${scaledY}`);
                     let shapeClass = shape;
                     if (shape === 'square') {
                         shapeClass = 'square';
                     }
-
+                    const tableClass = isOccupiedBy ? 'occupied' : '';
                     const tableElement = `
                         <a href="/" class="table-link" id="table-link-${table_number}" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
-                            <div id="table-${table_number}" class="table ${shapeClass}" style="width: 100%; height: 100%;">
+                            <div id="table-${table_number}" class="table ${shapeClass} ${tableClass}" style="width: 100%; height: 100%;">
                                 <input type="text" class="table-input" value="${table_number}" readonly />
                             </div>
                         </a>`;
-
                     $("#canvas").append(tableElement);
                 });
 
@@ -175,54 +262,109 @@
                     const scaledWidth = width * scaleX;
                     const scaledHeight = height * scaleY;
 
-                    console.log(`Rendering text box ${id} at ${scaledX}, ${scaledY}`);
-                    
                     const element = `
                         <div id="text-box-${id}" class="table-text" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
                             <input type="text" class="table-input" value="${content}" readonly />
                         </div>`;
-                    
                     $("#canvas").append(element);
                 });
             }
-    
-            $("#canvas").on('click', '.table', function() {
-                const id = $(this).attr("table_number"); // Extracting table number from the ID
-                // Implement logic to handle table click, e.g., placing an order
+
+            function populateOccupiedTables() {
+                console.log("Populating occupied tables...");
+
                 const staffNumber = sessionStorage.getItem('staffNumber');
+                const occupiedTables = tables.filter(table => table.isOccupiedBy === staffNumber);
+                const staffName=getStaffName(staffNumber);
 
-                // Update the isOccupiedBy field of the clicked table in tables array
+                const $occupiedTablesList = $('#occupied-tables-list');
+                $occupiedTablesList.empty(); 
+
+                occupiedTables.forEach(table => {
+                getStaffName(table.isOccupiedBy) // Fetch staff name asynchronously
+                .then(staffName => {
+                    const tableElement = `
+                        <li class="table-item">
+                            <a href="#" class="table-number">${table.table_number}</a> - Occupied by <span class="occupied-by">${staffName}</span>
+                        </li>
+                    `;
+                    $occupiedTablesList.append(tableElement);
+                })
+                .catch(error => {
+                    console.error("Error fetching staff name:", error);
+                    const tableElement = `
+                        <li class="table-item">
+                            <a href="#" class="table-number">${table.table_number}</a> - Occupied by <span class="occupied-by">Unknown</span>
+                        </li>
+                    `;
+                    $occupiedTablesList.append(tableElement);
+                });
+            });
+                console.log(staffName)
+                console.log("Populated occupied tables:", $occupiedTablesList.html());
+            }
+        
+
+            $("#canvas").on('click', '.table', function(event) {
+                event.preventDefault();
+                const id = $(this).attr("id").split('-')[1];
+                const staffNumber = sessionStorage.getItem('staffNumber');
+                
                 const clickedTable = tables.find(table => table.table_number == id);
-                error.log("Clicked table:",clickedTable);
+                
                 if (clickedTable) {
-                    clickedTable.isOccupiedBy = staffNumber;
+                    getStaffName(staffNumber)
 
-                    // Update table's data on server-side
-                    $.ajax({
-                        url: `/update-table/${id}/`,  // Assuming you have an endpoint to update table data
-                        method: 'PUT',
-                        data: JSON.stringify(clickedTable),
-                        contentType: 'application/json',
-                        success: function(response) {
-                            console.log("Table data updated successfully:", response);
-                            // Optionally update the UI to reflect the change, e.g., change table color to indicate occupancy
-                            $(`#table-${id}`).addClass('occupied');  // Add a CSS class to indicate occupied table
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log("Error updating table data:", textStatus, errorThrown);
-                        }
+                    .then(staffName => {
+                        getStaffSubposition(staffNumber)
+                        .then(subpositionId => {
+                            if (isManager(subpositionId)) {
+                                console.log(staffName)
+                                const confirmMessage = `Table is currently in use by ${staffName}. Are you sure you want to edit?`;
+                                
+                                if (confirm(confirmMessage)) {
+                                    const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                    window.location.href = redirectUrl;
+                                }
+                            } else if (clickedTable.isOccupiedBy && clickedTable.isOccupiedBy !== staffNumber) {
+                                alert("Sorry, table is currently in use.");
+                            } else if (clickedTable.isOccupiedBy === staffNumber) {
+                                const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                window.location.href = redirectUrl;
+                            } else {
+                                clickedTable.isOccupiedBy = staffNumber;
+
+                                const csrftoken = getCookie('csrftoken');
+
+                                $.ajax({
+                                    url: `/update-table/${id}/`,
+                                    method: 'PUT',
+                                    data: JSON.stringify(clickedTable),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'X-CSRFToken': csrftoken
+                                    },
+                                    success: function(response) {
+                                        console.log("Table data updated successfully:", response);
+                                        $(`#table-${id}`).addClass('occupied');
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        console.log("Error updating table data:", textStatus, errorThrown);
+                                    }
+                                });
+                                const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                window.location.href = redirectUrl;
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.log("Error fetching staff name:", error);
                     });
                 } else {
                     console.log("Table not found.");
                 }
-    
-            });
-    
-            $("#canvas").on('click', '.table-text', function(event) {
-                event.stopPropagation(); // Stop the click event from bubbling up
             });
         });
     </script>
-    
 </body>
 </html>
