@@ -1,6 +1,5 @@
 import json
 from django.views.decorators.http import require_http_methods
-import xml.parsers.expat.errors
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
@@ -101,15 +100,15 @@ def save_floor_plan(request, floor_plan_name):
 
         try:
             # Get existing floor plan by name
-            floor_plan = models.FloorPlan.objects.get(name=floor_plan_name)
+            floor_plan = models.FloorPlan.objects.get(name=floor_plan_name)#pylint:disable=no-member
             
             print(f"Received floor plan name: {floor_plan_name}")
             print(f"Received tables data: {tables_json}")
             print(f"Received text boxes data: {textboxes_json}")
 
             # Delete existing tables and text boxes associated with the floor plan
-            deleted_tables = models.Table.objects.filter(floor_plan=floor_plan).delete()[0]
-            deleted_textboxes = models.TextBox.objects.filter(floor_plan=floor_plan).delete()[0]
+            deleted_tables = models.Table.objects.filter(floor_plan=floor_plan).delete()[0]#pylint:disable=no-member
+            deleted_textboxes = models.TextBox.objects.filter(floor_plan=floor_plan).delete()[0]#pylint:disable=no-member
 
             print(f"Deleted {deleted_tables} tables and {deleted_textboxes} text boxes")
 
@@ -244,7 +243,7 @@ def edit_floor_plan(request, floor_plan_name):
             # Handle form submission to save changes to the floor plan
             # ...
 
-            messages.success(request, 'Floor plan updated successfully.')
+           
             return redirect('list_floor_plans')
 
         tables = models.Table.objects.filter(floor_plan=floorplan)#pylint:disable=no-member
@@ -283,7 +282,7 @@ def edit_floor_plan(request, floor_plan_name):
         return render(request, 'PlateMate/Edit_Floor_Plan.html', context)
     
     except ObjectDoesNotExist:
-        messages.error(request, 'Floor plan not found.')
+        
         return redirect('list_floor_plans')
 
 def remove_shape(request, shape_id):
@@ -297,8 +296,8 @@ def remove_shape(request, shape_id):
         # Try to delete a Table with the given table_number
         print(f"Here is the shapeID{shape_id}")
         if shape_id.startswith('table'):
-            deleted_count, _ = models.Table.objects.filter(table_number=shape_id_int).delete()
-            print(f"Delete query for Table with table_number {shape_id_int}: {models.Table.objects.filter(table_number=shape_id_int).query}")  # Debug print
+            deleted_count, _ = models.Table.objects.filter(table_number=shape_id_int).delete()#pylint:disable=no-member
+            print(f"Delete query for Table with table_number {shape_id_int}: {models.Table.objects.filter(table_number=shape_id_int).query}")#pylint:disable=no-member
             if deleted_count != 0:
                 print(f"Deleted {deleted_count} table(s) with table_number: {shape_id_int}")
                 return JsonResponse({'message': 'Table removed successfully'}, status=200)
@@ -308,8 +307,8 @@ def remove_shape(request, shape_id):
         
         # Try to delete a TextBox with the given id
         elif not shape_id.startswith('table'):
-            deleted_count, _ = models.TextBox.objects.filter(id=shape_id_int).delete()
-            print(f"Delete query for TextBox with id {shape_id_int}: {models.TextBox.objects.filter(id=shape_id_int).query}")  # Debug print
+            deleted_count, _ = models.TextBox.objects.filter(id=shape_id_int).delete()#pylint:disable=no-member
+            print(f"Delete query for TextBox with id {shape_id_int}: {models.TextBox.objects.filter(id=shape_id_int).query}") #pylint:disable=no-member
             if deleted_count != 0:
                 print(f"Deleted {deleted_count} textbox with id: {shape_id_int}")
                 return JsonResponse({'message': 'TextBox removed successfully'}, status=200)
@@ -326,7 +325,7 @@ def remove_shape(request, shape_id):
         return JsonResponse({'error': 'Internal Server Error'}, status=500)
 def list_floorplans(request):
     # Fetch all floor plans from the database
-    floorplan = models.FloorPlan.objects.all()
+    floorplan = models.FloorPlan.objects.all()#pylint:disable=no-member
     print("Rendering the list of floor plans.")
 
     context = {
@@ -351,18 +350,18 @@ def update_table(request, table_number):
 def get_staff_subpositions(request, staff_number):
     try:
         print(staff_number)
-        staff = sm.Staff.objects.get(id_number=staff_number)
+        staff = sm.Staff.objects.get(id_number=staff_number)#pylint:disable=no-member
         subposition_ids = [subposition.id for subposition in staff.subposition.all()]
         print(subposition_ids)
         return JsonResponse(subposition_ids, safe=False)
 
-    except sm.Staff.DoesNotExist:
+    except sm.Staff.DoesNotExist:#pylint:disable=no-member
         return JsonResponse({"error": "Staff not found"}, status=404)
 def get_staff_name(request, staff_number):
     try:
-        staff = sm.Staff.objects.get(id_number=staff_number)
+        staff = sm.Staff.objects.get(id_number=staff_number)#pylint:disable=no-member
         first_name = staff.first_name
         print(first_name)
         return JsonResponse({'first_name': first_name})
-    except sm.Staff.DoesNotExist:
+    except sm.Staff.DoesNotExist:#pylint:disable=no-member
         return JsonResponse({'error': 'Staff member not found'}, status=404)
