@@ -707,8 +707,9 @@
           </div>
         </div>
         <div class="top-frame">
-          <button class="back-button" onclick="window.location.href = 'Customer_Home.html';">
+          <a href="{% url 'floor_plan_view' floor_plan_name='Main' %}" class="back-button">
             <div class="back-button-2">&lt;</div>
+        </a>
         </button>
           <button class="appetizers" onclick="showCategory('appetizer');">
             <div class="text-wrapper-6">Appetizers</div>
