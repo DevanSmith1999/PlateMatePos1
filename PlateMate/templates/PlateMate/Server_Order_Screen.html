@@ -645,7 +645,12 @@
       </div>
       <div class="ORDER-HERE" id="orderHere">
         <div class="item-frame">
-          <button class="ITEM">
+          <form method="POST" action="{% url 'Server_Order_Screen' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="1">
+            <input type="hidden" name="TableID" value="1">
+            <button class="ITEM">
+          </form>
             <div class="item-name">
               <div class="text-wrapper-5">Smoked Catfish Dip</div>
             </div>
