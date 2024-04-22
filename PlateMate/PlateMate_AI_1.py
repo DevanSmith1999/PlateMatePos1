@@ -1,5 +1,5 @@
 
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain.embeddings.openai import OpenAIEmbeddings # type: ignore
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.vectorstores import FAISS 

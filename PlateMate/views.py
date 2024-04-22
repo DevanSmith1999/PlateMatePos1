@@ -515,6 +515,7 @@ def get_staff_name(request, staff_number):
 
         
 def create_order(request):
+    print("hellow there")
     context = {}
     table_id = 1 #Set table id here (1 for testing will need to be retrived from table user eventually)
     active_orders = []

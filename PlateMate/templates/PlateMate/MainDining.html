@@ -247,7 +247,7 @@
                     }
                     const tableClass = isOccupiedBy ? 'occupied' : '';
                     const tableElement = `
-                        <a href="/" class="table-link" id="table-link-${table_number}" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
+                        <a href="{% url 'Server_Ordering'%}" class="table-link" id="table-link-${table_number}" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
                             <div id="table-${table_number}" class="table ${shapeClass} ${tableClass}" style="width: 100%; height: 100%;">
                                 <input type="text" class="table-input" value="${table_number}" readonly />
                             </div>

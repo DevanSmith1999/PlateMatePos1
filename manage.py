@@ -22,7 +22,7 @@ def main():
 
     if len(sys.argv) == 2 and sys.argv[1] == 'migrate': #Auto Imports Fixture to populate Menu Items Model
             execute_from_command_line(['manage.py', 'loaddata', 'MenuItems'])
-            execute_from_command_line(['manage.py', 'loaddata', 'Tables'])
+            
 
 
 

@@ -13,10 +13,23 @@ class MenuItem(models.Model):
     return str(self.pk)
 
 class Table(models.Model):
-  ServerID = models.IntegerField(default = 1)
+    SHAPE_CHOICES = [
+        ('circle', 'Circle'),
+        ('rectangle', 'Rectangle'),
+        ('square', 'Square'),
+    ]
 
-  def __str__(self):
-    return str(self.pk)
+    floor_plan = models.ForeignKey('FloorPlan', related_name='tables', on_delete=models.CASCADE)
+    shape = models.CharField(max_length=10, choices=SHAPE_CHOICES)
+    x_position = models.IntegerField()
+    y_position = models.IntegerField()
+    width = models.IntegerField()
+    height = models.IntegerField()
+    table_number = models.IntegerField(primary_key=True,unique=True,default=1)  # Custom primary key
+    isOccupiedBy = models.CharField(max_length=50, blank=True, null=True)  # Staff number or None
+
+    def __str__(self):
+        return f"{self.table_number} - {self.shape} - {self.floor_plan.name}"
 
 class ActiveOrder(models.Model):
   MenuItemID = models.IntegerField()
@@ -42,24 +55,7 @@ class FloorPlan(models.Model):
     def __str__(self):
         return f"{self.name}"
     
-class Table(models.Model):
-    SHAPE_CHOICES = [
-        ('circle', 'Circle'),
-        ('rectangle', 'Rectangle'),
-        ('square', 'Square'),
-    ]
 
-    floor_plan = models.ForeignKey('FloorPlan', related_name='tables', on_delete=models.CASCADE)
-    shape = models.CharField(max_length=10, choices=SHAPE_CHOICES)
-    x_position = models.IntegerField()
-    y_position = models.IntegerField()
-    width = models.IntegerField()
-    height = models.IntegerField()
-    table_number = models.IntegerField(primary_key=True,unique=True,default=1)  # Custom primary key
-    isOccupiedBy = models.CharField(max_length=50, blank=True, null=True)  # Staff number or None
-
-    def __str__(self):
-        return f"{self.table_number} - {self.shape} - {self.floor_plan.name}"
     
 class TextBox(models.Model):
     floor_plan = models.ForeignKey('FloorPlan', related_name='text_boxes', on_delete=models.CASCADE)
