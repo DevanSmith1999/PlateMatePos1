@@ -12,10 +12,19 @@
     }
 
     .navbar-brand {
-        font-size: 1.5rem;
+        color: #fff !important; /* Override any conflicting styles */
+        text-decoration: none !important; /* Override any conflicting styles */
+        margin-left: 20px;
+        transition: color 0.3s;
+        font-size: larger;
         font-weight: bold;
         display: flex;
         align-items: center; /* Align items vertically */
+    }
+
+    .navbar-brand:hover {
+        color: #f8f9fa !important; /* lighter shade of white */
+        text-decoration: underline !important; /* underline on hover */
     }
 
     .navbar-brand img {
@@ -39,6 +48,7 @@
 
     .navbar-links a:hover {
         color: #f8f9fa;
+        text-decoration: underline; /* underline on hover */
     }
 
     .dropdown {
@@ -73,7 +83,7 @@
 <div class="navbar">
     <div class="navbar-brand">
         <img src="{% static 'img/Logo.png' %}" alt="Logo">
-        PlateMate
+        <a href="{% url 'home'%}" style="color: #fff !important; text-decoration: none !important;">PlateMate</a>
     </div>
     <div class="navbar-links">
         <a href="{% url 'position_list' %}">Positions</a>
@@ -81,7 +91,7 @@
         <a href="{% url 'list_floorplans' %}">Floorplans</a>
         <a href="{% url 'server_login' %}">Server Login</a>
         <div class="dropdown">
-            <a class="dropdown-toggle" href="#">Customer Ordering</a>
+            <a class="dropdown-toggle" href="#" style="color: #fff !important; text-decoration: none !important;">Customer Ordering</a>
             <div class="dropdown-content">
                 <a href="{% url 'Customer_Home' %}?value=1">1</a>
                 <a href="{% url 'Customer_Home' %}?value=2">2</a>
