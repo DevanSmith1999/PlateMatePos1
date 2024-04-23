@@ -621,7 +621,7 @@
           </div>
           <div class="order">
             <div class="text-wrapper">
-              <form method="post" action="{% url 'create_order' %}">
+              <form method="post" action="{% url 'Server_Ordering' %}">
                 {% csrf_token %} <button type="submit" name="mark_ordered">Send</button>
               </form>
             </div>
@@ -645,66 +645,126 @@
       </div>
       <div class="ORDER-HERE" id="orderHere">
         <div class="item-frame">
-          <button class="ITEM">
-            <div class="item-name">
-              <div class="text-wrapper-5">Smoked Catfish Dip</div>
-            </div>
-          </button>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="1">
+            <input type="hidden" name="TableID" value="1">  
+            <button class="ITEM">
+              <div class="item-name">
+                <div class="text-wrapper-5">Smoked Catfish Dip</div>
+              </div>
+            </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="2">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-2">
             <div class="item-name">
               <div class="text-wrapper-5">Fried Catfish Tacos</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="3">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-3">
             <div class="item-name">
               <div class="text-wrapper-5">Crawfish Popper</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="4">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-4">
             <div class="item-name">
               <div class="text-wrapper-5">Crawfish Cakes</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="5">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-5">
             <div class="item-name">
               <div class="text-wrapper-5">Shrimp Remoulade</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="6">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-6">
             <div class="item-name">
               <div class="text-wrapper-5">Peel & Eat Boiled Shrimp</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="7">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-7">
             <div class="item-name">
               <div class="text-wrapper-5">Barbequed Oysters</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="8">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-8">
             <div class="item-name">
               <div class="text-wrapper-5">Italian Oysters</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="9">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-9">
             <div class="item-name">
               <div class="text-wrapper-5">Fried Alligator Bites</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="10">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-10">
             <div class="item-name">
               <div class="text-wrapper-5">Duck Quesadillas</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="11">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-11">
             <div class="item-name">
               <div class="text-wrapper-5">Stuffed Mushrooms</div>
             </div>
           </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="12">
+            <input type="hidden" name="TableID" value="1">  
           <button class="ITEM-12">
             <div class="item-name">
               <div class="text-wrapper-5">Crispy Fried Onion Rings</div>
             </div>
           </button>
+          </form>
         </div>
         <div class="top-frame">
           <button class="back-button" onclick="window.location.href = 'Customer_Home.html';">
@@ -746,66 +806,126 @@
       if (category === 'appetizer') {
         return `
         <div class="item-frame">
-          <div class="ITEM">
-            <div class="item-name">
-              <div class="text-wrapper-5">Smoked Catfish Dip</div>
-            </div>
-          </div>
-          <div class="ITEM-2">
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="1">
+            <input type="hidden" name="TableID" value="1">  
+            <button class="ITEM">
+              <div class="item-name">
+                <div class="text-wrapper-5">Smoked Catfish Dip</div>
+              </div>
+            </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="2">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-2">
             <div class="item-name">
               <div class="text-wrapper-5">Fried Catfish Tacos</div>
             </div>
-          </div>
-          <div class="ITEM-3">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="3">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-3">
             <div class="item-name">
               <div class="text-wrapper-5">Crawfish Popper</div>
             </div>
-          </div>
-          <div class="ITEM-4">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="4">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-4">
             <div class="item-name">
               <div class="text-wrapper-5">Crawfish Cakes</div>
             </div>
-          </div>
-          <div class="ITEM-5">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="5">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-5">
             <div class="item-name">
               <div class="text-wrapper-5">Shrimp Remoulade</div>
             </div>
-          </div>
-          <div class="ITEM-6">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="6">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-6">
             <div class="item-name">
               <div class="text-wrapper-5">Peel & Eat Boiled Shrimp</div>
             </div>
-          </div>
-          <div class="ITEM-7">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="7">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-7">
             <div class="item-name">
               <div class="text-wrapper-5">Barbequed Oysters</div>
-            </div>>
-          </div>
-          <div class="ITEM-8">
+            </div>
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="8">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-8">
             <div class="item-name">
               <div class="text-wrapper-5">Italian Oysters</div>
             </div>
-          </div>
-          <div class="ITEM-9">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="9">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-9">
             <div class="item-name">
               <div class="text-wrapper-5">Fried Alligator Bites</div>
             </div>
-          </div>
-          <div class="ITEM-10">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="10">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-10">
             <div class="item-name">
               <div class="text-wrapper-5">Duck Quesadillas</div>
             </div>
-          </div>
-          <div class="ITEM-11">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="11">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-11">
             <div class="item-name">
               <div class="text-wrapper-5">Stuffed Mushrooms</div>
             </div>
-          </div>
-          <div class="ITEM-12">
+          </button>
+          </form>
+          <form method="POST" action="{% url 'Server_Ordering' %}">
+            {% csrf_token %}
+            <input type="hidden" name="MenuItemID" value="12">
+            <input type="hidden" name="TableID" value="1">  
+          <button class="ITEM-12">
             <div class="item-name">
               <div class="text-wrapper-5">Crispy Fried Onion Rings</div>
             </div>
-          </div>
+          </button>
+          </form>
         </div>
         <div class="top-frame">
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
