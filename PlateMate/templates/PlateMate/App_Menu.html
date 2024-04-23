@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="globals.css" type="text/css" />
+  <link rel="stylesheet" href="styleguide.css" type="text/css" />
+  <link rel="stylesheet" href="customer_style.css" type="text/css" />
+</head>
+<style>
+  .MENU {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .MENU .div {
+    background-color: #ffffff;
+    width: 1438px;
+    height: 1006px;
+    position: relative;
+  }
+
+  .MENU .MENU-ITEMS {
+    position: absolute;
+    width: 1044px;
+    height: 1006px;
+    top: 0;
+    left: 394px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .item-frame {
+    position: absolute;
+    width: 1045px;
+    height: 724px;
+    top: 278px;
+    left: 0;
+    background-color: #ffffff;
+    overflow-y: scroll;
+  }
+
+  .MENU .ITEM {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 13px;
+    left: 13px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .item-image {
+    display: flex;
+    width: 218px;
+    height: 124px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    background-color: #000000;
+  }
+
+  .MENU .text-wrapper {
+    position: relative;
+    width: 218px;
+    height: 101px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .item-name {
+    position: absolute;
+    width: 218px;
+    height: 94px;
+    top: 150px;
+    left: 12px;
+    border-radius: 10px;
+  }
+
+  .MENU .text-wrapper-2 {
+    position: absolute;
+    width: 200px;
+    height: 29px;
+    top: 64px;
+    left: 10px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: right;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+
+  .MENU .text-wrapper-3 {
+    position: absolute;
+    width: 200px;
+    height: 65px;
+    top: -1px;
+    left: 10px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .ITEM-2 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 13px;
+    left: 272px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-3 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 13px;
+    left: 532px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-4 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 13px;
+    left: 791px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-5 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 302px;
+    left: 12px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .text-wrapper-4 {
+    position: relative;
+    width: 218px;
+    height: 124px;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .ITEM-6 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 302px;
+    left: 272px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-7 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 302px;
+    left: 532px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-8 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 302px;
+    left: 791px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-9 {
+    left: 791px;
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 591px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-10 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 591px;
+    left: 12px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-11 {
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 591px;
+    left: 273px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .ITEM-12 {
+    left: 532px;
+    position: absolute;
+    width: 242px;
+    height: 266px;
+    top: 591px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .top-frame {
+    position: absolute;
+    width: 1044px;
+    height: 278px;
+    top: 0;
+    left: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: #000000;
+  }
+
+  .MENU .back-button {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    background-color: #c02c2c;
+    border-radius: 25px;
+  }
+
+  .MENU .back-button-2 {
+    position: relative;
+    width: 43px;
+    height: 42px;
+    margin-top: -2px;
+    margin-left: -1.5px;
+    margin-right: -1.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .ai-chat {
+    display: flex;
+    width: 71px;
+    height: 49px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 5px;
+    left: 823px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .AI-CHAT {
+    position: absolute;
+    width: fit-content;
+    margin-top: -0.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+   /* Popup container */
+   .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  /* AI chat area */
+  .chat-area {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  /* AI message */
+  .ai-message {
+    background-color: #b2dff5;
+    text-align: left;
+    margin-right: 50%;
+  }
+
+  /* User message */
+  .user-message {
+    background-color: #e2f7cb;
+    text-align: right;
+    margin-left: 50%;
+  }
+
+  /* Input field */
+  .input-field {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .MENU .call-server {
+    display: flex;
+    width: 71px;
+    height: 49px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 5px;
+    left: 906px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .CALL {
+    position: absolute;
+    width: fit-content;
+    margin-top: -0.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .order-banner {
+    display: flex;
+    width: 977px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 62px;
+    left: 30px;
+    background-color: #c02c2c;
+  }
+
+  .MENU .text-wrapper-5 {
+    position: relative;
+    width: fit-content;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .appetizers {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 12px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .kids-sides {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 429px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .entrees {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 220px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .dessert {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 638px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .table-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 7px;
+    left: 989px;
+    background-color: #c02c2c;
+    border-radius: 25px;
+  }
+
+  .MENU .text-wrapper-6 {
+    position: relative;
+    width: 44px;
+    height: 42px;
+    margin-top: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .drinks {
+    display: flex;
+    width: 186px;
+    height: 132px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 132px;
+    left: 847px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .SIDE-PANNEL {
+    position: absolute;
+    width: 394px;
+    height: 1006px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .COMPANY-NAME {
+    position: absolute;
+    width: 299px;
+    height: 121px;
+    top: 130px;
+    left: 47px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .middendorf-s {
+    position: absolute;
+    width: 298px;
+    height: 120px;
+    top: 40px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .MENU-LINK {
+    position: absolute;
+    width: 212px;
+    height: 98px;
+    top: 345px;
+    left: 90px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .MENU .text-wrapper-7 {
+    position: absolute;
+    width: 214px;
+    height: 98px;
+    top: 30px;
+    left: -1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .ABOUT-US {
+    position: absolute;
+    width: 212px;
+    height: 98px;
+    top: 486px;
+    left: 90px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .text-wrapper-8 {
+    position: absolute;
+    width: 209px;
+    height: 94px;
+    top: 30px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .ORDER {
+    position: absolute;
+    width: 212px;
+    height: 103px;
+    top: 627px;
+    left: 91px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .text-wrapper-9 {
+    position: absolute;
+    width: 210px;
+    height: 102px;
+    top: 30px;
+    left: 1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .LOGO {
+    height: 73px;
+    top: 23px;
+    left: 21px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 100px;
+  }
+
+  .MENU .text-wrapper-10 {
+    height: 72px;
+    top: 17px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 100px;
+  }
+
+  .MENU .TIME {
+    top: 23px;
+    left: 273px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 100px;
+    height: 73px;
+  }   
+
+
+  .MENU .text-wrapper-11 {
+    top: -1px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 77px;
+    height: 39px;
+  }
+
+  .MENU .PAY-BUTTON {
+    position: absolute;
+    width: 89px;
+    height: 77px;
+    top: 773px;
+    left: 89px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MENU .text-wrapper-12 {
+    position: absolute;
+    width: 87px;
+    height: 75px;
+    top: 20px;
+    left: 1px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .MENU .STATUS-BUTTON {
+    position: absolute;
+    width: 89px;
+    height: 77px;
+    top: 773px;
+    left: 211px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .text-wrapper-13 {
+    position: absolute;
+    width: 86px;
+    height: 76px;
+    top: 20px;
+    left: 2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  #txt {
+    font-family: "Inter", Helvetica;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 3.5em;
+   }
+
+
+  /* Popup container */
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  /* AI chat area */
+  .chat-area {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  /* AI message */
+  .ai-message {
+    background-color: #b2dff5;
+    text-align: left;
+    margin-right: 50%;
+  }
+
+  /* User message */
+  .user-message {
+    background-color: #e2f7cb;
+    text-align: right;
+    margin-left: 50%;
+  }
+
+  /* Input field */
+  .input-field {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+</style>
+
+<body>
+  <div class="MENU">
+    <div class="div">
+      <div class="MENU-ITEMS">
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$8.75</div>
+              <div class="text-wrapper-3">Smoked Catfish Dip</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$12.50</div>
+              <div class="text-wrapper-3">Fried Catfish Tacos</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$10.75</div>
+              <div class="text-wrapper-3">Crawfish Popper</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$10.25</div>
+              <div class="text-wrapper-3">Crawfish Cakes</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$9.50</div>
+              <div class="text-wrapper-3">Shrimp Remoulade</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$11.75</div>
+              <div class="text-wrapper-3">Peel & Eat Boiled Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-7">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$11.75</div>
+              <div class="text-wrapper-3">Barbequed Oysters</div>
+            </div>
+          </div>
+          <div class="ITEM-8">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$11.75</div>
+              <div class="text-wrapper-3">Italian Oysters</div>
+            </div>
+          </div>
+          <div class="ITEM-9">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$11.75</div>
+              <div class="text-wrapper-3">Fried Alligator Bites</div>
+            </div>
+          </div>
+          <div class="ITEM-10">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$9.50</div>
+              <div class="text-wrapper-3">Duck Quesadillas</div>
+            </div>
+          </div>
+          <div class="ITEM-11">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$9.75</div>
+              <div class="text-wrapper-3">Stuffed Mushrooms</div>
+            </div>
+          </div>
+          <div class="ITEM-12">
+            <div class="item-image">
+              <div class="text-wrapper">Item Image</div>
+            </div>
+            <div class="item-name">
+              <div class="text-wrapper-2">$8.95</div>
+              <div class="text-wrapper-3">Crispy Fried Onion Rings</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+          <button class="back-button" onclick="goToHome()">
+            <div class="back-button-2">&lt;</div>
+          </button>
+          <button class="ai-chat">
+            <div class="AI-CHAT">AI<br />CHAT</div>
+          </button>
+          <div class="popup-container" id="popupContainer">
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
+            </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
+  
+          <script>
+            function togglePopup() {
+              var popup = document.getElementById('popupContainer');
+              if (popup.style.display === 'none') {
+                popup.style.display = 'block';
+              } else {
+                popup.style.display = 'none';
+              }
+            }
+  
+            function addMessage(sender, content) {
+              var chatArea = document.getElementById('chatArea');
+              var messageElement = document.createElement('div');
+              messageElement.textContent = content;
+              messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+              chatArea.appendChild(messageElement);
+              chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+            }
+  
+            function sendMessage(event) {
+              if (event.keyCode === 13) { // Enter key
+                var userInput = document.getElementById('userQuery');
+                var message = userInput.value.trim();
+                if (message !== '') {
+                  addMessage('user', message);
+                  userInput.value = ''; // Clear the input field
+                  callChatFunction(message); // Call the chat function with the user's message
+                }
+              }
+            }
+  
+            // Sample AI function (replace with your actual AI function)
+            function callChatFunction(query) {
+              $.ajax({
+                url: "{% url 'chat' %}",
+                type: "GET",
+                data: { query: query },
+                success: function (data) {
+                  addMessage('ai', data.response);
+                },
+                error: function (xhr, status, error) {
+                  console.error('Error: ' + error);
+                }
+              });
+            }
+          </script>
+          
+          <button class="call-server">
+            <div class="CALL">CALL</div>
+          </button>
+          <div class="order-banner">
+            <div class="text-wrapper-5">Menu Items</div>
+          </div>
+          <button class="appetizers" onclick="goToApps()" ;">
+            <div class="text-wrapper-5">Appetizers</div>
+          </button>
+          <button class="entrees" onclick="goToEntree()" ;">
+            <div class="text-wrapper-5">Entrees</div>
+          </button>
+          <button class="drinks" onclick="goToDrink()" ;">
+            <div class="text-wrapper-5">Drinks</div>
+          </button>
+          <button class="kids-sides" onclick="goToKids_Sides()" ;">
+            <div class="text-wrapper-5">Kids/Sides</div>
+          </button>
+          <button class="dessert" onclick="goToDessert()" ;">
+            <div class="text-wrapper-5">Dessert</div>
+          </button>
+          <div class="table-num">
+            <div class="text-wrapper-6">1</div>
+          </div>
+        </div>
+      </div>
+      <div class="SIDE-PANNEL">
+        <div class="COMPANY-NAME">
+          <div class="middendorf-s">Middendorf’s</div>
+        </div>
+
+        <button class="MENU-LINK" onclick="goToHome()">
+          <div class="text-wrapper-7">HOME</div>
+        </button>
+
+        <!ABOUT_US SCREEN BUTTON LINK>
+        <button class="ABOUT-US" onclick="goToAbout()">
+          <div class="text-wrapper-8">ABOUT US</div>
+        </button>
+
+        <!ORDER SCREEN BUTTON LINK>
+        <button class="ORDER" onclick="goToOrder()">
+          <div class="text-wrapper-9">ORDER</div>
+        </button>
+
+        <div class="LOGO">
+            <div class="text-wrapper-10">Logo</div>
+        </div>
+
+        <body onload="startTime()">
+          <div class="TIME" id="txt">	   
+        </div>
+
+
+        <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';">
+          <div class="text-wrapper-12">PAY</div>
+        </button>
+        <button class="STATUS-BUTTON">
+          <div class="text-wrapper-12">STAT</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePopup() {
+      var popup = document.getElementById('popupContainer');
+      if (popup.style.display === 'none') {
+        popup.style.display = 'block';
+      } else {
+        popup.style.display = 'none';
+      }
+    }
+
+    function addMessage(sender, content) {
+      var chatArea = document.getElementById('chatArea');
+      var messageElement = document.createElement('div');
+      messageElement.textContent = content;
+      messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+      chatArea.appendChild(messageElement);
+      chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+    }
+
+    function sendMessage(event) {
+      if (event.keyCode === 13) { // Enter key
+        var userInput = document.getElementById('userQuery');
+        var message = userInput.value.trim();
+        if (message !== '') {
+          addMessage('user', message);
+          userInput.value = ''; // Clear the input field
+          callChatFunction(message); // Call the chat function with the user's message
+        }
+      }
+    }
+
+    // Sample AI function (replace with your actual AI function)
+    function callChatFunction(query) {
+      $.ajax({
+        url: "{% url 'chat' %}",
+        type: "GET",
+        data: { query: query },
+        success: function (data) {
+          addMessage('ai', data.response);
+        },
+        error: function (xhr, status, error) {
+          console.error('Error: ' + error);
+        }
+      });
+    }
+  </script>
+
+
+  <script>
+    function startTime() {
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      let session = "AM";
+
+      if(h == 0){
+        h = 12;
+      }
+
+      if(h > 12){
+        h -= 12;
+        session = "PM";
+      }
+
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('txt').innerHTML = h + ":" + m + " " + session;
+      setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
+    </script>
+
+
+  <script>
+    function goToHome() {
+      window.location.href = "{% url 'Customer_Home' %}";
+    }
+    function goToAbout() {
+      window.location.href = "{% url 'About_Us' %}";
+    }
+    function goToOrder() {
+      window.location.href = "{% url 'Menu_Ordering' %}";
+    }
+    function goToApps() {
+      window.location.href = "{% url 'App_Menu' %}";
+    }
+    function goToEntree() {
+      window.location.href = "{% url 'Entree_Menu' %}";
+    }
+    function goToKids_Sides() {
+      window.location.href = "{% url 'Kids_Sides_Menu' %}";
+    }
+    function goToDessert() {
+      window.location.href = "{% url 'Dessert_Menu' %}";
+    }
+    function goToDrink() {
+      window.location.href = "{% url 'Drink_Menu' %}";
+    }
+  </script>
+</body>
+</html>

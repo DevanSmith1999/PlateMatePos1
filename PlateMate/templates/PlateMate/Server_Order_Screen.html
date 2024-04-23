@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+</head>
+<style>
+  .SERVER {
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 768;
+  }
+
+  .SERVER .div {
+    background-color: #ffffff;
+    width: 100%;
+    height: 95%;
+    position: relative;
+  }
+
+  .SERVER .SIDE-PANNEL {
+    position: absolute;
+    width: 29%;
+    height: 98vh;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .recipt {
+    position: absolute;
+    width: 95%;
+    height: 891px;
+    top: 76px;
+    left: 7px;
+    background-color: #9c9fa0;
+    overflow: hidden;
+    border: 3px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .recipt-info-title {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: #000000;
+  }
+
+  .SERVER .QT-NAME-PRICE {
+    position: relative;
+    width: 100%;
+    height: 53px;
+    margin-top: 1px;
+    margin-bottom: -2px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .total-price {
+    display: flex;
+    width: 100%;
+    height: 118px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 733px;
+    left: 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-color: #000000;
+  }
+
+  .SERVER .subtotal-amount-tax {
+    position: relative;
+    width: 560px;
+    left: 6px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #f5f5f5;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .order {
+    display: flex;
+    width: 75px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 1px 0px;
+    position: absolute;
+    top: 770px;
+    left: 400px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper {
+    position: relative;
+    margin-top: -0.5px;
+    width: fit-content;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .recipt-wrapper {
+    display: flex;
+    width: 88px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 851px;
+    left: 216px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -8px;
+    margin-bottom: -6px;
+    color: #000000;
+    font-size: 24px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .split {
+    display: flex;
+    width: 88px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 851px;
+    left: 80px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .SERVER .pay {
+    display: flex;
+    width: 88px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 851px;
+    left: 352px;
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper-3 {
+    position: relative;
+    width: fit-content;
+    margin-top: -8px;
+    margin-bottom: -6px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .table-num {
+    display: flex;
+    width: 108px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 11px;
+    left: 390px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper-4 {
+    position: relative;
+    width: fit-content;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .check-num {
+    display: flex;
+    width: 108px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 11px;
+    left: 16px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+
+  .SERVER .ORDER-HERE {
+    position: absolute;
+    width: 71%;
+    height: 98vh;
+    top: 0px;
+    left: 29%;
+    background-color: #ffffff;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .item-frame {
+    position: absolute;
+    width: 100%;
+    height: 67vh;
+    top: 330px;
+    left: 0;
+    background-color: #ffffff;
+  }
+
+  .SERVER .ITEM {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 30px;
+    left: 10px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .item-name {
+    position: relative;
+    width: 218px;
+    height: 94px;
+    top: 39px;
+    left: 12px;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper-5 {
+    position: relative;
+    width: 200px;
+    height: 65px;
+    top: -1px;
+    left: 10px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .ITEM-2 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 30px;
+    left: 262px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-3 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 30px;
+    left: 514px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-4 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 30px;
+    left: 766px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-5 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 30px;
+    left: 1018px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-6 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 240px;
+    left: 10px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-7 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 240px;
+    left: 262px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-8 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 240px;
+    left: 514px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-9 {
+    left: 766px;
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 240px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-10 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 240px;
+    left: 1018px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-11 {
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 450px;
+    left: 10px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .ITEM-12 {
+    left: 262px;
+    position: absolute;
+    width: 242px;
+    height: 172px;
+    top: 450px;
+    background-color: #2d7ac0;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #000000;
+  }
+
+  .SERVER .top-frame {
+    position: absolute;
+    width: 100%;
+    height: 33vh;
+    top: 0;
+    left: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: #000000;
+  }
+
+
+  .SERVER .appetizers {
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 10px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .kids {
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 430px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+  .SERVER .sides{
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 640px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .entrees {
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 220px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+
+  .SERVER .dessert {
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 850px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .drinks {
+    display: flex;
+    width: 200px;
+    height: 177px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 1060px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+
+  .SERVER .server-name {
+    display: flex;
+    width: 145px;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 11px;
+    left: 1145px;
+    background-color: #9c9fa0;
+    border-radius: 10px;
+  }
+  .SERVER .back-button {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    top: 11px;
+    left: 15px;
+    background-color: #9c9fa0;
+    border-radius: 25px;
+  }
+  
+  .SERVER .back-button-2 {
+    position: relative;
+    width: 43px;
+    height: 42px;
+    margin-top: -2px;
+    margin-left: -1.5px;
+    margin-right: -1.5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+</style>
+
+<body>
+  <div class="SERVER">
+    <div class="div">
+      <div class="SIDE-PANNEL">
+        <div class="recipt">
+          <div class="recipt-info-title">
+            <div class="QT-NAME-PRICE">
+              QT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE
+              <table style="width: 100%; margin-top: 30px; font-size: 20px; table-layout: fixed;">
+                <tbody>
+                    {% for order in active_orders %}
+                    <tr>
+                      <td style="width: 10%;">{{ order.Quantity }}</td>
+                      <td style="text-align: left; width: 45%;">{{ order.menu_item.Name }}</td>
+                      <td style="width: 25%;">{{ order.menu_item.Price }}</td>
+                      <td>
+                        <form method="post" action="{% url 'server_delete_order_item' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="order_id" value="{{ order.id }}">
+                          <button type="submit"  name="delete">
+                            {% if order.Quantity > 1 %}
+                              x
+                            {% else %}
+                              x
+                            {% endif %}
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="total-price">
+            <div class="subtotal-amount-tax">Subtotal: {{ total_price }}<br />Tax: {{ tax }} <br />Total: {{ totalandtax }} </div>
+          </div>
+          <div class="order">
+            <div class="text-wrapper">
+              <form method="post" action="{% url 'create_order' %}">
+                {% csrf_token %} <button type="submit" name="mark_ordered">Send</button>
+              </form>
+            </div>
+          </div>
+          <div class="recipt-wrapper">
+            <div class="text-wrapper-3">Print</div>
+          </div>
+          <div class="split">
+            <div class="text-wrapper-3">Split</div>
+          </div>
+          <div class="pay">
+            <div class="text-wrapper-3">Pay</div>
+          </div>
+        </div>
+        <div class="table-num">
+          <div class="text-wrapper-4">Table #</div>
+        </div>
+        <div class="check-num">
+          <div class="text-wrapper-4">Check #</div>
+        </div>
+      </div>
+      <div class="ORDER-HERE" id="orderHere">
+        <div class="item-frame">
+          <button class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Smoked Catfish Dip</div>
+            </div>
+          </button>
+          <button class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fried Catfish Tacos</div>
+            </div>
+          </button>
+          <button class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crawfish Popper</div>
+            </div>
+          </button>
+          <button class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crawfish Cakes</div>
+            </div>
+          </button>
+          <button class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">Shrimp Remoulade</div>
+            </div>
+          </button>
+          <button class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Peel & Eat Boiled Shrimp</div>
+            </div>
+          </button>
+          <button class="ITEM-7">
+            <div class="item-name">
+              <div class="text-wrapper-5">Barbequed Oysters</div>
+            </div>
+          </button>
+          <button class="ITEM-8">
+            <div class="item-name">
+              <div class="text-wrapper-5">Italian Oysters</div>
+            </div>
+          </button>
+          <button class="ITEM-9">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fried Alligator Bites</div>
+            </div>
+          </button>
+          <button class="ITEM-10">
+            <div class="item-name">
+              <div class="text-wrapper-5">Duck Quesadillas</div>
+            </div>
+          </button>
+          <button class="ITEM-11">
+            <div class="item-name">
+              <div class="text-wrapper-5">Stuffed Mushrooms</div>
+            </div>
+          </button>
+          <button class="ITEM-12">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crispy Fried Onion Rings</div>
+            </div>
+          </button>
+        </div>
+        <div class="top-frame">
+          <button class="back-button" onclick="window.location.href = 'Customer_Home.html';">
+            <div class="back-button-2">&lt;</div>
+        </button>
+          <button class="appetizers" onclick="showCategory('appetizer');">
+            <div class="text-wrapper-6">Appetizers</div>
+          </button>
+          <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+          <button class="entrees" onclick="showCategory('entree');">
+            <div class="text-wrapper-6">Entrees</div>
+          </button>
+          <button class="dessert" onclick="showCategory('dessert');">
+            <div class="text-wrapper-6">Desserts</div>
+          </button>
+          <button class="drinks" onclick="showCategory('drink');">
+            <div class="text-wrapper-6">Drinks</div>
+          </button>
+          <div class="server-name">
+            <div class="text-wrapper-4">Server</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showCategory(category) {
+      var orderHere = document.getElementById("orderHere");
+      var categoryContent = getCategoryContent(category);
+      orderHere.innerHTML = categoryContent;
+    }
+
+    function getCategoryContent(category) {
+      if (category === 'appetizer') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Smoked Catfish Dip</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fried Catfish Tacos</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crawfish Popper</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crawfish Cakes</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">Shrimp Remoulade</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Peel & Eat Boiled Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-7">
+            <div class="item-name">
+              <div class="text-wrapper-5">Barbequed Oysters</div>
+            </div>>
+          </div>
+          <div class="ITEM-8">
+            <div class="item-name">
+              <div class="text-wrapper-5">Italian Oysters</div>
+            </div>
+          </div>
+          <div class="ITEM-9">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fried Alligator Bites</div>
+            </div>
+          </div>
+          <div class="ITEM-10">
+            <div class="item-name">
+              <div class="text-wrapper-5">Duck Quesadillas</div>
+            </div>
+          </div>
+          <div class="ITEM-11">
+            <div class="item-name">
+              <div class="text-wrapper-5">Stuffed Mushrooms</div>
+            </div>
+          </div>
+          <div class="ITEM-12">
+            <div class="item-name">
+              <div class="text-wrapper-5">Crispy Fried Onion Rings</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      } else if (category === 'entree') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Thin Fried Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Thick Fried Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Bacon Wrapped Broiled Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Broiled Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">One Whole Fried Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Broiled Whole Flounder</div>
+            </div>
+          </div>
+          <div class="ITEM-7">
+            <div class="item-name">
+              <div class="text-wrapper-5">Stuffed Broiled Whole Flounder</div>
+            </div>
+          </div>
+          <div class="ITEM-8">
+            <div class="item-name">
+              <div class="text-wrapper-5">Broiled Salmon Fillet</div>
+            </div>
+          </div>
+          <div class="ITEM-9">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fried Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-10">
+            <div class="item-name">
+              <div class="text-wrapper-5">Broiled Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-11">
+            <div class="item-name">
+              <div class="text-wrapper-5">Broiled Stuffed Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-12">
+            <div class="item-name">
+              <div class="text-wrapper-5">Barbequed Shrimp</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      }  else if (category === 'kids') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Kids Thin Fried Catfish</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Kids Fried Shrimp</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Kids Chicken Tenderloins</div>
+            </div>
+          </div>
+          </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      } else if (category === 'side') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Fries</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Sweet Potato Fries</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Spicy New Potatoes</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Cole Slaw</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">Potato Salad</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Seasonal Vegetables</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      } else if (category === 'dessert') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Banana Bread Pudding with Rum Sauce</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">German Chocolate Cake</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Choclate Lava Cake</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Raising a Ruckus</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">A Little Something Bad</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Whatever Floats Your Boat</div>
+            </div>
+          </div>
+          <div class="ITEM-7">
+            <div class="item-name">
+              <div class="text-wrapper-5">Red Velvet Cheesecake</div>
+            </div>
+          </div>
+          <div class="ITEM-8">
+            <div class="item-name">
+              <div class="text-wrapper-5">White Chocolate Bourbon Pecan Pie</div>
+            </div>
+          </div>
+          <div class="ITEM-9">
+            <div class="item-name">
+              <div class="text-wrapper-5">Key Lime Pie</div>
+            </div>
+          </div>
+          <div class="ITEM-10">
+            <div class="item-name">
+              <div class="text-wrapper-5">Good Old Fashioned Banana Split</div>
+            </div>
+          </div>
+          <div class="ITEM-11">
+            <div class="item-name">
+              <div class="text-wrapper-5">Pinocchio Eis</div>
+            </div>
+          </div>
+          <div class="ITEM-12">
+            <div class="item-name">
+              <div class="text-wrapper-5">Ice Cream - 2 Scoops</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      } else if (category === 'drink') {
+        return `
+        <div class="item-frame">
+          <div class="ITEM">
+            <div class="item-name">
+              <div class="text-wrapper-5">Coca-Cola</div>
+            </div>
+          </div>
+          <div class="ITEM-2">
+            <div class="item-name">
+              <div class="text-wrapper-5">Sprite</div>
+            </div>
+          </div>
+          <div class="ITEM-3">
+            <div class="item-name">
+              <div class="text-wrapper-5">Dr. Pepper</div>
+            </div>
+          </div>
+          <div class="ITEM-4">
+            <div class="item-name">
+              <div class="text-wrapper-5">Barq's Rootbeer</div>
+            </div>
+          </div>
+          <div class="ITEM-5">
+            <div class="item-name">
+              <div class="text-wrapper-5">Coke Zero</div>
+            </div>
+          </div>
+          <div class="ITEM-6">
+            <div class="item-name">
+              <div class="text-wrapper-5">Diet Coke</div>
+            </div>
+          </div>
+          <div class="ITEM-7">
+            <div class="item-name">
+              <div class="text-wrapper-5">Unsweet Tea</div>
+            </div>
+          </div>
+          <div class="ITEM-8">
+            <div class="item-name">
+              <div class="text-wrapper-5">Sweet Tea</div>
+            </div>
+          </div>
+          <div class="ITEM-9">
+            <div class="item-name">
+              <div class="text-wrapper-5">Coffee</div>
+            </div>
+          </div>
+          <div class="ITEM-10">
+            <div class="item-name">
+              <div class="text-wrapper-5">Lemonade</div>
+            </div>
+          </div>
+          <div class="ITEM-11">
+            <div class="item-name">
+              <div class="text-wrapper-5">Half & Half Tea</div>
+            </div>
+          </div>
+          <div class="ITEM-12">
+            <div class="item-name">
+              <div class="text-wrapper-5">Milk</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-frame">
+            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-6">Appetizers</div></button>
+            <button class="kids" onclick="showCategory('kids');">
+            <div class="text-wrapper-6">Kids</div>
+          </button>
+          <button class="sides" onclick="showCategory('side');">
+            <div class="text-wrapper-6">Sides</div>
+          </button>
+            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-6">Entrees</div></button>
+            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-6">Desserts</div></button>
+            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-6">Drinks</div></button>
+            <div class="server-name"><div class="text-wrapper-4">Server</div></div>
+        </div>
+        `;
+      }
+    }
+  </script>
+</body>
+
+</html>
