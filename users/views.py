@@ -7,7 +7,7 @@ from .forms import SignUpForm  # Import your SignupForm from forms.py
 
 @login_required
 def home(request):
- return render(request, "PlateMate/home.html", {})
+ return render(request, "Staff/staff_list.html", {})
 
 def signup(request):
     if request.method == 'POST':
