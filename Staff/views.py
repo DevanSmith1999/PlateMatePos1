@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from django.urls import reverse
 import users
 
+
 def create_position(request):
     if request.method == 'POST':
         form = SubPositionForm(request.POST)
@@ -56,6 +57,7 @@ def delete_subposition(request, pk):
     return redirect('Positions/confirm_delete_subposition', pk=pk)  # Redirect to the confirmation page if GET request
 
 # Views for Staff
+
 def staff_list(request):
     subposition = SubPosition.objects.all()#pylint:disable=no-member
     return render(request, 'Staff/staff_list.html', {'subposition': subposition})

@@ -29,7 +29,7 @@ def home(request):
     '''This is Plate Mate's home landing page'''
     return render(
         request,
-        'PlateMate/home.html'
+        'PlateMate/Manager_home.html'
     )
 
 def Customer_Home(request):
@@ -102,7 +102,7 @@ def Server_Order_Screen(request):
     #handle the order button (Pushes order to Kitchen)
     if request.method == 'POST' and 'mark_ordered' in request.POST:
         print("order button pressed")
-        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
+        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)#pylint:disable=no-member
         return render(request, 'PlateMate/Server_Order_Screen.html', context)
         
     
@@ -112,10 +112,10 @@ def Server_Order_Screen(request):
             table_id = int(request.POST.get('TableID'))                             #*****Currenrly getting table id from form to be updated with table user id!
             
             # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
-            table = Table.objects.get(pk=table_id)
+            table = Table.objects.get(pk=table_id)#pylint:disable=no-member
             
             # Check for existing order with same menu_item_id and TableID
-            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()#pylint:disable=no-member  # Get the first matching order
             
             if existing_order:
                 # Increment quantity of existing order
@@ -132,8 +132,8 @@ def Server_Order_Screen(request):
             
             # Retrive all the data for displaying 
             total_price = 0
-            for order in ActiveOrder.objects.filter(TableID=table_id):
-                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+            for order in ActiveOrder.objects.filter(TableID=table_id):#pylint:disable=no-member
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
                 active_orders.append(order)
                 total_price += order.menu_item.Price * order.Quantity #calc sum of all currently ordered items
             
@@ -150,8 +150,8 @@ def Server_Order_Screen(request):
     else:  # GET request (initial page load)
         table_id = 1
         active_orders = []
-        for order in ActiveOrder.objects.filter(TableID=table_id):
-            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+        for order in ActiveOrder.objects.filter(TableID=table_id):#pylint:disable=no-member
+            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
             active_orders.append(order)
         context['active_orders'] = active_orders
     return render(request, 'PlateMate/Server_Order_Screen.html', context)
@@ -160,7 +160,7 @@ def server_delete_order_item(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
         try:
-            order = ActiveOrder.objects.get(pk=order_id)
+            order = ActiveOrder.objects.get(pk=order_id)#pylint:disable=no-member
             if order.Quantity > 1:
                 order.Quantity -= 1
                 order.save()
@@ -168,10 +168,10 @@ def server_delete_order_item(request):
                 order.delete()
 
             # Recalculate total price for all active orders after deletion/modification
-            active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+            active_orders = ActiveOrder.objects.filter(TableID=1)#pylint:disable=no-member  # Assuming table_id
             total_price = 0
             for order in active_orders:
-                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
                 total_price += order.menu_item.Price * order.Quantity
             tax = float(total_price) * 0.0445
             totalandtax = f"{float(total_price) + tax:.2f}"
@@ -181,7 +181,7 @@ def server_delete_order_item(request):
             context = {'active_orders': active_orders, 'total_price': total_price,'tax': tax, 'totalandtax': totalandtax}
             return render(request, 'PlateMate/Server_Order_Screen.html', context)
 
-        except (ActiveOrder.DoesNotExist, ValueError):
+        except (ActiveOrder.DoesNotExist, ValueError):#pylint:disable=no-member
             # Handle errors
             pass
     return redirect('create_order')  # Redirect back even on GET requests (optional)
@@ -523,7 +523,7 @@ def create_order(request):
     #handle the order button (Pushes order to Kitchen)
     if request.method == 'POST' and 'mark_ordered' in request.POST:
         print("order button pressed")
-        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
+        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)#pylint:disable=no-member
         return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
         
     
@@ -533,10 +533,10 @@ def create_order(request):
             table_id = int(request.POST.get('TableID'))                             #*****Currenrly getting table id from form to be updated with table user id!
             
             # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
-            table = Table.objects.get(pk=table_id)
+            table = Table.objects.get(pk=table_id)#pylint:disable=no-member
             
             # Check for existing order with same menu_item_id and TableID
-            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()#pylint:disable=no-member  # Get the first matching order
             
             if existing_order:
                 # Increment quantity of existing order
@@ -554,8 +554,8 @@ def create_order(request):
             
             # Retrive all the data for displaying 
             total_price = 0
-            for order in ActiveOrder.objects.filter(TableID=table_id, Ordered = 0):
-                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+            for order in ActiveOrder.objects.filter(TableID=table_id, Ordered = 0):#pylint:disable=no-member
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
                 active_orders.append(order)
                 total_price += order.menu_item.Price * order.Quantity #calc sum of all currently ordered items
             
@@ -572,8 +572,8 @@ def create_order(request):
     else:  # GET request (initial page load)
         table_id = 1
         active_orders = []
-        for order in ActiveOrder.objects.filter(TableID=table_id):
-            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+        for order in ActiveOrder.objects.filter(TableID=table_id):#pylint:disable=no-member
+            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
             active_orders.append(order)
         context['active_orders'] = active_orders
 
@@ -583,7 +583,7 @@ def delete_order_item(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
         try:
-            order = ActiveOrder.objects.get(pk=order_id)
+            order = ActiveOrder.objects.get(pk=order_id)#pylint:disable=no-member
             if order.Quantity > 1:
                 order.Quantity -= 1
                 order.save()
@@ -591,17 +591,17 @@ def delete_order_item(request):
                 order.delete()
 
             # Recalculate total price for all active orders after deletion/modification
-            active_orders = ActiveOrder.objects.filter(TableID=1, Ordered = 0)  # Assuming table_id
+            active_orders = ActiveOrder.objects.filter(TableID=1, Ordered = 0)#pylint:disable=no-member  # Assuming table_id
             total_price = 0
             for order in active_orders:
-                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)#pylint:disable=no-member
                 total_price += order.menu_item.Price * order.Quantity
 
             # Update context with the new total price
             context = {'active_orders': active_orders, 'total_price': total_price}
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
 
-        except (ActiveOrder.DoesNotExist, ValueError):
+        except (ActiveOrder.DoesNotExist, ValueError):#pylint:disable=no-member
             # Handle errors
             pass
     return redirect('create_order')  # Redirect back even on GET requests (optional)
