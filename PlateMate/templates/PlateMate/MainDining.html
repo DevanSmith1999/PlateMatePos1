@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Floor Plan Viewer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(248, 245, 245);
+            margin: 0;
+            padding: 20px;
+        }
+        #content {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+
+        #navbar {
+            width: 100%;
+            display: block;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        #canvas {
+            flex-grow:1; /* Take up remaining space */
+            height: 90vh;
+            background-color: darkgray;
+            border: 1px solid darkgrey;
+            position: relative;
+            z-index: 0;
+        }
+        .table, .table-text {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid black; /* Black border for tables */
+        }
+        .table-text {
+            border: 2px solid black; /* No border for text boxes */
+            background-color: transparent;
+        }
+        .table-input {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: none;
+            background-color: transparent;
+            text-align: center;
+            pointer-events: none; /* To prevent input from blocking drag and drop */
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(247, 243, 243);
+        }
+        .rectangle {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(247, 243, 243);
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(247, 243, 243);
+        }
+        #mainDiningText {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(11, 220, 247);
+            margin-bottom: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .occupied {
+            background-color: yellow;
+        }
+        .sidebar {
+            width: 25vw;
+            height: 85vh;
+            background-color: #838080;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        li.table-item {
+            list-style-type: none;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        li.table-item:hover {
+            background-color: #e9f5f5;
+        }
+
+        li.table-item a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        li.table-item a:hover {
+            color: #0056b3;
+        }
+
+        li.table-item:empty::before {
+            content: "No occupied tables.";
+            color: #aaa;
+        }
+
+    </style>
+</head>
+<body>
+    {% include 'Server_navbar.html' %}
+    <div id="content">
+        <div class="sidebar">
+            <div class="sidebar-title">Occupied Tables</div>
+            <ul id="occupied-tables-list">
+                <!-- Occupied tables will be appended here -->
+            </ul>
+        </div>        
+        <div id="mainDiningText">Main Dining</div>
+        <div id="canvas">
+            <!-- Tables and text boxes will be appended here -->
+        </div>
+    </div>
+
+    <script>
+        let tables = [];
+        let textboxes = [];
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        function getStaffSubposition(staffNumber) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `/get-staff-subpositions/${staffNumber}/`,
+                    method: 'GET',
+                    success: function(response) {
+                        resolve(response); // Return the list of subposition_ids
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        reject(errorThrown);
+                    }
+                });
+            });
+        }
+        function isManager(subpositionIds) {
+            return subpositionIds.includes("24") || subpositionIds.includes(24);
+        }
+        function getStaffName(staffNumber) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: `/get-staff-name/${staffNumber}/`,
+                    method: 'GET',
+                    success: function(response) {
+                        resolve(response.first_name);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        reject(errorThrown);
+                    }
+                });
+            });
+        }
+
+        $(document).ready(function() {
+            const floor_plan_name = "Main";
+            const originalCanvasWidth = 683;
+            const originalCanvasHeight = 600;
+            const newCanvasWidth = $('#canvas').width();
+            const newCanvasHeight = $('#canvas').height();
+
+            const scaleX = newCanvasWidth / originalCanvasWidth;
+            const scaleY = newCanvasHeight / originalCanvasHeight;
+
+            $.ajax({
+                url: `/get-floor-plan/${floor_plan_name}/`,
+                method: 'GET',
+                success: function(response) {
+                    console.log("Floor plan data:", response);
+                    tables = response.tables || [];
+                    textboxes = response.textboxes || [];
+
+                    console.log("Received tables data:", tables);
+                    console.log("Received text boxes data:", textboxes);
+
+                    populateOccupiedTables();
+
+                    renderElements();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Error:", textStatus, errorThrown);
+                }
+            });
+
+            function renderElements() {
+                if (!Array.isArray(tables) || !Array.isArray(textboxes)) {
+                    console.log("Tables or text boxes data is not an array.");
+                    return;
+                }
+
+                tables.forEach(table => {
+                    const { table_number, isOccupiedBy, shape, x_position, y_position, width, height } = table;
+                    const scaledX = x_position * scaleX;
+                    const scaledY = y_position * scaleY;
+                    const scaledWidth = width * scaleX;
+                    const scaledHeight = height * scaleY;
+
+                    let shapeClass = shape;
+                    if (shape === 'square') {
+                        shapeClass = 'square';
+                    }
+                    const tableClass = isOccupiedBy ? 'occupied' : '';
+                    const tableElement = `
+                        <a href="{% url 'Server_Ordering'%}" class="table-link" id="table-link-${table_number}" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
+                            <div id="table-${table_number}" class="table ${shapeClass} ${tableClass}" style="width: 100%; height: 100%;">
+                                <input type="text" class="table-input" value="${table_number}" readonly />
+                            </div>
+                        </a>`;
+                    $("#canvas").append(tableElement);
+                });
+
+                textboxes.forEach(textbox => {
+                    const { id, x_position, y_position, width, height, content } = textbox;
+                    const scaledX = x_position * scaleX;
+                    const scaledY = y_position * scaleY;
+                    const scaledWidth = width * scaleX;
+                    const scaledHeight = height * scaleY;
+
+                    const element = `
+                        <div id="text-box-${id}" class="table-text" style="position: absolute; top: ${scaledY}px; left: ${scaledX}px; width: ${scaledWidth}px; height: ${scaledHeight}px;">
+                            <input type="text" class="table-input" value="${content}" readonly />
+                        </div>`;
+                    $("#canvas").append(element);
+                });
+            }
+
+            function populateOccupiedTables() {
+                console.log("Populating occupied tables...");
+
+                const staffNumber = sessionStorage.getItem('staffNumber');
+                const occupiedTables = tables.filter(table => table.isOccupiedBy === staffNumber);
+                const staffName=getStaffName(staffNumber);
+
+                const $occupiedTablesList = $('#occupied-tables-list');
+                $occupiedTablesList.empty(); 
+
+                occupiedTables.forEach(table => {
+                getStaffName(table.isOccupiedBy) // Fetch staff name asynchronously
+                .then(staffName => {
+                    const tableElement = `
+                        <li class="table-item">
+                            <a href="#" class="table-number">${table.table_number}</a> - Occupied by <span class="occupied-by">${staffName}</span>
+                        </li>
+                    `;
+                    $occupiedTablesList.append(tableElement);
+                })
+                .catch(error => {
+                    console.error("Error fetching staff name:", error);
+                    const tableElement = `
+                        <li class="table-item">
+                            <a href="#" class="table-number">${table.table_number}</a> - Occupied by <span class="occupied-by">Unknown</span>
+                        </li>
+                    `;
+                    $occupiedTablesList.append(tableElement);
+                });
+            });
+                console.log(staffName)
+                console.log("Populated occupied tables:", $occupiedTablesList.html());
+            }
+        
+
+            $("#canvas").on('click', '.table', function(event) {
+                event.preventDefault();
+                const id = $(this).attr("id").split('-')[1];
+                const staffNumber = sessionStorage.getItem('staffNumber');
+                
+                const clickedTable = tables.find(table => table.table_number == id);
+                
+                if (clickedTable) {
+                    getStaffName(staffNumber)
+
+                    .then(staffName => {
+                        getStaffSubposition(staffNumber)
+                        .then(subpositionId => {
+                            if (isManager(subpositionId)) {
+                                console.log(staffName)
+                                const confirmMessage = `Table is currently in use by ${staffName}. Are you sure you want to edit?`;
+                                
+                                if (confirm(confirmMessage)) {
+                                    const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                    window.location.href = redirectUrl;
+                                }
+                            } else if (clickedTable.isOccupiedBy && clickedTable.isOccupiedBy !== staffNumber) {
+                                alert("Sorry, table is currently in use.");
+                            } else if (clickedTable.isOccupiedBy === staffNumber) {
+                                const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                window.location.href = redirectUrl;
+                            } else {
+                                clickedTable.isOccupiedBy = staffNumber;
+
+                                const csrftoken = getCookie('csrftoken');
+
+                                $.ajax({
+                                    url: `/update-table/${id}/`,
+                                    method: 'PUT',
+                                    data: JSON.stringify(clickedTable),
+                                    contentType: 'application/json',
+                                    headers: {
+                                        'X-CSRFToken': csrftoken
+                                    },
+                                    success: function(response) {
+                                        console.log("Table data updated successfully:", response);
+                                        $(`#table-${id}`).addClass('occupied');
+                                    },
+                                    error: function(jqXHR, textStatus, errorThrown) {
+                                        console.log("Error updating table data:", textStatus, errorThrown);
+                                    }
+                                });
+                                const redirectUrl = $(`#table-link-${id}`).attr('href');
+                                window.location.href = redirectUrl;
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.log("Error fetching staff name:", error);
+                    });
+                } else {
+                    console.log("Table not found.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

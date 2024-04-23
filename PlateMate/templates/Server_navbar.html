@@ -1,0 +1,53 @@
+{% load static %}
+
+<style>
+   .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center; /* Align items vertically */
+    }
+
+    .navbar-brand img {
+        width: 65px; /* Reduced width */
+        height: auto;
+        margin-right: 10px; /* Space between logo and text */
+    }
+
+    .navbar-links {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-links a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 20px;
+        transition: color 0.3s;
+        font-size: larger;
+    }
+
+    .navbar-links a:hover {
+        color: #f8f9fa; /* lighter shade of white */
+    }
+</style>
+
+<div class="navbar">
+    <div class="navbar-brand">
+        <img src="{% static 'img/Logo.png' %}" alt="Logo">
+        PlateMate
+    </div>
+    <div class="navbar-links">
+        <a href="{% url 'server_login' %}">⇄ Switch User</a>
+    </div>
+</div>

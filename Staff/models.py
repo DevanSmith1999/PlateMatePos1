@@ -6,6 +6,7 @@ class Position(models.Model):
     POSITION_CHOICES = (
         ('FOH', 'FOH'),
         ('BOH', 'BOH'),
+        ('Manager','Manager')
     )
     name = models.CharField(max_length=100, choices=POSITION_CHOICES)
 
