@@ -61,14 +61,15 @@
   }
   
   .ABOUT-US .TIME {
-    top: 28px;
-    left: 293px;
+    top: 23px;
+    left: 273px;
     background-color: #c02c2c;
     border-radius: 10px;
     position: absolute;
-    width: 77px;
-    height: 39px;
-  }
+    width: 100px;
+    height: 73px;
+  }   
+
   
   .ABOUT-US .text-wrapper-10 {
     top: -1px;
@@ -422,7 +423,8 @@
         background-color: #c02c2c;
         border-radius: 10px;
       }
-  
+
+    
   .ABOUT-US .text-wrapper-9 {
     width: 995px;
         height: 120px;
@@ -437,13 +439,104 @@
         letter-spacing: 0;
         line-height: normal;
       }
+
+      .MAIN .AI-CHAT {
+        position: absolute;
+        width: 87px;
+        height: 86px;
+        top: 885px;
+        left: 772px;
+        background-color: #c02c2c;
+        border-radius: 10px;
+      }
+    
+      .MAIN .AI-chat {
+        position: absolute;
+        width: 80px;
+        height: 82px;
+        top: 1px;
+        left: 4px;
+        font-family: "Inter", Helvetica;
+        font-weight: 400;
+        color: #ffffff;
+        font-size: 32px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+      }
+
+      #txt {
+        font-family: "Inter", Helvetica;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        line-height: 3.5em;
+       }
+    
+
+
+      /* Popup container */
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  /* AI chat area */
+  .chat-area {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  /* AI message */
+  .ai-message {
+    background-color: #b2dff5;
+    text-align: left;
+    margin-right: 50%;
+  }
+
+  /* User message */
+  .user-message {
+    background-color: #e2f7cb;
+    text-align: right;
+    margin-left: 50%;
+  }
+
+  /* Input field */
+  .input-field {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
   </style>
   <body>
     <div class="ABOUT-US">
       <div class="div">
       <div class="SIDE-PANNEL">
         <div class="LOGO"><div class="text-wrapper">Logo</div></div>
-        <div class="TIME"><div class="text-wrapper-10">TIME</div></div>
+        <body onload="startTime()">
+          <div class="TIME" id="txt">	   
+        </div>
         <button class="STATUS-BUTTON"><div class="text-wrapper-2">STAT</div></button>
         <button class="PAY-BUTTON" onclick="goToPay()"><div class="text-wrapper-3">PAY</div></button>
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
@@ -524,6 +617,86 @@
   </div>
   </body>
 </html>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById('popupContainer');
+    if (popup.style.display === 'none') {
+      popup.style.display = 'block';
+    } else {
+      popup.style.display = 'none';
+    }
+  }
+
+  function addMessage(sender, content) {
+    var chatArea = document.getElementById('chatArea');
+    var messageElement = document.createElement('div');
+    messageElement.textContent = content;
+    messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+    chatArea.appendChild(messageElement);
+    chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+  }
+
+  function sendMessage(event) {
+    if (event.keyCode === 13) { // Enter key
+      var userInput = document.getElementById('userQuery');
+      var message = userInput.value.trim();
+      if (message !== '') {
+        addMessage('user', message);
+        userInput.value = ''; // Clear the input field
+        callChatFunction(message); // Call the chat function with the user's message
+      }
+    }
+  }
+
+  // Sample AI function (replace with your actual AI function)
+  function callChatFunction(query) {
+    $.ajax({
+      url: "{% url 'chat' %}",
+      type: "GET",
+      data: { query: query },
+      success: function (data) {
+        addMessage('ai', data.response);
+      },
+      error: function (xhr, status, error) {
+        console.error('Error: ' + error);
+      }
+    });
+  }
+</script>
+
+
+<script>
+  function startTime() {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    let session = "AM";
+
+    if(h == 0){
+      h = 12;
+    }
+
+    if(h > 12){
+      h -= 12;
+      session = "PM";
+    }
+
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML = h + ":" + m + " " + session;
+    setTimeout(startTime, 1000);
+  }
+
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
+
+
+
 <script>
   function goToHome() {
         window.location.href = "{% url 'Customer_Home' %}";
