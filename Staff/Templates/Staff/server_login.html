@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +19,24 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            background-color: transparent; /* Semi-transparent white background */
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Shadow effect */
+            display: flex;
+            align-items: center; /* Align items vertically */
+        }
+
+        .logo {
+            margin-right: 20px; /* Spacing between logo and keypad + input */
+            size: 150px;;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px; /* Spacing between input and keypad */
         }
 
         .display {
@@ -35,7 +50,9 @@
             border-radius: 10px;
             padding: 20px;
             font-size: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            width: 150px; /* Fixed width for input display */
+            text-align: center; /* Center text in input display */
         }
 
         .keypad {
@@ -87,14 +104,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="display">
-            <div class="input-display" id="input-display"></div>
+        <div class="logo">
+            <img src="{% static 'img/Logo.png' %}" alt="Logo">
         </div>
-        <form method="post" onsubmit="setStaffNumber();">
-            {% if error %}
-                 <p style="color: red;">{{ error }}</p>
-           {% endif %}
-            {% csrf_token %}
+        <div class="input-container">
+            <div class="display">
+                <div class="input-display" id="input-display"></div>
+            </div>
             <div class="keypad">
                 <button type="button" onclick="appendToInput('1')">1</button>
                 <button type="button" onclick="appendToInput('2')">2</button>
@@ -109,6 +125,12 @@
                 <button type="button" onclick="appendToInput('0')">0</button>
                 <button type="button" onclick="backspace()">Back</button>
             </div>
+        </div>
+        <form method="post" onsubmit="setStaffNumber();">
+            {% if error %}
+                 <p style="color: red;">{{ error }}</p>
+           {% endif %}
+            {% csrf_token %}
             <div class="controls">
                 <button type="submit" class="control-button">Login</button>
             </div>
@@ -137,6 +159,7 @@
             input.value = input.value.slice(0, -1);
             display.textContent = input.value;
         }
+        
         function setStaffNumber() {
             var input = document.getElementById('id_number').value;
             
