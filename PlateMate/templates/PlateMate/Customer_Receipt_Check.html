@@ -507,15 +507,15 @@
       }
 
     .PAY-SCREEN .TIME {
-        top: 28px;
-        left: 293px;
-        background-color: #c02c2c;
-        border-radius: 10px;
-        position: absolute;
-        width: 77px;
-        height: 39px;
-      }
-
+      top: 23px;
+      left: 273px;
+      background-color: #c02c2c;
+      border-radius: 10px;
+      position: absolute;
+      width: 100px;
+      height: 73px;
+    }
+  
     .PAY-SCREEN .text-wrapper-13 {
         top: -1px;
         left: 0;
@@ -530,6 +530,15 @@
         width: 77px;
         height: 39px;
       }
+
+      #txt {
+        font-family: "Inter", Helvetica;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        line-height: 3.5em;
+       }
 
       /* Popup container */
   .popup-container {
@@ -670,9 +679,10 @@
                 <div class="LOGO">
                     <div class="text-wrapper-12">Logo</div>
                 </div>
-                <div class="TIME">
-                    <div class="text-wrapper-13">TIME</div>
+                <body onload="startTime()">
+                  <div class="TIME" id="txt">	   
                 </div>
+    
             </div>
         </div>
     </div>
@@ -723,6 +733,37 @@
           });
         }
     </script>
+
+
+    <script>
+      function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        let session = "AM";
+
+        if(h == 0){
+          h = 12;
+        }
+
+        if(h > 12){
+          h -= 12;
+          session = "PM";
+        }
+
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = h + ":" + m + " " + session;
+        setTimeout(startTime, 1000);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+      }
+      </script>
+
 
     <script>
         function goToHome() {

@@ -64,16 +64,19 @@
   }
   
   .ORDER .TIME {
+    top: 2px;
+    left: 273px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 100px;
+    height: 73px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    position: absolute;
-    top: 16px;
-    left: 310px;
-    background-color: #c02c2c;
-    border-radius: 10px;
   }
+
   
   .ORDER .text-wrapper {
     position: relative;
@@ -677,6 +680,15 @@
     border-radius: 10px;
   }
 
+  #txt {
+    font-family: "Inter", Helvetica;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 3.5em;
+   }
+
   /* Popup container */
 .popup-container {
 display: none;
@@ -736,7 +748,9 @@ border-radius: 5px;
       <div class="div2">
       <div class="SIDE-PANNEL">
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
-        <div class="TIME"><div class="text-wrapper">TIME</div></div>
+        <body onload="startTime()">
+          <div class="TIME" id="txt">	   
+          </div>
         <div class="recipt">
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
@@ -1925,9 +1939,45 @@ border-radius: 5px;
         `;
       }
     }
+
+
+
+    
     function goToHome() {
         window.location.href = "{% url 'Customer_Home' %}";
     }
     </script>
+
+    <script>
+      function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        let session = "AM";
+
+        if(h == 0){
+          h = 12;
+        }
+
+        if(h > 12){
+          h -= 12;
+          session = "PM";
+        }
+
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = h + ":" + m + " " + session;
+        setTimeout(startTime, 1000);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+      }
+      </script>
+
+
+
   </body>
 </html>
