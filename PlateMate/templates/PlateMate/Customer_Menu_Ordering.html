@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="globals.css" type="text/css"/>
-    <link rel="stylesheet" href="styleguide.css" type="text/css"/>
-    <link rel="stylesheet" href="customer_style.css" type="text/css"/>
-  </head>
-  <style>
-    .ORDER {
-      background-color: #ffffff;
+
+<head>
+  <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="globals.css" type="text/css" />
+  <link rel="stylesheet" href="styleguide.css" type="text/css" />
+  <link rel="stylesheet" href="customer_style.css" type="text/css" />
+</head>
+<style>
+  .ORDER {
+    background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
   }
+
   .ORDER .div2 {
     background-color: #ffffff;
     width: 1438px;
     height: 1006px;
     position: relative;
   }
-  
+
   .ORDER .SIDE-PANNEL {
     position: absolute;
     width: 394px;
     height: 1006px;
-    top:0;
+    top: 0;
     left: 0;
     background-color: #ffffff;
     border-radius: 2px;
@@ -34,7 +36,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .COMPANY-NAME {
     display: flex;
     width: 299px;
@@ -48,7 +50,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .middendorf-s {
     position: relative;
     width: 298px;
@@ -62,7 +64,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .TIME {
     top: 2px;
     left: 273px;
@@ -77,7 +79,6 @@
     gap: 10px;
   }
 
-  
   .ORDER .text-wrapper {
     position: relative;
     width: 77px;
@@ -90,7 +91,32 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
+  .ORDER .LOGO {
+    height: 60px;
+    top: 10px;
+    left: 10px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+    position: absolute;
+    width: 100px;
+  }
+
+  .ORDER .logo {
+    height: 72px;
+    top: 8px;
+    left: 0;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 100px;
+  }
+
   .ORDER .recipt {
     position: absolute;
     width: 370px;
@@ -102,7 +128,7 @@
     border: 3px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .recipt-info-title {
     display: flex;
     flex-direction: column;
@@ -117,7 +143,7 @@
     border-bottom-style: solid;
     border-color: #000000;
   }
-  
+
   .ORDER .QT-NAME-PRICE {
     position: relative;
     width: 369px;
@@ -132,7 +158,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .total-price {
     display: flex;
     width: 388px;
@@ -147,7 +173,7 @@
     border-top-style: solid;
     border-color: #000000;
   }
-  
+
   .ORDER .div {
     position: relative;
     width: 379px;
@@ -160,7 +186,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .pay {
     display: flex;
     width: 75px;
@@ -175,7 +201,7 @@
     background-color: #ffffff;
     border-radius: 10px;
   }
-  
+
   .ORDER .text-wrapper-2 {
     width: 65px;
     height: 31px;
@@ -189,7 +215,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .ORDER-HERE {
     position: absolute;
     width: 1044px;
@@ -202,7 +228,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .item-frame {
     position: absolute;
     width: 1045px;
@@ -212,7 +238,7 @@
     background-color: #ffffff;
     overflow-y: scroll;
   }
-  
+
   .ORDER .ITEM {
     position: absolute;
     width: 242px;
@@ -224,7 +250,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .item-image {
     display: flex;
     width: 218px;
@@ -237,7 +263,7 @@
     left: 12px;
     background-color: #000000;
   }
-  
+
   .ORDER .text-wrapper-3 {
     position: relative;
     width: 218px;
@@ -252,7 +278,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .item-name {
     position: absolute;
     width: 218px;
@@ -261,7 +287,7 @@
     left: 12px;
     border-radius: 10px;
   }
-  
+
   .ORDER .text-wrapper-4 {
     position: absolute;
     width: 200px;
@@ -276,7 +302,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .text-wrapper-5 {
     position: absolute;
     width: 200px;
@@ -290,7 +316,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .add {
     display: flex;
     width: 134px;
@@ -304,7 +330,7 @@
     background-color: #ffffff;
     border-radius: 10px;
   }
-  
+
   .ORDER .text-wrapper-6 {
     position: relative;
     width: 133px;
@@ -318,7 +344,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .ITEM-2 {
     position: absolute;
     width: 242px;
@@ -330,7 +356,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-3 {
     position: absolute;
     width: 242px;
@@ -342,7 +368,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-4 {
     position: absolute;
     width: 242px;
@@ -354,7 +380,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-5 {
     position: absolute;
     width: 242px;
@@ -366,7 +392,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-6 {
     position: absolute;
     width: 242px;
@@ -378,7 +404,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-7 {
     position: absolute;
     width: 242px;
@@ -390,7 +416,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-8 {
     position: absolute;
     width: 242px;
@@ -402,7 +428,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-9 {
     left: 791px;
     position: absolute;
@@ -414,7 +440,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-10 {
     position: absolute;
     width: 242px;
@@ -426,7 +452,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-11 {
     position: absolute;
     width: 242px;
@@ -438,7 +464,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .ITEM-12 {
     left: 532px;
     position: absolute;
@@ -450,7 +476,7 @@
     border: 1px solid;
     border-color: #000000;
   }
-  
+
   .ORDER .top-frame {
     position: absolute;
     width: 1044px;
@@ -461,7 +487,7 @@
     border-bottom-style: solid;
     border-color: #000000;
   }
-  
+
   .ORDER .back-button {
     display: flex;
     flex-direction: column;
@@ -476,7 +502,7 @@
     background-color: #c02c2c;
     border-radius: 25px;
   }
-  
+
   .ORDER .back-button-2 {
     position: relative;
     width: 43px;
@@ -492,7 +518,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .ai-chat {
     display: flex;
     width: 71px;
@@ -506,7 +532,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .AI-CHAT {
     position: absolute;
     width: fit-content;
@@ -519,7 +545,60 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
+  /* Popup container */
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  /* AI chat area */
+  .chat-area {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  /* AI message */
+  .ai-message {
+    background-color: #b2dff5;
+    text-align: left;
+    margin-right: 50%;
+  }
+
+  /* User message */
+  .user-message {
+    background-color: #e2f7cb;
+    text-align: right;
+    margin-left: 50%;
+  }
+
+  /* Input field */
+  .input-field {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
   .ORDER .call-server {
     display: flex;
     width: 71px;
@@ -533,7 +612,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .CALL-SERVER {
     position: absolute;
     width: fit-content;
@@ -546,7 +625,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .order-banner {
     display: flex;
     width: 977px;
@@ -559,7 +638,7 @@
     left: 30px;
     background-color: #c02c2c;
   }
-  
+
   .ORDER .text-wrapper-7 {
     color: #ffffff;
     font-size: 32px;
@@ -571,7 +650,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .appetizers {
     display: flex;
     width: 186px;
@@ -585,7 +664,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .kids-sides {
     display: flex;
     width: 186px;
@@ -599,7 +678,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .entrees {
     display: flex;
     width: 186px;
@@ -613,7 +692,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .text-wrapper-9 {
     position: relative;
     width: fit-content;
@@ -625,7 +704,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .dessert {
     display: flex;
     width: 186px;
@@ -639,7 +718,7 @@
     background-color: #c02c2c;
     border-radius: 10px;
   }
-  
+
   .ORDER .table-num {
     display: inline-flex;
     align-items: center;
@@ -651,7 +730,7 @@
     background-color: #c02c2c;
     border-radius: 25px;
   }
-  
+
   .ORDER .text-wrapper-10 {
     position: relative;
     width: 44px;
@@ -665,7 +744,7 @@
     letter-spacing: 0;
     line-height: normal;
   }
-  
+
   .ORDER .drinks {
     display: flex;
     width: 186px;
@@ -754,38 +833,41 @@ border-radius: 5px;
         <div class="recipt">
           <div class="recipt-info-title">
             <div class="QT-NAME-PRICE">
-              QT&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE&nbsp;&nbsp;&nbsp;&nbsp;
-              <table cellspacing="10" style="margin-top: 20px; font-size: 20px;">
+              QT&nbsp;&nbsp;&nbsp;NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRICE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <table style="width: 100%; margin-top: 30px; font-size: 20px; table-layout: fixed;">
                 <tbody>
-                    {% for order in active_orders %}
-                    <tr>
-                      <td>{{ order.Quantity }}</td>
-                      <td style="text-align: left;">{{ order.menu_item.Name }}</td>
-                      <td>{{ order.menu_item.Price }}</td>
-                      <td>
-                        <form method="post" action="{% url 'delete_order_item' %}">
-                          {% csrf_token %}
-                          <input type="hidden" name="order_id" value="{{ order.id }}">
-                          <button type="submit"  name="delete">
-                            {% if order.Quantity > 1 %}
-                              x
-                            {% else %}
-                              x
-                            {% endif %}
-                          </button>
-                        </form>
-                      </td>
-                    </tr>
-                    {% endfor %}
+                  {% for order in active_orders %}
+                  <tr>
+                    <td style="width: 10%;">{{ order.Quantity }}</td>
+                    <td style="text-align: left; width: 45%;">{{ order.menu_item.Name }}</td>
+                    <td style="width: 25%;">{{ order.menu_item.Price }}</td>
+                    <td>
+                      <form method="post" action="{% url 'delete_order_item' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="order_id" value="{{ order.id }}">
+                        <button type="submit" name="delete">
+                          {% if order.Quantity > 1 %}
+                          x
+                          {% else %}
+                          x
+                          {% endif %}
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
                 </tbody>
-            </table>
+              </table>
             </div>
           </div>
-          <div class="total-price"><div class="div">Total: {{ total_price }}</div></div>
+          <div class="total-price">
+            <div class="div">Total: {{ total_price }}</div>
+          </div>
           <div class="pay">
             <div class="text-wrapper-2">
               <form method="post" action="{% url 'create_order' %}">
-                {% csrf_token %} <button type="submit" name="mark_ordered">Order</button>
+                {% csrf_token %} <button type="submit" name="mark_ordered"
+                  onclick="alert('Your order has been sent to the Kitchen!')">Order</button>
               </form>
             </div>
           </div>
@@ -794,7 +876,9 @@ border-radius: 5px;
       <div class="ORDER-HERE" id="orderHere">
         <div class="item-frame">
           <div class="ITEM">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$8.75</div>
               <div class="text-wrapper-5">Smoked Catfish Dip</div>
@@ -803,11 +887,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="1">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-2">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$12.50</div>
               <div class="text-wrapper-5">Fried Catfish Tacos</div>
@@ -816,11 +904,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="2">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-3">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$10.75</div>
               <div class="text-wrapper-5">Crawfish Popper</div>
@@ -829,11 +921,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="3">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-4">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$10.25</div>
               <div class="text-wrapper-5">Crawfish Cakes</div>
@@ -842,11 +938,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="4">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-5">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$9.50</div>
               <div class="text-wrapper-5">Shrimp Remoulade</div>
@@ -855,11 +955,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="5">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-6">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$11.75</div>
               <div class="text-wrapper-5">Peel & Eat Boiled Shrimp</div>
@@ -868,11 +972,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="6">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-7">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$11.75</div>
               <div class="text-wrapper-5">Barbequed Oysters</div>
@@ -881,11 +989,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="7">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-8">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$11.75</div>
               <div class="text-wrapper-5">Italian Oysters</div>
@@ -894,11 +1006,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="8">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-9">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$11.75</div>
               <div class="text-wrapper-5">Fried Alligator Bites</div>
@@ -907,11 +1023,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="9">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-10">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$9.50</div>
               <div class="text-wrapper-5">Duck Quesadillas</div>
@@ -920,11 +1040,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="10">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-11">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$9.75</div>
               <div class="text-wrapper-5">Stuffed Mushrooms</div>
@@ -933,11 +1057,15 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="11">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
           <div class="ITEM-12">
-            <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
+            <div class="item-image">
+              <div class="text-wrapper-3">Item Image</div>
+            </div>
             <div class="item-name">
               <div class="text-wrapper-4">$8.95</div>
               <div class="text-wrapper-5">Crispy Fried Onion Rings</div>
@@ -946,90 +1074,125 @@ border-radius: 5px;
               {% csrf_token %}
               <input type="hidden" name="MenuItemID" value="12">
               <input type="hidden" name="TableID" value="1">
-              <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
+              <button type="submit" class="add" name="Add">
+                <div class="text-wrapper-6">Add</div>
+              </button>
             </form>
           </div>
         </div>
         <div class="top-frame">
-            <button class="back-button" onclick="goToHome()">
-                <div class="back-button-2">&lt;</div>
-            </button>
-
-            <button class="ai-chat" onclick="togglePopup()">
-              <div class="AI-CHAT">AI <br />CHAT</div>
-            </button>
-            <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          <button class="back-button" onclick="goToHome()">
+            <div class="back-button-2">&lt;</div>
+          </button>
+          <button class="ai-chat">
+            <div class="AI-CHAT">AI<br />CHAT</div>
+          </button>
+          <div class="popup-container" id="popupContainer">
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
             </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
 
+          <script>
+            function togglePopup() {
+              var popup = document.getElementById('popupContainer');
+              if (popup.style.display === 'none') {
+                popup.style.display = 'block';
+              } else {
+                popup.style.display = 'none';
+              }
+            }
 
-            <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
-            <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
-            <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
-            <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
-            <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
-            <div class="table-num"><div class="text-wrapper-10">#</div></div>
-            <button class="drinks" onclick="showCategory('drink');"><div class="text-wrapper-9">Drinks</div></button>
+            function addMessage(sender, content) {
+              var chatArea = document.getElementById('chatArea');
+              var messageElement = document.createElement('div');
+              messageElement.textContent = content;
+              messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+              chatArea.appendChild(messageElement);
+              chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+            }
 
-            <script>
-              function togglePopup() {
-                var popup = document.getElementById('popupContainer');
-                if (popup.style.display === 'none') {
-                  popup.style.display = 'block';
-                } else {
-                  popup.style.display = 'none';
+            function sendMessage(event) {
+              if (event.keyCode === 13) { // Enter key
+                var userInput = document.getElementById('userQuery');
+                var message = userInput.value.trim();
+                if (message !== '') {
+                  addMessage('user', message);
+                  userInput.value = ''; // Clear the input field
+                  callChatFunction(message); // Call the chat function with the user's message
                 }
               }
-    
-              function addMessage(sender, content) {
-                var chatArea = document.getElementById('chatArea');
-                var messageElement = document.createElement('div');
-                messageElement.textContent = content;
-                messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
-                chatArea.appendChild(messageElement);
-                chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
-              }
-    
-              function sendMessage(event) {
-                if (event.keyCode === 13) { // Enter key
-                  var userInput = document.getElementById('userQuery');
-                  var message = userInput.value.trim();
-                  if (message !== '') {
-                    addMessage('user', message);
-                    userInput.value = ''; // Clear the input field
-                    callChatFunction(message); // Call the chat function with the user's message
-                  }
+            }
+
+            // Sample AI function (replace with your actual AI function)
+            function callChatFunction(query) {
+              $.ajax({
+                url: "{% url 'chat' %}",
+                type: "GET",
+                data: { query: query },
+                success: function (data) {
+                  addMessage('ai', data.response);
+                },
+                error: function (xhr, status, error) {
+                  console.error('Error: ' + error);
                 }
-              }
-    
-              // Sample AI function (replace with your actual AI function)
-              function callChatFunction(query) {
-                $.ajax({
-                  url: "{% url 'chat' %}",
-                  type: "GET",
-                  data: { query: query },
-                  success: function (data) {
-                    addMessage('ai', data.response);
-                  },
-                  error: function (xhr, status, error) {
-                    console.error('Error: ' + error);
-                  }
-                });
-              }
-            </script>
-          
+              });
+            }
+          </script>
+          <button class="call-server">
+            <div class="CALL-SERVER">CALL</div>
+          </button>
+          <div class="order-banner">
+            <div class="text-wrapper-7">ORDER HERE</div>
+          </div>
+          <button class="appetizers" onclick="showCategory('appetizer');">
+            <div class="text-wrapper-9">Appetizers</div>
+          </button>
+          <button class="kids-sides" onclick="showCategory('side');">
+            <div class="text-wrapper-9">Kids-Sides</div>
+          </button>
+          <button class="entrees" onclick="showCategory('entree');">
+            <div class="text-wrapper-9">Entrees</div>
+          </button>
+          <button class="dessert" onclick="showCategory('dessert');">
+            <div class="text-wrapper-9">Desserts</div>
+          </button>
+          <div class="table-num">
+            <div class="text-wrapper-10">#</div>
+          </div>
+          <button class="drinks" onclick="showCategory('drink');">
+            <div class="text-wrapper-9">Drinks</div>
+          </button>
+          <script>
+            function callChatFunction() {
+              var query = document.getElementById('userQuery').value;
+              $.ajax({
+                url: "{% url 'chat' %}",
+                type: "GET",
+                data: { query: query },
+                success: function (data) {
+                  document.getElementById('response').innerText = data.response;
+                },
+                error: function (xhr, status, error) {
+                  console.error('Error: ' + error);
+                }
+              });
+            }
+          </script>
+          <!--
+          <input type="text" id="userQuery" placeholder="Ask AI">
+          <button onclick="callChatFunction()">Ask</button>
+          <div id="response"></div>
+          -->
         </div>
       </div>
-      </div>
     </div>
-    <script>
-      function showCategory(category) {
+  </div>
+  <script>
+    function showCategory(category) {
       var orderHere = document.getElementById("orderHere");
       var categoryContent = getCategoryContent(category);
       orderHere.innerHTML = categoryContent;
@@ -1206,19 +1369,17 @@ border-radius: 5px;
               <div class="AI-CHAT">AI <br />CHAT</div>
             </button>
             <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
-            </div> 
-
-
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
+            </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
             <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
@@ -1394,19 +1555,17 @@ border-radius: 5px;
               <div class="AI-CHAT">AI <br />CHAT</div>
             </button>
             <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
             </div>
-
-            
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
             <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
@@ -1520,7 +1679,7 @@ border-radius: 5px;
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
           </div>
-          <div class="ITEM-9">
+          <div class="ITEM-10">
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
               <div class="text-wrapper-4">$5.25</div>
@@ -1544,19 +1703,17 @@ border-radius: 5px;
               <div class="AI-CHAT">AI <br />CHAT</div>
             </button>
             <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
-            </div> 
-
-            
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
+            </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
             <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
@@ -1574,7 +1731,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="61">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1587,7 +1744,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="62">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1596,11 +1753,11 @@ border-radius: 5px;
             <div class="item-image"><div class="text-wrapper-3">Item Image</div></div>
             <div class="item-name">
               <div class="text-wrapper-4">$7.50</div>
-              <div class="text-wrapper-5">Choclate Lava Cake</div>
+              <div class="text-wrapper-5">Chocolate Lava Cake</div>
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="63">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1613,7 +1770,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="64">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1626,7 +1783,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="65">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1639,7 +1796,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="66">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1652,7 +1809,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="67">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1665,7 +1822,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="68">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1678,7 +1835,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="69">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1691,7 +1848,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="70">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1704,7 +1861,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="71">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1717,7 +1874,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="72">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1732,18 +1889,17 @@ border-radius: 5px;
               <div class="AI-CHAT">AI <br />CHAT</div>
             </button>
             <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
-            </div> 
-
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
+            </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
             <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
@@ -1761,7 +1917,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="73">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1774,7 +1930,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="74">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1787,7 +1943,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="75">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1800,7 +1956,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="76">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1813,7 +1969,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="77">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1826,7 +1982,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="78">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1839,7 +1995,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="79">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1852,7 +2008,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="80">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1865,7 +2021,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="84">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1878,7 +2034,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="81">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1891,7 +2047,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="82">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1904,7 +2060,7 @@ border-radius: 5px;
             </div>
             <form method="POST" action="{% url 'create_order' %}" style="margin-top: 210px; margin-left: 10px">
               {% csrf_token %}
-              <input type="hidden" name="MenuItemID" value="1">
+              <input type="hidden" name="MenuItemID" value="83">
               <input type="hidden" name="TableID" value="1">
               <button type="submit" class="add" name="Add"><div class="text-wrapper-6">Add</div></button>
             </form>
@@ -1919,18 +2075,17 @@ border-radius: 5px;
               <div class="AI-CHAT">AI <br />CHAT</div>
             </button>
             <div class="popup-container" id="popupContainer">
-              <span class="close-btn" onclick="togglePopup()">X</span>
-              <h2>AI Chat Bot</h2>
-              <div class="chat-area" id="chatArea">
-                <div class="message ai-message">Welcome! How can I assist you today?</div>
-              </div>
-              <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
-            </div> 
-
+            <span class="close-btn" onclick="togglePopup()">X</span>
+            <h2>AI Chat Bot</h2>
+            <div class="chat-area" id="chatArea">
+              <div class="message ai-message">Welcome! How can I assist you today?</div>
+            </div>
+            <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
+          </div>
             <button class="call-server"><div class="CALL-SERVER">CALL</div></button>
             <div class="order-banner"><div class="text-wrapper-7">ORDER HERE</div></div>
             <button class="appetizers" onclick="showCategory('appetizer');"><div class="text-wrapper-9">Appetizers</div></button>
-            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids&nbsp;&nbsp;&amp; Sides</div></button>
+            <button class="kids-sides" onclick="showCategory('side');"><div class="text-wrapper-9">Kids-Sides</div></button>
             <button class="entrees" onclick="showCategory('entree');"><div class="text-wrapper-9">Entrees</div></button>
             <button class="dessert" onclick="showCategory('dessert');"><div class="text-wrapper-9">Desserts</div></button>
             <div class="table-num"><div class="text-wrapper-10">#</div></div>
@@ -1944,7 +2099,7 @@ border-radius: 5px;
 
     
     function goToHome() {
-        window.location.href = "{% url 'Customer_Home' %}";
+      window.location.href = "{% url 'Customer_Home' %}";
     }
     </script>
 

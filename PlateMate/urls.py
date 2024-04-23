@@ -14,6 +14,7 @@ urlpatterns = [
     path("Dessert_Menu/", views.Dessert_Menu, name = "Dessert_Menu"),
     path("Drink_Menu/", views.Drink_Menu, name = "Drink_Menu"),
     path("Server_Order_Screen/", views.Server_Order_Screen, name = "Server_Ordering"),
+    path('server_delete_order_item/', views.server_delete_order_item, name='server_delete_order_item'),
     path("Kitchen_Current_Orders/", views.Kitchen_Current_Orders, name = "Test Page"),
     path("Manager_Checks/", views.Manager_Checks, name = "Test Page"),
     path("Manager_Stats/", views.Manager_Stats, name = "Test Page"),

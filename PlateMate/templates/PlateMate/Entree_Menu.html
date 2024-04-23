@@ -338,6 +338,58 @@
     letter-spacing: 0;
     line-height: normal;
   }
+   /* Popup container */
+   .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Close button */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  /* AI chat area */
+  .chat-area {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+
+  /* AI message */
+  .ai-message {
+    background-color: #b2dff5;
+    text-align: left;
+    margin-right: 50%;
+  }
+
+  /* User message */
+  .user-message {
+    background-color: #e2f7cb;
+    text-align: right;
+    margin-left: 50%;
+  }
+
+  /* Input field */
+  .input-field {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
   .MENU .call-server {
     display: flex;
@@ -898,7 +950,53 @@
           <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
         </div>
 
+        <script>
+          function togglePopup() {
+            var popup = document.getElementById('popupContainer');
+            if (popup.style.display === 'none') {
+              popup.style.display = 'block';
+            } else {
+              popup.style.display = 'none';
+            }
+          }
 
+          function addMessage(sender, content) {
+            var chatArea = document.getElementById('chatArea');
+            var messageElement = document.createElement('div');
+            messageElement.textContent = content;
+            messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+            chatArea.appendChild(messageElement);
+            chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+          }
+
+          function sendMessage(event) {
+            if (event.keyCode === 13) { // Enter key
+              var userInput = document.getElementById('userQuery');
+              var message = userInput.value.trim();
+              if (message !== '') {
+                addMessage('user', message);
+                userInput.value = ''; // Clear the input field
+                callChatFunction(message); // Call the chat function with the user's message
+              }
+            }
+          }
+
+          // Sample AI function (replace with your actual AI function)
+          function callChatFunction(query) {
+            $.ajax({
+              url: "{% url 'chat' %}",
+              type: "GET",
+              data: { query: query },
+              success: function (data) {
+                addMessage('ai', data.response);
+              },
+              error: function (xhr, status, error) {
+                console.error('Error: ' + error);
+              }
+            });
+          }
+        </script>
+        
         <button class="call-server">
           <div class="CALL">CALL</div>
         </button>
@@ -921,7 +1019,7 @@
           <div class="text-wrapper-5">Dessert</div>
         </button>
         <div class="table-num">
-          <div class="text-wrapper-6">#</div>
+          <div class="text-wrapper-6">1</div>
         </div>
       </div>
     </div>

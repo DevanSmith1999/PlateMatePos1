@@ -84,11 +84,96 @@ def Customer_Receipt_Check(request):
     )
 
 def Server_Order_Screen(request):
-    '''Server order screen'''
-    return render(
-        request,
-        'PlateMate/Server_Order_Screen.html'
-    )
+    context = {}
+    table_id = 1 #Set table id here (1 for testing will need to be retrived from table user eventually)
+    active_orders = []
+    
+    #handle the order button (Pushes order to Kitchen)
+    if request.method == 'POST' and 'mark_ordered' in request.POST:
+        print("order button pressed")
+        ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
+        return render(request, 'PlateMate/Server_Order_Screen.html', context)
+        
+    
+    elif request.method == 'POST' and 'Add': #handle the add button
+        try:
+            menu_item_id = int(request.POST.get('MenuItemID'))
+            table_id = int(request.POST.get('TableID'))                             #*****Currenrly getting table id from form to be updated with table user id!
+            
+            # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
+            table = Table.objects.get(pk=table_id)
+            
+            # Check for existing order with same menu_item_id and TableID
+            existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
+            
+            if existing_order:
+                # Increment quantity of existing order
+                existing_order.Quantity += 1
+                existing_order.save()
+            else:
+                # Create new order if none exists
+                new_order = ActiveOrder(MenuItemID=menu_item_id, TableID=table, Quantity=1)
+                new_order.save()  
+                 
+
+            # After processing the form, retrieve active orders with data integrity check
+            active_orders = []
+            
+            # Retrive all the data for displaying 
+            total_price = 0
+            for order in ActiveOrder.objects.filter(TableID=table_id):
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                active_orders.append(order)
+                total_price += order.menu_item.Price * order.Quantity #calc sum of all currently ordered items
+            
+            context['active_orders'] = active_orders
+            context['total_price'] = total_price #sum of all ordered items
+            
+
+            return render(request, 'PlateMate/Server_Order_Screen.html', context)
+        except (ValueError, Exception) as e:
+            print(e)
+            # Handle various exceptions
+            context['active_orders'] = []  # Set empty list for active orders
+            return render(request, 'PlateMate/Server_Order_Screen.html', context)
+    else:  # GET request (initial page load)
+        table_id = 1
+        active_orders = []
+        for order in ActiveOrder.objects.filter(TableID=table_id):
+            order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+            active_orders.append(order)
+        context['active_orders'] = active_orders
+    return render(request, 'PlateMate/Server_Order_Screen.html', context)
+
+def server_delete_order_item(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        try:
+            order = ActiveOrder.objects.get(pk=order_id)
+            if order.Quantity > 1:
+                order.Quantity -= 1
+                order.save()
+            else:
+                order.delete()
+
+            # Recalculate total price for all active orders after deletion/modification
+            active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+            total_price = 0
+            for order in active_orders:
+                order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+                total_price += order.menu_item.Price * order.Quantity
+            tax = float(total_price) * 0.0445
+            totalandtax = f"{float(total_price) + tax:.2f}"
+            tax = f"{tax:.2f}"
+            
+            # Update context with the new total price
+            context = {'active_orders': active_orders, 'total_price': total_price,'tax': tax, 'totalandtax': totalandtax}
+            return render(request, 'PlateMate/Server_Order_Screen.html', context)
+
+        except (ActiveOrder.DoesNotExist, ValueError):
+            # Handle errors
+            pass
+    return redirect('create_order')  # Redirect back even on GET requests (optional)
 
 def Kitchen_Current_Orders(request):
     '''View current orders from all tables'''
@@ -147,20 +232,22 @@ def create_order(request):
     
     #handle the order button (Pushes order to Kitchen)
     if request.method == 'POST' and 'mark_ordered' in request.POST:
+        print("order button pressed")
         ActiveOrder.objects.filter(TableID=table_id).update(Ordered=True)
         return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
+        
     
     elif request.method == 'POST' and 'Add': #handle the add button
         try:
             menu_item_id = int(request.POST.get('MenuItemID'))
-            table_id = int(request.POST.get('TableID'))
-
+            table_id = int(request.POST.get('TableID'))                             #*****Currenrly getting table id from form to be updated with table user id!
+            
             # Retrieve Table object *may be source of error later - Remeber dealing with table object not table id value
             table = Table.objects.get(pk=table_id)
-        
+            
             # Check for existing order with same menu_item_id and TableID
             existing_order = ActiveOrder.objects.filter(MenuItemID=menu_item_id, TableID=table, Ordered = 0).first()  # Get the first matching order
-
+            
             if existing_order:
                 # Increment quantity of existing order
                 existing_order.Quantity += 1
@@ -168,7 +255,9 @@ def create_order(request):
             else:
                 # Create new order if none exists
                 new_order = ActiveOrder(MenuItemID=menu_item_id, TableID=table, Quantity=1)
-                new_order.save()
+                print("did we get here3")
+                new_order.save()  
+                print("did we get here4")  
 
             # After processing the form, retrieve active orders with data integrity check
             active_orders = []
@@ -186,7 +275,7 @@ def create_order(request):
 
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
         except (ValueError, Exception) as e:
-            print("ERRORRRRRRRRRR")
+            print(e)
             # Handle various exceptions
             context['active_orders'] = []  # Set empty list for active orders
             return render(request, 'PlateMate/Customer_Menu_Ordering.html', context)
@@ -212,7 +301,7 @@ def delete_order_item(request):
                 order.delete()
 
             # Recalculate total price for all active orders after deletion/modification
-            active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+            active_orders = ActiveOrder.objects.filter(TableID=1, Ordered = 0)  # Assuming table_id
             total_price = 0
             for order in active_orders:
                 order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)

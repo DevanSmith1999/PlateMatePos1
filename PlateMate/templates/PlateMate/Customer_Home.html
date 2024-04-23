@@ -447,13 +447,37 @@
     letter-spacing: 0;
     line-height: normal;
   }
+  .MAIN .CALL-SERVER {
+    position: absolute;
+    width: 87px;
+    height: 86px;
+    top: 885px;
+    left: 922px;
+    background-color: #c02c2c;
+    border-radius: 10px;
+  }
+
+  .MAIN .call-server {
+    position: absolute;
+    width: 80px;
+    height: 82px;
+    top: 22px;
+    left: 4px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+  }
 
   .MAIN .AI-CHAT {
     position: absolute;
     width: 87px;
     height: 86px;
     top: 885px;
-    left: 772px;
+    left: 816px;
     background-color: #c02c2c;
     border-radius: 10px;
   }
@@ -535,24 +559,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-
-  .MAIN .CALL-SERVER {
-    position: absolute;
-    width: 100px;
-    height: 86px;
-    top: 885px;
-    left: 918px;
-    background-color: #c02c2c;
-    border-radius: 10px;
-  }
-
-  .MAIN .call-server {
-    position: absolute;
-    width: 97px;
-    height: 63px;
-    top: 11px;
-    left: 2px;
-  }
 </style>
 
 <body>
@@ -590,35 +596,35 @@
               <div class="text-wrapper-6">PAY</div>
             </button>
             <button class="STATUS-BUTTON">
-              <div class="text-wrapper-7">Stat</div>
+              <div class="text-wrapper-7">STAT</div>
             </button>
 
       </div>
 
       <div class="MAIN-MENU">
         <div class="TABLE-NUM">
-          <div class="text-wrapper-8">#</div>
+          <div class="text-wrapper-8">1</div>
         </div>
         <div class="MENU-ITEM-BANNER">
           <div class="text-wrapper-9">Welcome</div>
         </div>
-        <button class="APPETIZEERS" onclick="window.location.href= 'Customer_App_Order.html';">
+        <button class="APPETIZEERS" onclick="goToApps()">
           <div class="text-wrapper-10">Appetizers</div>
         </button>
-        <button class="ENTREE" onclick="window.location.href= 'Customer_Entree_Order.html';">
+        <button class="ENTREE" onclick="goToEntree()">
           <div class="text-wrapper-11">Entrees</div>
         </button>
-        <button class="DRINKS" onclick="window.location.href= 'Customer_Drinks_Order.html';">
-          <div class="text-wrapper-12">DRINKS</div>
+        <button class="DRINKS" onclick="goToDrink()">
+          <div class="text-wrapper-12">Drinks</div>
         </button>
-        <button class="KIDS" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';">
-          <div class="text-wrapper-13">KIDS</div>
+        <button class="KIDS" onclick="goToKids_Sides()">
+          <div class="text-wrapper-13">Kids</div>
         </button>
-        <button class="SIDES" onclick="window.location.href= 'Customer_Kides_Sides_Order.html';">
+        <button class="SIDES" onclick="goToKids_Sides()">
           <div class="text-wrapper-14">Sides</div>
         </button>
-        <button class="DESSERT" onclick="window.location.href= 'Customer_Dessert_Order.html';">
-          <div class="text-wrapper-15">DESSERT</div>
+        <button class="DESSERT" onclick="goToDessert()">
+          <div class="text-wrapper-15">Dessert</div>
         </button>
 
 
@@ -636,8 +642,7 @@
 
 
 
-        <button class="CALL-SERVER"><img class="call-server" src="img/call-server.png" /></button>
-      </div>
+        <button class="CALL-SERVER"><div class="call-server">CALL</div></button>
     </div>
   </div>
 </body>
@@ -735,4 +740,19 @@
   function goToOrder() {
     window.location.href = "{% url 'Menu_Ordering' %}";
   }
+  function goToApps() {
+      window.location.href = "{% url 'App_Menu' %}";
+    }
+    function goToEntree() {
+      window.location.href = "{% url 'Entree_Menu' %}";
+    }
+    function goToKids_Sides() {
+      window.location.href = "{% url 'Kids_Sides_Menu' %}";
+    }
+    function goToDessert() {
+      window.location.href = "{% url 'Dessert_Menu' %}";
+    }
+    function goToDrink() {
+      window.location.href = "{% url 'Drink_Menu' %}";
+    }
 </script>
