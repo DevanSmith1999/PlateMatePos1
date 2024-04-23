@@ -9,7 +9,6 @@ urlpatterns = [
     path('subpositions/', views.subpositions_list, name='subposition_list'),# pylint: disable=no-member
     path('subpositions/<int:pk>/confirm_delete/', views.confirm_delete_subposition, name='confirm_delete_subposition'),
     path('subpositions/<int:pk>/delete/', views.delete_subposition, name='delete_subposition'),
-
     path('create_staff/', views.create_staff, name='create_staff'),# pylint: disable=no-member
     path('staff/', views.staff_list, name='staff_list'),
     path('staff/<int:staff_id>/', views.staff_detail, name='staff_detail'),

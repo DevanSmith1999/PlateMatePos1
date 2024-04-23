@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="globals.css" type="text/css" />
   <link rel="stylesheet" href="styleguide.css" type="text/css" />
   <link rel="stylesheet" href="customer_style.css" type="text/css" />
@@ -163,13 +162,13 @@
   }
 
   .MAIN .TIME {
-    top: 28px;
-    left: 293px;
+    top: 23px;
+    left: 273px;
     background-color: #c02c2c;
     border-radius: 10px;
     position: absolute;
-    width: 77px;
-    height: 39px;
+    width: 100px;
+    height: 73px;
   }
 
   .MAIN .text-wrapper-5 {
@@ -498,6 +497,16 @@
     line-height: normal;
   }
 
+  #txt {
+    font-family: "Inter", Helvetica;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 3.5em;
+   }
+
+
   /* Popup container */
   .popup-container {
     display: none;
@@ -579,22 +588,22 @@
               <div class="text-wrapper-4">Logo</div>
             </div>
 
-            <div class="TIME">
-              <div class="text-wrapper-5">TIME</div>
+            <body onload="startTime()">
+              <div class="TIME" id="txt">	   
             </div>
 
             <button class="PAY-BUTTON" onclick="window.location.href = 'Customer_Receipt_Check.html';">
               <div class="text-wrapper-6">PAY</div>
             </button>
             <button class="STATUS-BUTTON">
-              <div class="text-wrapper-7">Stat</div>
+              <div class="text-wrapper-7">STAT</div>
             </button>
 
       </div>
 
       <div class="MAIN-MENU">
         <div class="TABLE-NUM">
-          <div class="text-wrapper-8">#</div>
+          <div class="text-wrapper-8">1</div>
         </div>
         <div class="MENU-ITEM-BANNER">
           <div class="text-wrapper-9">Welcome</div>
@@ -606,21 +615,21 @@
           <div class="text-wrapper-11">Entrees</div>
         </button>
         <button class="DRINKS" onclick="goToDrink()">
-          <div class="text-wrapper-12">DRINKS</div>
+          <div class="text-wrapper-12">Drinks</div>
         </button>
         <button class="KIDS" onclick="goToKids_Sides()">
-          <div class="text-wrapper-13">KIDS</div>
+          <div class="text-wrapper-13">Kids</div>
         </button>
         <button class="SIDES" onclick="goToKids_Sides()">
           <div class="text-wrapper-14">Sides</div>
         </button>
         <button class="DESSERT" onclick="goToDessert()">
-          <div class="text-wrapper-15">DESSERT</div>
+          <div class="text-wrapper-15">Dessert</div>
         </button>
 
 
         <button class="AI-CHAT" onclick="togglePopup()">
-          <div class="AI-chat">AI <br />Chat</div>
+          <div class="AI-chat">AI <br />CHAT</div>
         </button>
         <div class="popup-container" id="popupContainer">
           <span class="close-btn" onclick="togglePopup()">X</span>
@@ -631,52 +640,6 @@
           <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
         </div>
 
-        <script>
-          function togglePopup() {
-            var popup = document.getElementById('popupContainer');
-            if (popup.style.display === 'none') {
-              popup.style.display = 'block';
-            } else {
-              popup.style.display = 'none';
-            }
-          }
-
-          function addMessage(sender, content) {
-            var chatArea = document.getElementById('chatArea');
-            var messageElement = document.createElement('div');
-            messageElement.textContent = content;
-            messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
-            chatArea.appendChild(messageElement);
-            chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
-          }
-
-          function sendMessage(event) {
-            if (event.keyCode === 13) { // Enter key
-              var userInput = document.getElementById('userQuery');
-              var message = userInput.value.trim();
-              if (message !== '') {
-                addMessage('user', message);
-                userInput.value = ''; // Clear the input field
-                callChatFunction(message); // Call the chat function with the user's message
-              }
-            }
-          }
-
-          // Sample AI function (replace with your actual AI function)
-          function callChatFunction(query) {
-            $.ajax({
-              url: "{% url 'chat' %}",
-              type: "GET",
-              data: { query: query },
-              success: function (data) {
-                addMessage('ai', data.response);
-              },
-              error: function (xhr, status, error) {
-                console.error('Error: ' + error);
-              }
-            });
-          }
-        </script>
 
 
         <button class="CALL-SERVER"><div class="call-server">CALL</div></button>
@@ -685,6 +648,88 @@
 </body>
 
 </html>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById('popupContainer');
+    if (popup.style.display === 'none') {
+      popup.style.display = 'block';
+    } else {
+      popup.style.display = 'none';
+    }
+  }
+
+  function addMessage(sender, content) {
+    var chatArea = document.getElementById('chatArea');
+    var messageElement = document.createElement('div');
+    messageElement.textContent = content;
+    messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
+    chatArea.appendChild(messageElement);
+    chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
+  }
+
+  function sendMessage(event) {
+    if (event.keyCode === 13) { // Enter key
+      var userInput = document.getElementById('userQuery');
+      var message = userInput.value.trim();
+      if (message !== '') {
+        addMessage('user', message);
+        userInput.value = ''; // Clear the input field
+        callChatFunction(message); // Call the chat function with the user's message
+      }
+    }
+  }
+
+  // Sample AI function (replace with your actual AI function)
+  function callChatFunction(query) {
+    $.ajax({
+      url: "{% url 'chat' %}",
+      type: "GET",
+      data: { query: query },
+      success: function (data) {
+        addMessage('ai', data.response);
+      },
+      error: function (xhr, status, error) {
+        console.error('Error: ' + error);
+      }
+    });
+  }
+</script>
+
+
+<script>
+  function startTime() {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+    let s = today.getSeconds();
+    let session = "AM";
+
+    if(h == 0){
+      h = 12;
+    }
+
+    if(h > 12){
+      h -= 12;
+      session = "PM";
+    }
+
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML = h + ":" + m + " " + session;
+    setTimeout(startTime, 1000);
+  }
+
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  </script>
+        
+  
+
+
+
 <script>
   function goToHome() {
     window.location.href = "{% url 'Customer_Home' %}";

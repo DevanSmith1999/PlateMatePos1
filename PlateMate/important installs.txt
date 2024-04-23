@@ -1,0 +1,9 @@
+Run these in your terminal First before starting the server.
+
+pip install openai
+pip install langchain
+pip install streamlit
+pip install faiss-cpu
+pip install streamlit_chat
+pip install tiktoken
+pip install -U langchain-community
