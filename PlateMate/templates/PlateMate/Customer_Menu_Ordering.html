@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{% load static %}
 <head>
   <meta charset="utf-8" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -93,28 +93,20 @@
   }
 
   .ORDER .LOGO {
-    height: 60px;
-    top: 10px;
-    left: 10px;
-    background-color: #c02c2c;
+    height: 100px;
+    top: 8px;
+    left: 8px;
     border-radius: 10px;
     position: absolute;
     width: 100px;
   }
 
-  .ORDER .logo {
-    height: 72px;
-    top: 8px;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
+  .ORDER .logo_image {
     position: absolute;
-    width: 100px;
+    width: 150px;
+    height: 150px;
+    top: -30px;
+    left: -28px;
   }
 
   .ORDER .recipt {
@@ -827,6 +819,9 @@ border-radius: 5px;
       <div class="div2">
       <div class="SIDE-PANNEL">
         <div class="COMPANY-NAME"><div class="middendorf-s">Middendorf’s</div></div>
+        <div class="LOGO">
+          <img class="logo_image" src="{% static 'img/Logo.png' %}" alt="Logo">
+        </div>
         <body onload="startTime()">
           <div class="TIME" id="txt">	   
           </div>

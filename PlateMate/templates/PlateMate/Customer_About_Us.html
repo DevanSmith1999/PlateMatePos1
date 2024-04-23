@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
   <head>
     <meta charset="utf-8" />
@@ -35,29 +36,21 @@
         border-color: #000000;
       }
   
-  .ABOUT-US .LOGO {
-    height: 73px;
-    top: 23px;
-    left: 21px;
-    background-color: #c02c2c;
+    .ABOUT-US .LOGO {
+    height: 100px;
+    top: 8px;
+    left: 8px;
     border-radius: 10px;
     position: absolute;
     width: 100px;
   }
-  
-  .ABOUT-US .text-wrapper {
-    height: 72px;
-    top: 17px;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
+
+  .ABOUT-US .logo_image {
     position: absolute;
-    width: 100px;
+    width: 150px;
+    height: 150px;
+    top: -30px;
+    left: -28px;
   }
   
   .ABOUT-US .TIME {
@@ -533,7 +526,9 @@
     <div class="ABOUT-US">
       <div class="div">
       <div class="SIDE-PANNEL">
-        <div class="LOGO"><div class="text-wrapper">Logo</div></div>
+        <div class="LOGO">
+          <img class="logo_image" src="{% static 'img/Logo.png' %}" alt="Logo">
+        </div>
         <body onload="startTime()">
           <div class="TIME" id="txt">	   
         </div>

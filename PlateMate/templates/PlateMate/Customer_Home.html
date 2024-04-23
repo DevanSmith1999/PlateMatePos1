@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-
+{% load static %}
 <head>
   <meta charset="utf-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <link rel="stylesheet" href="globals.css" type="text/css" />
   <link rel="stylesheet" href="styleguide.css" type="text/css" />
   <link rel="stylesheet" href="customer_style.css" type="text/css" />
@@ -137,28 +138,20 @@
   }
 
   .MAIN .LOGO {
-    height: 73px;
-    top: 23px;
-    left: 21px;
-    background-color: #c02c2c;
+    height: 100px;
+    top: 8px;
+    left: 8px;
     border-radius: 10px;
     position: absolute;
     width: 100px;
   }
 
-  .MAIN .text-wrapper-4 {
-    height: 72px;
-    top: 17px;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
+  .MAIN .logo_image {
     position: absolute;
-    width: 100px;
+    width: 150px;
+    height: 150px;
+    top: -30px;
+    left: -28px;
   }
 
   .MAIN .TIME {
@@ -585,7 +578,7 @@
             </button>
 
             <div class="LOGO">
-              <div class="text-wrapper-4">Logo</div>
+              <img class="logo_image" src="{% static 'img/Logo.png' %}" alt="Logo">
             </div>
 
             <body onload="startTime()">

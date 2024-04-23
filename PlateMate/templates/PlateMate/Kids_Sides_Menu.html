@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{% load static %}
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="globals.css" type="text/css" />
@@ -654,28 +654,20 @@
   }
 
   .MENU .LOGO {
-    height: 73px;
-    top: 23px;
-    left: 21px;
-    background-color: #c02c2c;
+    height: 100px;
+    top: 8px;
+    left: 8px;
     border-radius: 10px;
     position: absolute;
     width: 100px;
   }
 
-  .MENU .text-wrapper-10 {
-    height: 72px;
-    top: 17px;
-    left: 0;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
+  .MENU .logo_image {
     position: absolute;
-    width: 100px;
+    width: 150px;
+    height: 150px;
+    top: -30px;
+    left: -28px;
   }
 
   .MENU .TIME {
@@ -999,7 +991,7 @@
         </button>
 
         <div class="LOGO">
-            <div class="text-wrapper-10">Logo</div>
+          <img class="logo_image" src="{% static 'img/Logo.png' %}" alt="Logo">
         </div>
 
         <body onload="startTime()">
