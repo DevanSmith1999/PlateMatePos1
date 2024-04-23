@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.http import require_POST
 from Staff import models as sm
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse 
@@ -24,7 +25,7 @@ def chat_view(request):
     user_query = request.GET.get('query', 'Default Query')  # Get the query parameter from URL
     response = chat(user_query)  # Call function
     return JsonResponse({'response': response})  # Return the response as JSON
-
+@login_required
 def home(request):
     '''This is Plate Mate's home landing page'''
     return render(

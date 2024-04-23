@@ -1,21 +1,28 @@
-<!-- navbar.html -->
+{% load static %}
+
 <style>
     .navbar {
-        background-color: #808080;
+        background-color: #333; /* Dark background */
         color: #fff;
         padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     }
-    .navbar-brand{
-        font-size: larger;
+
+    .navbar-logo img {
+        height: 40px; /* Adjust height as needed */
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 
     .navbar-links {
         display: flex;
         align-items: center;
-        flex-wrap: nowrap; /* Prevents wrapping to the next line */
     }
 
     .navbar-links a {
@@ -27,8 +34,9 @@
     }
 
     .navbar-links a:hover {
-        color: #f8f9fa; /* lighter shade of white */
+        color: #f8f9fa;
     }
+
     .dropdown {
         position: relative;
     }
@@ -36,9 +44,10 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #808080;
-        min-width: 50px;
+        background-color: #333;
+        min-width: 150px;
         z-index: 1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .dropdown-content a {
@@ -49,19 +58,18 @@
     }
 
     .dropdown-content a:hover {
-        background-color: #f8f9fa; /* lighter shade of white */
-        color: #808080; /* dropdown background color */
+        background-color: #444; /* Slightly darker background on hover */
     }
 
     .dropdown:hover .dropdown-content {
         display: block;
     }
-    .dropdown .dropdown-toggle {
-        cursor: pointer;
-    }
 </style>
 
 <div class="navbar">
+    <div class="navbar-logo">
+        <img src="{% static 'img/Logo.png' %}" alt="PlateMate Logo",width="100" height="100">
+    </div>
     <div class="navbar-brand">PlateMate</div>
     <div class="navbar-links">
         <a href="{% url 'position_list' %}">Positions</a>
@@ -78,8 +86,5 @@
             </div>
         </div>
         <a href="{% url 'logout_confirmation' %}">Logout</a>
-        <!-- Add more links here as needed -->
-       
-        </div>
     </div>
 </div>
