@@ -511,7 +511,7 @@
     line-height: normal;
   }
 
-  .ORDER .ai-chat {
+  .ORDER .AI-CHAT {
     display: flex;
     width: 71px;
     height: 49px;
@@ -525,7 +525,7 @@
     border-radius: 10px;
   }
 
-  .ORDER .AI-CHAT {
+  .ORDER .AI-chat {
     position: absolute;
     width: fit-content;
     margin-top: -0.5px;
@@ -542,8 +542,8 @@
   .popup-container {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 62%;
+    left: 85%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     width: 300px;
@@ -563,7 +563,7 @@
 
   /* AI chat area */
   .chat-area {
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
     margin-bottom: 10px;
   }
@@ -573,6 +573,11 @@
     background-color: #b2dff5;
     text-align: left;
     margin-right: 50%;
+    padding: 2px;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* User message */
@@ -580,6 +585,10 @@
     background-color: #e2f7cb;
     text-align: right;
     margin-left: 50%;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* Input field */
@@ -589,6 +598,9 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   .ORDER .call-server {
@@ -1079,8 +1091,8 @@ border-radius: 5px;
           <button class="back-button" onclick="goToHome()">
             <div class="back-button-2">&lt;</div>
           </button>
-          <button class="ai-chat">
-            <div class="AI-CHAT">AI<br />CHAT</div>
+          <button class="AI-CHAT" onclick="togglePopup()">
+            <div class="AI-chat">AI <br />CHAT</div>
           </button>
           <div class="popup-container" id="popupContainer">
             <span class="close-btn" onclick="togglePopup()">X</span>
@@ -1090,7 +1102,6 @@ border-radius: 5px;
             </div>
             <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
           </div>
-
           <script>
             function togglePopup() {
               var popup = document.getElementById('popupContainer');
@@ -1100,7 +1111,7 @@ border-radius: 5px;
                 popup.style.display = 'none';
               }
             }
-
+          
             function addMessage(sender, content) {
               var chatArea = document.getElementById('chatArea');
               var messageElement = document.createElement('div');
@@ -1109,7 +1120,7 @@ border-radius: 5px;
               chatArea.appendChild(messageElement);
               chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
             }
-
+          
             function sendMessage(event) {
               if (event.keyCode === 13) { // Enter key
                 var userInput = document.getElementById('userQuery');
@@ -1121,7 +1132,7 @@ border-radius: 5px;
                 }
               }
             }
-
+          
             // Sample AI function (replace with your actual AI function)
             function callChatFunction(query) {
               $.ajax({
@@ -1161,27 +1172,6 @@ border-radius: 5px;
           <button class="drinks" onclick="showCategory('drink');">
             <div class="text-wrapper-9">Drinks</div>
           </button>
-          <script>
-            function callChatFunction() {
-              var query = document.getElementById('userQuery').value;
-              $.ajax({
-                url: "{% url 'chat' %}",
-                type: "GET",
-                data: { query: query },
-                success: function (data) {
-                  document.getElementById('response').innerText = data.response;
-                },
-                error: function (xhr, status, error) {
-                  console.error('Error: ' + error);
-                }
-              });
-            }
-          </script>
-          <!--
-          <input type="text" id="userQuery" placeholder="Ask AI">
-          <button onclick="callChatFunction()">Ask</button>
-          <div id="response"></div>
-          -->
         </div>
       </div>
     </div>
