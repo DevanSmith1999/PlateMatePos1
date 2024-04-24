@@ -643,6 +643,7 @@ def server_pay(request):
     tax = f"{tax:.2f}"
     
     # Delete all entries with TableID=1 after creating the context
+    Table.objects.filter(table_number=1).update(isOccupiedBy=None) #Update the table's isOccupiedBy field to none removing the servers assignment to the table 
     ActiveOrder.objects.filter(TableID=1).delete()
 
     # Update context with the new total price
