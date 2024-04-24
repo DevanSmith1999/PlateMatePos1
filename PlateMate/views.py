@@ -630,3 +630,21 @@ def delete_order_item(request):
             pass
     return redirect('create_order')  # Redirect back even on GET requests (optional)
 
+def server_pay(request):
+    '''Landing Page for Table To reset after server closes table.'''
+    active_orders = ActiveOrder.objects.filter(TableID=1)  # Assuming table_id
+    total_price = 0
+    for order in active_orders:
+        ActiveOrder.objects.filter(TableID=1).update(Ordered=True)
+        order.menu_item = MenuItem.objects.get(pk=order.MenuItemID)
+        total_price += order.menu_item.Price * order.Quantity
+    tax = float(total_price) * 0.0445
+    totalandtax = f"{float(total_price) + tax:.2f}"
+    tax = f"{tax:.2f}"
+    
+    # Delete all entries with TableID=1 after creating the context
+    ActiveOrder.objects.filter(TableID=1).delete()
+
+    # Update context with the new total price
+    context = {'active_orders': active_orders, 'total_price': total_price,'tax': tax, 'totalandtax': totalandtax}
+    return render(request, 'PlateMate/Server_pay.html', context)

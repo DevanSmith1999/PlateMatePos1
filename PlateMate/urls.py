@@ -34,5 +34,6 @@ urlpatterns = [
     path("Server_Table_View/", views.Server_Table_View, name = "Test Page"),
     path('create_order/', views.create_order, name='create_order'),
     path('delete_order_item/', views.delete_order_item, name='delete_order_item'),
-    path('chat/', views.chat_view, name='chat')
+    path('chat/', views.chat_view, name='chat'),
+    path("Server_Pay/", views.server_pay,name="server_pay")
 ]

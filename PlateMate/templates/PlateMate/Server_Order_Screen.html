@@ -288,8 +288,9 @@
     position: relative;
     width: 200px;
     height: 65px;
-    top: -1px;
-    left: 10px;
+    top: -20px;
+    left: 0;
+    text-align: left;
     font-family: "Inter", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -632,9 +633,15 @@
           <div class="split">
             <div class="text-wrapper-3">Split</div>
           </div>
-          <div class="pay">
+          <button class="pay" id="payButton">
             <div class="text-wrapper-3">Pay</div>
-          </div>
+          </button>
+          
+          <script>
+          document.getElementById('payButton').addEventListener('click', function() {
+            window.location.href = "{% url 'server_pay' %}";
+          });
+          </script>
         </div>
         <div class="table-num">
           <div class="text-wrapper-4">Table 1</div>

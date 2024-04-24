@@ -329,8 +329,8 @@
   .popup-container {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 62%;
+    left: 85%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     width: 300px;
@@ -350,7 +350,7 @@
 
   /* AI chat area */
   .chat-area {
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
     margin-bottom: 10px;
   }
@@ -360,6 +360,11 @@
     background-color: #b2dff5;
     text-align: left;
     margin-right: 50%;
+    padding: 2px;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* User message */
@@ -367,6 +372,10 @@
     background-color: #e2f7cb;
     text-align: right;
     margin-left: 50%;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* Input field */
@@ -376,6 +385,9 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
   
   .ABOUT-US .CALL-SERVER {
@@ -469,12 +481,12 @@
     
 
 
-      /* Popup container */
+    /* Popup container */
   .popup-container {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 62%;
+    left: 85%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
     width: 300px;
@@ -494,7 +506,7 @@
 
   /* AI chat area */
   .chat-area {
-    height: 200px;
+    height: 250px;
     overflow-y: auto;
     margin-bottom: 10px;
   }
@@ -504,6 +516,11 @@
     background-color: #b2dff5;
     text-align: left;
     margin-right: 50%;
+    padding: 2px;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* User message */
@@ -511,6 +528,10 @@
     background-color: #e2f7cb;
     text-align: right;
     margin-left: 50%;
+    border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
 
   /* Input field */
@@ -520,6 +541,9 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: "Inter", Helvetica;
+    font-weight: 400;
+    font-size: 18px;
   }
   </style>
   <body>
@@ -545,8 +569,8 @@
           Families have been dining with us for generations, enjoying our delicious seafood, down home comfort and kid friendly environment.  We like to say “Memories are made at Middendorf’s.” </div></div>
         <div class="TABLE-NUM"><div class="text-wrapper-8">1</div></div>
 
-        <button class="AI-CHAT">
-          <div class="AI-chat">AI <br />Chat</div>
+        <button class="AI-CHAT" onclick="togglePopup()">
+          <div class="AI-chat">AI <br />CHAT</div>
         </button>
         <div class="popup-container" id="popupContainer">
           <span class="close-btn" onclick="togglePopup()">X</span>
@@ -557,60 +581,14 @@
           <input type="text" class="input-field" id="userQuery" placeholder="Ask AI" onkeyup="sendMessage(event)">
         </div>
 
-        <script>
-          function togglePopup() {
-            var popup = document.getElementById('popupContainer');
-            if (popup.style.display === 'none') {
-              popup.style.display = 'block';
-            } else {
-              popup.style.display = 'none';
-            }
-          }
-
-          function addMessage(sender, content) {
-            var chatArea = document.getElementById('chatArea');
-            var messageElement = document.createElement('div');
-            messageElement.textContent = content;
-            messageElement.classList.add('message', sender === 'ai' ? 'ai-message' : 'user-message');
-            chatArea.appendChild(messageElement);
-            chatArea.scrollTop = chatArea.scrollHeight; // Auto-scroll to bottom
-          }
-
-          function sendMessage(event) {
-            if (event.keyCode === 13) { // Enter key
-              var userInput = document.getElementById('userQuery');
-              var message = userInput.value.trim();
-              if (message !== '') {
-                addMessage('user', message);
-                userInput.value = ''; // Clear the input field
-                callChatFunction(message); // Call the chat function with the user's message
-              }
-            }
-          }
-
-          // Sample AI function (replace with your actual AI function)
-          function callChatFunction(query) {
-            $.ajax({
-              url: "{% url 'chat' %}",
-              type: "GET",
-              data: { query: query },
-              success: function (data) {
-                addMessage('ai', data.response);
-              },
-              error: function (xhr, status, error) {
-                console.error('Error: ' + error);
-              }
-            });
-          }
-        </script>
         <button class="CALL-SERVER">
           <div class="call-server">CALL</div>
         </button>
         <div class="ABOUT-US-BANNER"><div class="text-wrapper-9">ABOUT US</div></div>
-      </div>
     </div>
   </div>
-  </body>
+</body>
+
 </html>
 
 <script>
